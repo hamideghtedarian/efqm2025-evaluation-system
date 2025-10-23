@@ -4,6 +4,19 @@
 ساختار داده‌ها بر پایه منطق **RADAR** شامل چهار مؤلفه Approach، Deployment، Assessment و Refinement می‌باشد.  
 
 ## 📁 ساختار پوشه‌ها
+efqm2025-assessment/
+├── README.md
+├── schema/
+│   └── efqm2025-schema.json
+├── data/
+│   ├── criteria/
+│   │   └── efqm2025.json
+│   └── companies/
+│       └── example-company.json
+├── forms/
+│   └── radar-form.html
+└── scripts/
+    └── evaluate.py
 
 
 ## ⚙️ نحوه استفاده
