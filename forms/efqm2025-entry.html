@@ -1,177 +1,525 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فرم ارزیابی EFQM 2025</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>فرم ارزیابی EFQM 2025 — ورژن برند</title>
+
   <style>
-    body {
-      font-family: "Vazirmatn", sans-serif;
-      background: #f5f7fa;
-      color: #333;
-      padding: 20px;
-      direction: rtl;
+    body { font-family: "Vazirmatn", sans-serif, Tahoma, Arial; background:#f7f9fc; color:#222; margin:0; padding:18px; direction:rtl; }
+    .container { max-width:1100px; margin:0 auto; }
+    .brand-banner img { max-width:100%; height:auto; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
+    .brand-logo img { width:120px; display:block; margin:8px auto; }
+    h1 { text-align:center; color:#004080; margin:14px 0; }
+    .card { background:#fff; border-radius:12px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.06); margin:16px 0; }
+    label { display:block; font-weight:700; margin-top:10px; }
+    input[type="text"], input[type="date"], input[type="number"], select, textarea {
+      width:100%; padding:8px; border-radius:8px; border:1px solid #d0d6dc; margin-top:6px;
     }
-    h1, h2 { color: #004080; text-align: center; }
-    .form-section {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 900px;
-    }
-    label { font-weight: bold; display: block; margin-top: 10px; }
-    input, select, textarea {
-      width: 100%; padding: 8px; border: 1px solid #ccc;
-      border-radius: 8px; margin-top: 5px;
-    }
-    button {
-      background-color: #004080;
-      color: white; border: none; border-radius: 8px;
-      padding: 10px 16px; margin-top: 15px; cursor: pointer;
-    }
-    button:hover { background-color: #0066cc; }
-    ul { list-style-type: disc; padding-right: 20px; }
-    pre { background: #eee; padding: 10px; border-radius: 8px; white-space: pre-wrap; }
+    textarea { min-height:80px; resize:vertical; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; }
+    .col { flex:1 1 300px; min-width:240px; }
+    button { background:#004080; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    button.secondary { background:#6c757d; }
+    button.danger { background:#c0392b; }
+    ul { padding-right:16px; }
+    .list-item { padding:8px 10px; border:1px solid #eef0f2; margin:8px 0; border-radius:8px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .actions button { margin-left:6px; }
+    #output { background:#f2f4f7; padding:10px; border-radius:8px; white-space:pre-wrap; max-height:300px; overflow:auto; }
+    footer { text-align:center; color:#666; margin:18px 0; font-size:14px; }
+    .small { font-size:13px; color:#666; margin-top:8px; }
   </style>
+
+  <!-- html2pdf bundle for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <h1>فرم ارزیابی EFQM 2025</h1>
+  <div class="container">
 
-  <div class="form-section">
-    <h2>مشخصات سازمان</h2>
-    <label>نام سازمان:</label>
-    <input id="organization" />
-    <label>ارزیاب:</label>
-    <input id="evaluator" />
-    <label>تاریخ ارزیابی:</label>
-    <input type="date" id="evaluation_date" />
+    <!-- Brand -->
+    <div class="card brand-banner" id="brandBannerWrap">
+      <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/banner.png"
+           alt="Brand Banner" id="brandBannerImg">
+    </div>
+    <div class="card brand-logo" id="brandLogoWrap">
+      <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/logo.png"
+           alt="Brand Logo" id="brandLogoImg">
+    </div>
+
+    <h1>سامانه ارزیابی EFQM 2025 — نسخه فارسی</h1>
+
+    <!-- File load/save -->
+    <div class="card">
+      <div class="row">
+        <div class="col">
+          <label>بارگذاری فایل ارزیابی (JSON)</label>
+          <input type="file" id="fileInput" accept=".json" />
+          <div class="small">با بارگذاری، محتوای فایل در فرم بارگذاری شده و قابل ویرایش است.</div>
+        </div>
+
+        <div class="col">
+          <label>ذخیره/خروجی</label>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">
+            <button onclick="downloadJSON()">💾 ذخیره JSON</button>
+            <button onclick="downloadWord()">📄 دانلود Word (.doc)</button>
+            <button onclick="exportPDF()">📕 تولید PDF رسمی</button>
+            <button class="secondary" onclick="clearAll()">✖ پاک کردن فرم</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Organization info -->
+    <div class="card">
+      <label>نام سازمان</label>
+      <input id="organization" placeholder="مثلاً شرکت فولاد آریا" />
+
+      <div class="row">
+        <div class="col">
+          <label>ارزیاب (یا تیم ارزیابی)</label>
+          <input id="evaluator" placeholder="نام ارزیاب یا اعضای تیم (کامایی جدا کنید)" />
+        </div>
+        <div class="col">
+          <label>تاریخ ارزیابی</label>
+          <input type="date" id="evaluation_date" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Add / edit criterion -->
+    <div class="card">
+      <h3>افزودن یا ویرایش زیرمعیار</h3>
+
+      <div class="row">
+        <div class="col">
+          <label>معیار</label>
+          <select id="criterion">
+            <option value="1">1 - Purpose, Vision & Strategy</option>
+            <option value="2">2 - Organisational Culture & Leadership</option>
+            <option value="3">3 - Engaging Stakeholders</option>
+            <option value="4">4 - Creating Sustainable Value</option>
+            <option value="5">5 - Driving Performance & Transformation</option>
+            <option value="6">6 - Stakeholder Perceptions</option>
+            <option value="7">7 - Strategic & Operational Performance</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label>زیرمعیار (مثلاً 1.1)</label>
+          <input id="subcriterion" placeholder="مثلاً 1.1" />
+        </div>
+
+        <div class="col">
+          <label>امتیاز (۰–۱۰۰)</label>
+          <input type="number" id="score" min="0" max="100" />
+        </div>
+      </div>
+
+      <hr style="margin:12px 0; border:none; height:1px; background:#eef2f6;" />
+
+      <label>نتایج (Results)</label>
+      <textarea id="results" placeholder="شواهد و شاخص‌ها"></textarea>
+
+      <label>رویکرد (Approach)</label>
+      <textarea id="approach" placeholder="سیاست‌ها، طراحی‌ها و روش‌ها"></textarea>
+
+      <label>جاری‌سازی (Deployment)</label>
+      <textarea id="deployment" placeholder="گستره اجرا و نمونه‌ها"></textarea>
+
+      <label>ارزیابی و بهبود (Assessment & Refinement)</label>
+      <textarea id="refinement" placeholder="نظام بازخورد، بازنگری و اصلاحات"></textarea>
+
+      <hr style="margin:12px 0; border:none; height:1px; background:#eef2f6;" />
+
+      <!-- strengths & opportunities -->
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="flex:1 1 420px;">
+          <label>افزودن نقطه قوت</label>
+          <div style="display:flex; gap:8px;">
+            <input id="strengthInput" placeholder="مثلاً ساختار شفاف مسئولیت‌ها" />
+            <button onclick="addStrength()">➕</button>
+          </div>
+          <ul id="strengthList"></ul>
+        </div>
+
+        <div style="flex:1 1 420px;">
+          <label>افزودن فرصت بهبود</label>
+          <div style="display:flex; gap:8px;">
+            <input id="opportunityInput" placeholder="مثلاً تقویت مکانیزم بازخورد مشتریان" />
+            <button onclick="addOpportunity()">➕</button>
+          </div>
+          <ul id="opportunityList"></ul>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <button onclick="addCriterion()">✅ افزودن/ثبت زیرمعیار</button>
+      </div>
+    </div>
+
+    <!-- List of added criteria -->
+    <div class="card">
+      <h3>موارد ثبت شده</h3>
+      <div id="criteriaList"></div>
+      <div class="small">برای ویرایش یک مورد، دکمه «ویرایش» را بزنید تا در فرم بارگذاری شود؛ سپس پس از اعمال تغییرات مجدداً ذخیره کنید.</div>
+    </div>
+
+    <!-- Output & preview -->
+    <div class="card" id="reportAreaWrap">
+      <h3>خروجی JSON (پیش‌نمایش)</h3>
+      <pre id="output">{}</pre>
+    </div>
+
+    <footer class="card">
+      © 2025 Dr. Hamid Eghtedarian – All rights reserved. <br>
+      Licensed under <a href="https://github.com/hamideghtedarian/hamideghtedarian/blob/main/README.md" target="_blank">Hamid Eghtedarian Open Evaluation License (HEOEL)</a>
+    </footer>
   </div>
 
-  <div class="form-section">
-    <h2>اطلاعات معیار</h2>
-    <label>معیار:</label>
-    <select id="criterion">
-      <option value="1">1. Purpose, Vision & Strategy</option>
-      <option value="2">2. Organisational Culture & Leadership</option>
-      <option value="3">3. Engaging Stakeholders</option>
-      <option value="4">4. Creating Sustainable Value</option>
-      <option value="5">5. Driving Performance & Transformation</option>
-      <option value="6">6. Stakeholder Perceptions</option>
-      <option value="7">7. Strategic & Operational Performance</option>
-    </select>
+<script>
+/* ======= داده و حالت ======= */
+let criteria = []; // array of { id:criterionNumber, subcriteria:[{id:, score:, radar:{...}, strengths:[], opportunities:[]} ] }
+let strengths = [];
+let opportunities = [];
+let editingIndex = null; // if editing an existing subcriterion entry
 
-    <label>زیرمعیار (مثلاً 1.1):</label>
-    <input id="subcriterion" />
+/* ======= توابع کمکی UI ======= */
+function addStrength() {
+  const v = document.getElementById("strengthInput").value.trim();
+  if (!v) return alert("متن نقطه قوت را وارد کنید.");
+  strengths.push(v);
+  renderStrengths();
+  document.getElementById("strengthInput").value = "";
+}
+function addOpportunity() {
+  const v = document.getElementById("opportunityInput").value.trim();
+  if (!v) return alert("متن فرصت بهبود را وارد کنید.");
+  opportunities.push(v);
+  renderOpportunities();
+  document.getElementById("opportunityInput").value = "";
+}
+function renderStrengths() {
+  const ul = document.getElementById("strengthList");
+  ul.innerHTML = "";
+  strengths.forEach((s,i)=> {
+    const li=document.createElement("li");
+    li.textContent = s + " ";
+    const btn=document.createElement("button");
+    btn.textContent="حذف";
+    btn.onclick=()=>{ strengths.splice(i,1); renderStrengths(); };
+    btn.style.marginRight="8px";
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+}
+function renderOpportunities() {
+  const ul = document.getElementById("opportunityList");
+  ul.innerHTML = "";
+  opportunities.forEach((s,i)=> {
+    const li=document.createElement("li");
+    li.textContent = s + " ";
+    const btn=document.createElement("button");
+    btn.textContent="حذف";
+    btn.onclick=()=>{ opportunities.splice(i,1); renderOpportunities(); };
+    btn.style.marginRight="8px";
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+}
 
-    <label>امتیاز (۰ تا ۱۰۰):</label>
-    <input type="number" id="score" min="0" max="100" />
-  </div>
+/* ======= اضافه کردن زیرمعیار ======= */
+function addCriterion() {
+  const criterion = parseInt(document.getElementById("criterion").value);
+  const subcriterion = document.getElementById("subcriterion").value.trim();
+  const scoreRaw = document.getElementById("score").value;
+  const score = scoreRaw === "" ? null : Number(scoreRaw);
+  if (!subcriterion) return alert("لطفاً شناسه/عنوان زیرمعیار را وارد کنید (مثلاً 1.1).");
 
-  <div class="form-section">
-    <h2>تحلیل براساس منطق RADAR</h2>
-    <label>Results (نتایج):</label>
-    <textarea id="results"></textarea>
+  const radar = {
+    results: document.getElementById("results").value.trim(),
+    approach: document.getElementById("approach").value.trim(),
+    deployment: document.getElementById("deployment").value.trim(),
+    refinement: document.getElementById("refinement").value.trim()
+  };
 
-    <label>Approach (رویکرد):</label>
-    <textarea id="approach"></textarea>
+  const entry = {
+    id: criterion,
+    subcriteria: [{
+      id: subcriterion,
+      score,
+      radar,
+      strengths: [...strengths],
+      opportunities: [...opportunities]
+    }]
+  };
 
-    <label>Deployment (جاری‌سازی):</label>
-    <textarea id="deployment"></textarea>
+  if (editingIndex !== null) {
+    // replace existing entry at editingIndex
+    criteria[editingIndex] = entry;
+    editingIndex = null;
+  } else {
+    criteria.push(entry);
+  }
 
-    <label>Assessment & Refinement (ارزیابی و بهبود):</label>
-    <textarea id="refinement"></textarea>
-  </div>
+  // reset fields
+  document.getElementById("subcriterion").value = "";
+  document.getElementById("score").value = "";
+  document.getElementById("results").value = "";
+  document.getElementById("approach").value = "";
+  document.getElementById("deployment").value = "";
+  document.getElementById("refinement").value = "";
+  strengths = []; opportunities = [];
+  renderStrengths(); renderOpportunities();
+  renderCriteriaList();
+  updateOutput();
+  alert("✅ زیرمعیار ثبت شد.");
+}
 
-  <div class="form-section">
-    <h2>نقاط قوت و فرصت‌های بهبود</h2>
+/* ======= رندر لیست زیرمعیارها ======= */
+function renderCriteriaList() {
+  const wrap = document.getElementById("criteriaList");
+  wrap.innerHTML = "";
+  if (!criteria.length) { wrap.textContent = "هنوز موردی ثبت نشده است."; return; }
+  criteria.forEach((c, idx) => {
+    const div = document.createElement("div");
+    div.className = "list-item";
+    const left = document.createElement("div");
+    left.innerHTML = `<strong>معیار ${c.id}</strong> — <span>${c.subcriteria[0].id}</span> — امتیاز: ${c.subcriteria[0].score ?? "-"}`;
+    const right = document.createElement("div");
+    right.className = "actions";
+    const btnEdit = document.createElement("button"); btnEdit.textContent="ویرایش"; btnEdit.onclick=()=> loadForEdit(idx);
+    const btnDel = document.createElement("button"); btnDel.textContent="حذف"; btnDel.className="danger"; btnDel.onclick=()=> { if(confirm("حذف شود؟")) { criteria.splice(idx,1); renderCriteriaList(); updateOutput(); } };
+    right.appendChild(btnEdit); right.appendChild(btnDel);
+    div.appendChild(left); div.appendChild(right);
+    wrap.appendChild(div);
+  });
+}
 
-    <label>نقطه قوت:</label>
-    <input id="strengthInput" placeholder="مثلاً وجود ساختار شفاف در تدوین استراتژی" />
-    <button type="button" onclick="addStrength()">➕ افزودن نقطه قوت</button>
-    <ul id="strengthList"></ul>
+/* ======= بارگذاری آیتم برای ویرایش ======= */
+function loadForEdit(index) {
+  const item = criteria[index];
+  if (!item) return;
+  editingIndex = index;
+  document.getElementById("criterion").value = item.id;
+  const sc = item.subcriteria[0];
+  document.getElementById("subcriterion").value = sc.id;
+  document.getElementById("score").value = sc.score ?? "";
+  document.getElementById("results").value = sc.radar.results || "";
+  document.getElementById("approach").value = sc.radar.approach || "";
+  document.getElementById("deployment").value = sc.radar.deployment || "";
+  document.getElementById("refinement").value = sc.radar.refinement || "";
+  strengths = sc.strengths ? [...sc.strengths] : [];
+  opportunities = sc.opportunities ? [...sc.opportunities] : [];
+  renderStrengths(); renderOpportunities();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-    <label>فرصت بهبود:</label>
-    <input id="opportunityInput" placeholder="مثلاً نیاز به ارتقای مکانیزم بازخورد ذی‌نفعان" />
-    <button type="button" onclick="addOpportunity()">➕ افزودن فرصت بهبود</button>
-    <ul id="opportunityList"></ul>
-
-    <button onclick="addCriterion()">✅ افزودن زیرمعیار به ارزیابی</button>
-  </div>
-
-  <div class="form-section">
-    <button onclick="generateJSON()">📦 تولید فایل JSON نهایی</button>
-    <h3>خروجی:</h3>
-    <pre id="output"></pre>
-  </div>
-
-  <script>
-    const criteria = [];
-    let strengths = [];
-    let opportunities = [];
-
-    function addStrength() {
-      const text = document.getElementById("strengthInput").value;
-      if (text) {
-        strengths.push(text);
-        const li = document.createElement("li");
-        li.textContent = text;
-        document.getElementById("strengthList").appendChild(li);
-        document.getElementById("strengthInput").value = "";
-      }
+/* ======= بارگذاری JSON از فایل ======= */
+document.getElementById("fileInput").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const json = JSON.parse(reader.result);
+      loadFromJSON(json);
+      alert("✅ فایل بارگذاری شد — اکنون می‌توانید ویرایش یا ادامه دهید.");
+    } catch (err) {
+      alert("خطا در خواندن JSON: " + err.message);
     }
+  };
+  reader.readAsText(f, "utf-8");
+});
 
-    function addOpportunity() {
-      const text = document.getElementById("opportunityInput").value;
-      if (text) {
-        opportunities.push(text);
-        const li = document.createElement("li");
-        li.textContent = text;
-        document.getElementById("opportunityList").appendChild(li);
-        document.getElementById("opportunityInput").value = "";
-      }
-    }
+/* ======= تابع بارگذاری ساختار از JSON ======= */
+function loadFromJSON(data) {
+  // پایه‌ای‌ترین انتظارها: organization, evaluator, evaluation_date, criteria_evaluation or criteria
+  document.getElementById("organization").value = data.organization || data.company?.name || "";
+  document.getElementById("evaluator").value = data.evaluator || (Array.isArray(data.company?.evaluator_team) ? data.company.evaluator_team.join(", ") : "");
+  document.getElementById("evaluation_date").value = data.evaluation_date || data.company?.evaluation_date || (new Date()).toISOString().slice(0,10);
 
-    function addCriterion() {
-      const criterion = document.getElementById("criterion").value;
-      const subcriterion = document.getElementById("subcriterion").value;
-      const score = parseFloat(document.getElementById("score").value);
-      const radar = {
-        results: document.getElementById("results").value,
-        approach: document.getElementById("approach").value,
-        deployment: document.getElementById("deployment").value,
-        refinement: document.getElementById("refinement").value
-      };
-      criteria.push({
-        id: parseInt(criterion),
-        subcriteria: [{
-          id: subcriterion,
-          score,
-          radar,
-          strengths,
-          opportunities
-        }]
-      });
+  // normalize criteria array: handle different input key names
+  if (Array.isArray(data.criteria_evaluation)) {
+    criteria = data.criteria_evaluation.map(item => ({
+      id: item.id || item.criterion_id || item.criterion || null,
+      subcriteria: item.subcriteria ? item.subcriteria : (item.subcriterion ? [item.subcriterion] : (item.subcriteria_evaluations ? item.subcriteria_evaluations : []))
+    }));
+  } else if (Array.isArray(data.criteria)) {
+    // if schema file loaded
+    criteria = data.criteria.map(c => ({
+      id: c.id,
+      subcriteria: c.subcriteria ? c.subcriteria.map(sc=>({ id: sc.id || sc.title, score: sc.score || null, radar: sc.radar || {}, strengths: sc.strengths || [], opportunities: sc.opportunities || [] })) : []
+    }));
+  } else if (Array.isArray(data.criteria_scores)) {
+    // earlier format
+    criteria = data.criteria_scores.map(c => ({ id: c.id, subcriteria: c.subcriteria || [] }));
+  } else if (Array.isArray(data.evaluation)) {
+    criteria = data.evaluation.map(item => ({ id: item.criterion_id ? Number(item.criterion_id.split?.('.')[0] || item.criterion_id) : null, subcriteria:[{
+      id: item.criterion_id || item.id || item.subcriterion || "",
+      score: item.overall_score ?? item.score ?? null,
+      radar: {
+        results: item.radar?.results || item.results || "",
+        approach: item.radar?.approach || item.approach || "",
+        deployment: item.radar?.deployment || item.deployment || "",
+        refinement: item.radar?.refinement || item.refinement || ""
+      },
+      strengths: item.strengths || item.strengths || [],
+      opportunities: item.opportunities || item.opportunities || []
+    }] }));
+  } else {
+    // fallback: empty
+    criteria = [];
+  }
 
-      strengths = [];
-      opportunities = [];
-      document.getElementById("strengthList").innerHTML = "";
-      document.getElementById("opportunityList").innerHTML = "";
+  renderCriteriaList();
+  updateOutput();
+}
 
-      alert("✅ زیرمعیار به ارزیابی اضافه شد");
-    }
+/* ======= تولید و دانلود JSON ======= */
+function getFullJSON() {
+  return {
+    organization: document.getElementById("organization").value,
+    evaluator: document.getElementById("evaluator").value,
+    evaluation_date: document.getElementById("evaluation_date").value,
+    model_version: "EFQM 2025",
+    criteria_evaluation: criteria
+  };
+}
+function downloadJSON() {
+  const dataStr = JSON.stringify(getFullJSON(), null, 2);
+  const blob = new Blob([dataStr], { type: "application/json;charset=utf-8" });
+  const name = (document.getElementById("organization").value || "evaluation").replace(/\s+/g,'-') + ".json";
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
 
-    function generateJSON() {
-      const json = {
-        organization: document.getElementById("organization").value,
-        evaluator: document.getElementById("evaluator").value,
-        evaluation_date: document.getElementById("evaluation_date").value,
-        model_version: "EFQM 2025",
-        criteria_evaluation: criteria
-      };
-      document.getElementById("output").textContent = JSON.stringify(json, null, 2);
-    }
-  </script>
+/* ======= دانلود Word (.doc) - HTML wrapper (Word قابل باز شدن) ======= */
+function downloadWord() {
+  const html = buildReportHTML();
+  const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'></head><body>";
+  const footer = "</body></html>";
+  const blob = new Blob([header + html + footer], { type: "application/msword" });
+  const filename = (document.getElementById("organization").value || "evaluation") + ".doc";
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(url), 1000);
+}
+
+/* ======= تولید PDF با html2pdf ======= */
+function exportPDF() {
+  const reportEl = document.createElement("div");
+  reportEl.innerHTML = buildReportHTML();
+  reportEl.style.direction = "rtl";
+  reportEl.style.fontFamily = "Tahoma, Arial, Vazirmatn, sans-serif";
+  // عرض صفحه A4 در پیکسل برای html2pdf تقریبی است؛ تنظیمات کیفیت
+  const opt = {
+    margin: 12,
+    filename: (document.getElementById("organization").value || "evaluation") + ".pdf",
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  // نمایش موقت در صفحه (اختیاری) یا ارسال مستقیم به html2pdf
+  html2pdf().set(opt).from(reportEl).save();
+}
+
+/* ======= ساخت HTML گزارش (برای PDF/Word) ======= */
+function buildReportHTML() {
+  const org = document.getElementById("organization").value || "";
+  const evaluator = document.getElementById("evaluator").value || "";
+  const date = document.getElementById("evaluation_date").value || "";
+
+  // header with banner & logo (use remote images)
+  const header = `
+    <div style="text-align:center; margin-bottom:12px;">
+      <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/banner.png" style="max-width:100%; height:auto;" alt="banner" />
+    </div>
+    <div style="text-align:center; margin-bottom:6px;">
+      <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/logo.png" style="width:110px; height:auto;" alt="logo" />
+    </div>
+    <h2 style="text-align:center; margin:6px 0 12px 0; color:#004080;">گزارش ارزیابی EFQM 2025</h2>
+    <div style="margin-bottom:10px; font-size:14px;"><strong>سازمان:</strong> ${escapeHtml(org)} &nbsp;&nbsp; | &nbsp;&nbsp; <strong>ارزیاب:</strong> ${escapeHtml(evaluator)} &nbsp;&nbsp; | &nbsp;&nbsp; <strong>تاریخ:</strong> ${escapeHtml(date)}</div>
+    <hr />
+  `;
+
+  // body with criteria table
+  let body = "";
+  if (!criteria.length) {
+    body += `<p>هیچ زیرمعیاری ثبت نشده است.</p>`;
+  } else {
+    criteria.forEach((c, i) => {
+      const sc = c.subcriteria[0];
+      body += `<section style="margin-bottom:14px; padding:8px; border-radius:8px; border:1px solid #e8eef4;">
+        <h3 style="margin:6px 0;">معیار ${escapeHtml(String(c.id))} — ${escapeHtml(sc.id)}</h3>
+        <p><strong>امتیاز:</strong> ${sc.score ?? "-"}</p>
+        <table style="width:100%; border-collapse:collapse; margin-top:8px;">
+          <tr><td style="width:25%; vertical-align:top; padding:6px;"><strong>Results</strong></td><td style="padding:6px;">${escapeHtml(sc.radar.results)}</td></tr>
+          <tr><td style="width:25%; vertical-align:top; padding:6px;"><strong>Approach</strong></td><td style="padding:6px;">${escapeHtml(sc.radar.approach)}</td></tr>
+          <tr><td style="width:25%; vertical-align:top; padding:6px;"><strong>Deployment</strong></td><td style="padding:6px;">${escapeHtml(sc.radar.deployment)}</td></tr>
+          <tr><td style="width:25%; vertical-align:top; padding:6px;"><strong>Assessment & Refinement</strong></td><td style="padding:6px;">${escapeHtml(sc.radar.refinement)}</td></tr>
+        </table>
+        <div style="margin-top:8px;">
+          <strong>نقاط قوت:</strong>
+          <ul>${(sc.strengths || []).map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ul>
+          <strong>فرصت‌های بهبود:</strong>
+          <ul>${(sc.opportunities || []).map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ul>
+        </div>
+      </section>`;
+    });
+  }
+
+  const footer = `
+    <hr />
+    <div style="font-size:12px; color:#666; margin-top:8px;">
+      <p>© 2025 Dr. Hamid Eghtedarian – All rights reserved.</p>
+      <p>Licensed under <a href="https://github.com/hamideghtedarian/hamideghtedarian/blob/main/README.md">Hamid Eghtedarian Open Evaluation License (HEOEL)</a></p>
+    </div>
+  `;
+
+  return header + body + footer;
+}
+
+/* ======= به‌روزرسانی پیش‌نمایش JSON ======= */
+function updateOutput() {
+  document.getElementById("output").textContent = JSON.stringify(getFullJSON(), null, 2);
+}
+
+/* ======= پاکسازی فرم ======= */
+function clearAll() {
+  if (!confirm("آیا مطمئنید که می‌خواهید فرم را پاک کنید؟")) return;
+  document.getElementById("organization").value = "";
+  document.getElementById("evaluator").value = "";
+  document.getElementById("evaluation_date").value = "";
+  document.getElementById("subcriterion").value = "";
+  document.getElementById("score").value = "";
+  document.getElementById("results").value = "";
+  document.getElementById("approach").value = "";
+  document.getElementById("deployment").value = "";
+  document.getElementById("refinement").value = "";
+  strengths = []; opportunities = []; criteria = []; editingIndex = null;
+  renderStrengths(); renderOpportunities(); renderCriteriaList(); updateOutput();
+}
+
+/* ======= تابع فرار از کاراکترهای HTML برای خروجی امن ======= */
+function escapeHtml(text) {
+  if (text === null || text === undefined) return "";
+  return String(text).replace(/[&<>"'`=\/]/g, function(s) {
+    return ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;', '`':'&#x60;', '=':'&#x3D;'
+    })[s];
+  });
+}
+
+/* ======= initialize ======= */
+renderCriteriaList();
+updateOutput();
+
+</script>
 </body>
 </html>
