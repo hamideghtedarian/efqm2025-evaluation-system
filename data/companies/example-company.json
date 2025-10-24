@@ -1,0 +1,26 @@
+{
+  "organization": "شرکت فولاد آریا",
+  "evaluator": "عبدالحمید اقتداریان",
+  "evaluation_date": "2025-10-24",
+  "model_version": "EFQM 2025",
+  "criteria_scores": [
+    {
+      "criterion_id": 1,
+      "title": "Purpose, Vision & Strategy",
+      "subcriteria": [
+        {
+          "id": "1.1",
+          "title": "Purpose",
+          "score": 78,
+          "radar": {
+            "results": "افزایش انسجام هدف و مأموریت سازمانی",
+            "approach": "تعریف مأموریت جدید با مشارکت ذی‌نفعان",
+            "deployment": "اجرا در سطح کلیه واحدها",
+            "assessment": "پایش دوره‌ای سطح درک کارکنان",
+            "refinement": "بازنگری مأموریت در برنامه استراتژیک سال آینده"
+          }
+        }
+      ]
+    }
+  ]
+}
