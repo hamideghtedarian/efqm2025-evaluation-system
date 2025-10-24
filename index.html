@@ -7,31 +7,195 @@
   <style>
     body {
       font-family: "Vazirmatn", sans-serif;
-      text-align: center;
-      background: #f2f4f8;
-      padding: 40px;
+      background: #f5f7fa;
+      color: #333;
+      padding: 20px;
+      direction: rtl;
     }
-    h1 { color: #004080; }
-    a {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 20px;
+    h1, h2 { color: #004080; text-align: center; }
+    .form-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+    }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea {
+      width: 100%; padding: 8px; border: 1px solid #ccc;
+      border-radius: 8px; margin-top: 5px;
+    }
+    button {
       background-color: #004080;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      color: white; border: none; border-radius: 8px;
+      padding: 10px 16px; margin-top: 15px; cursor: pointer;
     }
-    a:hover { background-color: #0066cc; }
+    button:hover { background-color: #0066cc; }
+    ul { list-style-type: disc; padding-right: 20px; }
+    pre { background: #eee; padding: 10px; border-radius: 8px; white-space: pre-wrap; }
+    .brand-banner img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .brand-logo img { width:120px; height:auto; display:block; margin:10px auto; }
+    footer { text-align:center; font-size:14px; color:#555; margin-top:30px; }
   </style>
 </head>
 <body>
-  <h1>به سامانه ارزیابی EFQM 2025 خوش آمدید</h1>
-  <p>برای ورود داده‌های ارزیابی، روی دکمه زیر کلیک کنید:</p>
 
-  <a href="./forms/efqm2025-entry.html">ورود به فرم ارزیابی</a>
+  <!-- Brand Banner -->
+  <div class="brand-banner">
+    <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/banner.png" 
+         alt="Dr. Hamid Eghtedarian Brand Banner">
+  </div>
 
-  <p style="margin-top: 40px; color: #777;">
-    نسخه آزمایشی سیستم ثبت ارزیابی بر اساس مدل تعالی EFQM 2025
-  </p>
+  <!-- Brand Logo -->
+  <div class="brand-logo">
+    <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/logo.png" 
+         alt="Dr. Hamid Eghtedarian Logo">
+  </div>
+
+  <h1>سامانه ارزیابی EFQM 2025</h1>
+
+  <div class="form-section">
+    <h2>مشخصات سازمان</h2>
+    <label>نام سازمان:</label>
+    <input id="organization" />
+    <label>ارزیاب:</label>
+    <input id="evaluator" />
+    <label>تاریخ ارزیابی:</label>
+    <input type="date" id="evaluation_date" />
+  </div>
+
+  <div class="form-section">
+    <h2>اطلاعات معیار</h2>
+    <label>معیار:</label>
+    <select id="criterion">
+      <option value="1">1. Purpose, Vision & Strategy</option>
+      <option value="2">2. Organisational Culture & Leadership</option>
+      <option value="3">3. Engaging Stakeholders</option>
+      <option value="4">4. Creating Sustainable Value</option>
+      <option value="5">5. Driving Performance & Transformation</option>
+      <option value="6">6. Stakeholder Perceptions</option>
+      <option value="7">7. Strategic & Operational Performance</option>
+    </select>
+
+    <label>زیرمعیار (مثلاً 1.1):</label>
+    <input id="subcriterion" />
+
+    <label>امتیاز (۰ تا ۱۰۰):</label>
+    <input type="number" id="score" min="0" max="100" />
+  </div>
+
+  <div class="form-section">
+    <h2>تحلیل براساس منطق RADAR</h2>
+    <label>Results (نتایج):</label>
+    <textarea id="results"></textarea>
+
+    <label>Approach (رویکرد):</label>
+    <textarea id="approach"></textarea>
+
+    <label>Deployment (جاری‌سازی):</label>
+    <textarea id="deployment"></textarea>
+
+    <label>Assessment & Refinement (ارزیابی و بهبود):</label>
+    <textarea id="refinement"></textarea>
+  </div>
+
+  <div class="form-section">
+    <h2>نقاط قوت و فرصت‌های بهبود</h2>
+
+    <label>نقطه قوت:</label>
+    <input id="strengthInput" placeholder="مثلاً وجود ساختار شفاف در تدوین استراتژی" />
+    <button type="button" onclick="addStrength()">➕ افزودن نقطه قوت</button>
+    <ul id="strengthList"></ul>
+
+    <label>فرصت بهبود:</label>
+    <input id="opportunityInput" placeholder="مثلاً نیاز به ارتقای مکانیزم بازخورد ذی‌نفعان" />
+    <button type="button" onclick="addOpportunity()">➕ افزودن فرصت بهبود</button>
+    <ul id="opportunityList"></ul>
+
+    <button onclick="addCriterion()">✅ افزودن زیرمعیار به ارزیابی</button>
+  </div>
+
+  <div class="form-section">
+    <button onclick="generateJSON()">📦 تولید فایل JSON نهایی</button>
+    <h3>خروجی:</h3>
+    <pre id="output"></pre>
+  </div>
+
+  <footer>
+    © 2025 Dr. Hamid Eghtedarian – All rights reserved. <br>
+    Licensed under <a href="https://github.com/hamideghtedarian/hamideghtedarian/blob/main/README.md" target="_blank">
+    Hamid Eghtedarian Open Evaluation License (HEOEL)
+    </a>
+  </footer>
+
+  <script>
+    const criteria = [];
+    let strengths = [];
+    let opportunities = [];
+
+    function addStrength() {
+      const text = document.getElementById("strengthInput").value;
+      if (text) {
+        strengths.push(text);
+        const li = document.createElement("li");
+        li.textContent = text;
+        document.getElementById("strengthList").appendChild(li);
+        document.getElementById("strengthInput").value = "";
+      }
+    }
+
+    function addOpportunity() {
+      const text = document.getElementById("opportunityInput").value;
+      if (text) {
+        opportunities.push(text);
+        const li = document.createElement("li");
+        li.textContent = text;
+        document.getElementById("opportunityList").appendChild(li);
+        document.getElementById("opportunityInput").value = "";
+      }
+    }
+
+    function addCriterion() {
+      const criterion = document.getElementById("criterion").value;
+      const subcriterion = document.getElementById("subcriterion").value;
+      const score = parseFloat(document.getElementById("score").value);
+      const radar = {
+        results: document.getElementById("results").value,
+        approach: document.getElementById("approach").value,
+        deployment: document.getElementById("deployment").value,
+        refinement: document.getElementById("refinement").value
+      };
+      criteria.push({
+        id: parseInt(criterion),
+        subcriteria: [{
+          id: subcriterion,
+          score,
+          radar,
+          strengths,
+          opportunities
+        }]
+      });
+
+      strengths = [];
+      opportunities = [];
+      document.getElementById("strengthList").innerHTML = "";
+      document.getElementById("opportunityList").innerHTML = "";
+
+      alert("✅ زیرمعیار به ارزیابی اضافه شد");
+    }
+
+    function generateJSON() {
+      const json = {
+        organization: document.getElementById("organization").value,
+        evaluator: document.getElementById("evaluator").value,
+        evaluation_date: document.getElementById("evaluation_date").value,
+        model_version: "EFQM 2025",
+        criteria_evaluation: criteria
+      };
+      document.getElementById("output").textContent = JSON.stringify(json, null, 2);
+    }
+  </script>
+
 </body>
 </html>
