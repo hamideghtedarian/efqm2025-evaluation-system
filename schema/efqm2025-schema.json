@@ -1,40 +1,46 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "EFQM 2025 Assessment Schema",
   "type": "object",
   "properties": {
-    "company": {
-      "type": "object",
-      "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "evaluation_date": { "type": "string", "format": "date" },
-        "evaluator_team": { "type": "array", "items": { "type": "string" } }
-      },
-      "required": ["id", "name"]
-    },
-    "evaluation": {
+    "organization": { "type": "string" },
+    "evaluator": { "type": "string" },
+    "evaluation_date": { "type": "string", "format": "date" },
+    "model_version": { "type": "string" },
+    "criteria_evaluation": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "criterion_id": { "type": "string" },
-          "approach": {
-            "type": "object",
-            "properties": {
-              "text": { "type": "string" },
-              "score": { "type": "number" }
+          "id": { "type": "integer" },
+          "title": { "type": "string" },
+          "subcriteria": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "score": { "type": "number", "minimum": 0, "maximum": 100 },
+                "radar": {
+                  "type": "object",
+                  "properties": {
+                    "results": { "type": "string" },
+                    "approach": { "type": "string" },
+                    "deployment": { "type": "string" },
+                    "assessment": { "type": "string" },
+                    "refinement": { "type": "string" }
+                  },
+                  "required": ["results", "approach", "deployment"]
+                }
+              },
+              "required": ["id", "title", "score", "radar"]
             }
-          },
-          "deployment": { "$ref": "#/properties/evaluation/items/properties/approach" },
-          "assessment": { "$ref": "#/properties/evaluation/items/properties/approach" },
-          "refinement": { "$ref": "#/properties/evaluation/items/properties/approach" },
-          "feedback_summary": { "type": "string" },
-          "overall_score": { "type": "number" }
+          }
         },
-        "required": ["criterion_id"]
+        "required": ["id", "title", "subcriteria"]
       }
     }
   },
-  "required": ["company", "evaluation"]
+  "required": ["organization", "evaluator", "evaluation_date", "criteria_evaluation"]
 }
