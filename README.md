@@ -40,7 +40,7 @@
 ### 📬 تماس
 👤 **حمید اقتداریان**  
 🔗 [GitHub Profile](https://github.com/hamideghtedarian)  
-📧 hamideghtedarian[at]gmail.com  
+📧eghtedarian[at]gmail.com  
 
 ---
 
