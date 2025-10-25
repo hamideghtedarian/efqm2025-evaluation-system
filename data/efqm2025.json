@@ -1,0 +1,197 @@
+{
+  "criteria": [
+    {
+      "id": 1,
+      "title_en": "Purpose, Vision and Strategy",
+      "title_fa": "فلسفه وجودی، چشم‌انداز و استراتژی",
+      "subcriteria": [
+        {
+          "id": "1.1",
+          "title_en": "Defines and Communicates Purpose and Vision",
+          "title_fa": "تعریف و تبیین فلسفه وجودی و چشم‌انداز",
+          "description": "سازمان فلسفه وجودی و چشم‌انداز خود را تعریف کرده، آن را با ذی‌نفعان کلیدی در میان می‌گذارد و در تصمیم‌گیری‌ها از آن بهره می‌گیرد."
+        },
+        {
+          "id": "1.2",
+          "title_en": "Understands Ecosystem, Capabilities and Major Challenges",
+          "title_fa": "درک اکوسیستم، قابلیت‌ها و چالش‌های کلیدی",
+          "description": "سازمان محیط پیرامون خود را می‌شناسد، نقاط قوت و ضعف داخلی و چالش‌های کلیدی را شناسایی و تحلیل می‌کند."
+        },
+        {
+          "id": "1.3",
+          "title_en": "Understands Stakeholder Needs and Expectations",
+          "title_fa": "درک نیازها و انتظارات ذی‌نفعان",
+          "description": "سازمان نیازها و انتظارات ذی‌نفعان کلیدی خود را شناسایی و تحلیل کرده و آن را در تدوین استراتژی لحاظ می‌کند."
+        },
+        {
+          "id": "1.4",
+          "title_en": "Develops and Adapts Strategy",
+          "title_fa": "تدوین و تطبیق استراتژی",
+          "description": "سازمان استراتژی‌های خود را بر مبنای تحلیل‌های محیطی، قابلیت‌ها و چشم‌انداز تدوین و در بازه‌های زمانی مناسب بازنگری می‌کند."
+        },
+        {
+          "id": "1.5",
+          "title_en": "Implements Performance and Governance System",
+          "title_fa": "اجرای نظام عملکرد و حاکمیت",
+          "description": "سازمان نظام مدیریت عملکرد و حاکمیت خود را برای پیگیری تحقق استراتژی و پاسخ‌گویی مؤثر طراحی و اجرا می‌کند."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title_en": "Organisational Culture and Leadership",
+      "title_fa": "فرهنگ سازمانی و رهبری",
+      "subcriteria": [
+        {
+          "id": "2.1",
+          "title_en": "Steers Organisational Culture and Nurtures Core Values",
+          "title_fa": "هدایت فرهنگ سازمانی و پرورش ارزش‌های محوری",
+          "description": "رهبران فرهنگ و ارزش‌های سازمانی را شکل داده و الگویی برای رفتارها و تصمیمات سازمانی ایجاد می‌کنند."
+        },
+        {
+          "id": "2.2",
+          "title_en": "Creates Conditions for Realising Change",
+          "title_fa": "ایجاد شرایط لازم برای تحقق تغییر",
+          "description": "رهبری سازمان با ایجاد اعتماد، مشارکت و آمادگی ذهنی، زمینه‌ساز تغییرات مؤثر در سازمان می‌شود."
+        },
+        {
+          "id": "2.3",
+          "title_en": "Enables Creativity and Innovation",
+          "title_fa": "توانمندسازی خلاقیت و نوآوری",
+          "description": "رهبری محیطی را فراهم می‌سازد که افراد بتوانند ایده‌های خلاقانه و نوآورانه خود را مطرح و اجرایی کنند."
+        },
+        {
+          "id": "2.4",
+          "title_en": "Unites and Engages Stakeholders with Purpose, Vision and Strategy",
+          "title_fa": "هم‌راستا کردن و درگیر نمودن ذی‌نفعان با فلسفه، چشم‌انداز و استراتژی",
+          "description": "رهبران ذی‌نفعان را در جهت فلسفه وجودی و چشم‌انداز سازمان همسو و در اجرای استراتژی‌ها مشارکت می‌دهند."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title_en": "Engaging Stakeholders",
+      "title_fa": "درگیرسازی ذی‌نفعان",
+      "subcriteria": [
+        {
+          "id": "3.1",
+          "title_en": "Builds and Maintains Stakeholder Relationships",
+          "title_fa": "ایجاد و حفظ روابط با ذی‌نفعان",
+          "description": "سازمان روابطی مؤثر و مبتنی بر اعتماد متقابل با ذی‌نفعان ایجاد و حفظ می‌کند."
+        },
+        {
+          "id": "3.2",
+          "title_en": "Develops and Manages Partnerships",
+          "title_fa": "توسعه و مدیریت همکاری‌ها و مشارکت‌ها",
+          "description": "سازمان همکاری‌های اثربخش با شرکا و همکاران خود ایجاد و به‌طور فعال مدیریت می‌کند."
+        },
+        {
+          "id": "3.3",
+          "title_en": "Engages People for Value Creation",
+          "title_fa": "درگیرسازی افراد برای خلق ارزش",
+          "description": "سازمان با ایجاد محیطی حمایتی، افراد را برای مشارکت در تحقق اهداف و خلق ارزش توانمند می‌کند."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title_en": "Creating Sustainable Value",
+      "title_fa": "خلق ارزش پایدار",
+      "subcriteria": [
+        {
+          "id": "4.1",
+          "title_en": "Designs Value Creation Models",
+          "title_fa": "طراحی مدل‌های خلق ارزش",
+          "description": "سازمان مدل‌های خلق ارزش خود را بر مبنای نیاز ذی‌نفعان، منابع و توانمندی‌ها طراحی می‌کند."
+        },
+        {
+          "id": "4.2",
+          "title_en": "Delivers Sustainable Value through Processes",
+          "title_fa": "تحقق ارزش پایدار از طریق فرایندها",
+          "description": "سازمان فرایندهای خود را طوری طراحی و اجرا می‌کند که ارزش پایدار برای ذی‌نفعان ایجاد شود."
+        },
+        {
+          "id": "4.3",
+          "title_en": "Manages Supply Chain Resilience",
+          "title_fa": "مدیریت تاب‌آوری زنجیره تأمین",
+          "description": "سازمان برای تضمین تداوم خلق ارزش، تاب‌آوری زنجیره تأمین خود را بهبود می‌بخشد."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title_en": "Driving Performance and Transformation",
+      "title_fa": "پیشبرد عملکرد و تحول",
+      "subcriteria": [
+        {
+          "id": "5.1",
+          "title_en": "Uses Data, Insights and Technology",
+          "title_fa": "به‌کارگیری داده، بینش و فناوری",
+          "description": "سازمان با بهره‌گیری از داده، تحلیل و فناوری، تصمیمات دقیق و مؤثر اتخاذ می‌کند."
+        },
+        {
+          "id": "5.2",
+          "title_en": "Drives Continuous Improvement and Transformation",
+          "title_fa": "رهبری بهبود مستمر و تحول",
+          "description": "سازمان فرآیندهای بهبود مستمر و پروژه‌های تحول را به‌صورت نظام‌مند هدایت می‌کند."
+        },
+        {
+          "id": "5.3",
+          "title_en": "Ensures Business Continuity and Future Foresight",
+          "title_fa": "تضمین تداوم کسب‌وکار و آینده‌نگری",
+          "description": "سازمان با مدیریت ریسک و پیش‌بینی آینده، تداوم فعالیت و آمادگی در برابر تغییرات را تضمین می‌کند."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title_en": "Stakeholder Perceptions",
+      "title_fa": "ادراکات ذی‌نفعان",
+      "subcriteria": [
+        {
+          "id": "6.1",
+          "title_en": "Stakeholder Satisfaction and Trust",
+          "title_fa": "رضایت و اعتماد ذی‌نفعان",
+          "description": "سازمان میزان رضایت، اعتماد و وفاداری ذی‌نفعان را اندازه‌گیری و تحلیل می‌کند."
+        },
+        {
+          "id": "6.2",
+          "title_en": "Perceived Value Creation and Reputation",
+          "title_fa": "درک خلق ارزش و اعتبار برند",
+          "description": "سازمان برداشت ذی‌نفعان از میزان خلق ارزش و اعتبار خود را بررسی می‌کند."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title_en": "Strategic and Operational Performance",
+      "title_fa": "عملکرد راهبردی و عملیاتی",
+      "subcriteria": [
+        {
+          "id": "7.1",
+          "title_en": "Fulfilment of Stakeholder Expectations",
+          "title_fa": "تحقق انتظارات ذی‌نفعان",
+          "description": "سازمان میزان تحقق تعهدات خود نسبت به ذی‌نفعان را ارزیابی می‌کند."
+        },
+        {
+          "id": "7.2",
+          "title_en": "Economic and Financial Performance",
+          "title_fa": "عملکرد اقتصادی و مالی",
+          "description": "سازمان عملکرد مالی خود را در راستای پایداری و رشد پایدار پایش می‌کند."
+        },
+        {
+          "id": "7.3",
+          "title_en": "Performance and Transformation Outcomes",
+          "title_fa": "نتایج عملکرد و تحول",
+          "description": "سازمان نتایج کلیدی عملکرد و میزان تحقق پروژه‌های تحول را ارزیابی می‌کند."
+        },
+        {
+          "id": "7.4",
+          "title_en": "Sustainability Performance",
+          "title_fa": "عملکرد پایداری",
+          "description": "سازمان عملکرد خود را در زمینه پایداری اقتصادی، اجتماعی و زیست‌محیطی پایش و گزارش می‌کند."
+        }
+      ]
+    }
+  ]
+}
