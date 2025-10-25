@@ -1,65 +1,437 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>ارزیابی زیرمعیارها - EFQM 2025</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ارزیابی EFQM 2025 — فرم زیرمعیارها</title>
   <style>
-    body{font-family:Vazirmatn, Tahoma; background:#f6f8fb; padding:20px;}
-    .card{background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.1); margin-bottom:20px;}
-    input, textarea, select{width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; margin-top:8px;}
-    button{background:#0059b3; color:white; border:none; padding:10px 18px; border-radius:8px; cursor:pointer;}
-    button:hover{background:#003d80;}
+    body{font-family: Vazirmatn, Tahoma, Arial; background:#f6f8fb; color:#222; padding:18px;}
+    .card{background:#fff; border-radius:10px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,0.06); margin-bottom:14px;}
+    label{display:block; font-weight:600; margin-top:8px;}
+    input[type=text], input[type=date], select, textarea, input[type=number]{
+      width:100%; padding:8px; border-radius:8px; border:1px solid #d6dbe0; margin-top:6px;
+    }
+    textarea{min-height:70px;}
+    .row{display:flex; gap:12px; flex-wrap:wrap;}
+    .col{flex:1 1 300px;}
+    button{background:#0059b3; color:#fff; border:none; padding:10px 14px; border-radius:8px; cursor:pointer;}
+    button.secondary{background:#6c757d;}
+    button.danger{background:#c9302c;}
+    table{width:100%; border-collapse:collapse; margin-top:8px;}
+    th, td{padding:8px; border:1px solid #eef2f6; text-align:right;}
+    .small{font-size:13px; color:#666;}
+    .inline{display:inline-block;}
+    .badge{background:#e6f0ff; color:#004080; padding:4px 8px; border-radius:12px; font-weight:600;}
   </style>
 </head>
 <body>
 
   <div class="card">
-    <h2>🧭 ارزیابی زیرمعیارها (Criteria)</h2>
-    <label>زیرمعیار:</label>
-    <select id="criterion">
-      <option value="1.1">1.1 - نقش رهبری در جهت‌دهی</option>
-      <option value="1.2">1.2 - ارزش‌ها و فرهنگ</option>
-      <option value="1.3">1.3 - ارتباط با ذی‌نفعان</option>
-      <option value="2.1">2.1 - استراتژی و چشم‌انداز</option>
-      <option value="2.2">2.2 - برنامه‌ریزی و هدف‌گذاری</option>
-    </select>
+    <h2>شناسنامه ارزیابی</h2>
+    <label>نام سازمان</label>
+    <input id="orgName" placeholder="مثلاً شرکت فولاد آریا" />
 
-    <label>نقاط قوت:</label>
-    <textarea id="strengths" rows="4" placeholder="نقاط قوت را وارد کنید..."></textarea>
+    <div class="row">
+      <div class="col">
+        <label>تاریخ ارزیابی</label>
+        <input type="date" id="evalDate" />
+      </div>
+      <div class="col">
+        <label>تیم ارزیابی (با کاما جدا کنید)</label>
+        <input id="evalTeam" placeholder="نام افراد، مثال: علی، رضا، نسرین" />
+      </div>
+    </div>
 
-    <label>فرصت‌های بهبود:</label>
-    <textarea id="opportunities" rows="4" placeholder="فرصت‌های بهبود را وارد کنید..."></textarea>
-
-    <button onclick="saveData()">💾 ذخیره</button>
+    <div style="margin-top:10px;">
+      <label>انتخاب مدل EFQM (فایل مدل باید در data/efqm2025.json قرار داشته باشد)</label>
+      <input id="modelPath" value="../data/efqm2025.json" />
+      <div class="small">در صورت نیاز می‌توانید مسیر را تغییر دهید.</div>
+    </div>
   </div>
 
   <div class="card">
-    <h3>📋 داده‌های ذخیره‌شده</h3>
-    <pre id="output">هنوز داده‌ای ثبت نشده است.</pre>
+    <h2>افزودن / ویرایش زیرمعیار (براساس EFQM 2025)</h2>
+
+    <label>زیرمعیار (از مدل بارگذاری شود)</label>
+    <select id="subSelect"><option>در حال بارگذاری...</option></select>
+
+    <label>امتیاز زیرمعیار (۰–۱۰۰)</label>
+    <input type="number" id="score" min="0" max="100" />
+
+    <label>Results (نتایج)</label>
+    <textarea id="results"></textarea>
+
+    <label>Approach (رویکرد)</label>
+    <textarea id="approach"></textarea>
+
+    <label>Deployment (جاری‌سازی)</label>
+    <textarea id="deployment"></textarea>
+
+    <label>Assessment & Refinement (ارزیابی و بهبود)</label>
+    <textarea id="refinement"></textarea>
+
+    <label>نقاط قوت (هر خط یک مورد)</label>
+    <textarea id="strengths"></textarea>
+
+    <label>فرصت‌های بهبود (هر خط یک مورد)</label>
+    <textarea id="opportunities"></textarea>
+
+    <div style="margin-top:10px;">
+      <button onclick="addOrUpdateEntry()">➕ افزودن/بروزرسانی زیرمعیار</button>
+      <button class="secondary" onclick="clearEntry()">پاک کردن فیلدها</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>موارد ثبت‌شده</h2>
+    <div id="summaryBadges" style="margin-bottom:10px;"></div>
+    <div id="entriesWrap">هنوز موردی ثبت نشده است.</div>
+  </div>
+
+  <div class="card">
+    <h2>خروجی / ذخیره</h2>
+    <div class="row">
+      <div class="col">
+        <label>ذخیره محلی (Local)</label>
+        <button onclick="saveLocal()">💾 ذخیره در مرورگر</button>
+        <button onclick="downloadJSON()">⬇ دانلود JSON</button>
+        <input type="file" id="loadFileInput" style="margin-top:10px;" />
+        <div class="small">برای ادامه کار، فایل ذخیره‌شده را بارگذاری کنید.</div>
+      </div>
+      <div class="col">
+        <label>ذخیره مستقیم در GitHub (اختیاری)</label>
+        <input id="ghToken" placeholder="Paste a GitHub Personal Access Token (ghp_...)" />
+        <input id="ghFilename" placeholder="نام فایل در repo (مثلاً foolad-arya.json)" style="margin-top:6px;" />
+        <div style="margin-top:8px;">
+          <button onclick="saveToGitHub()">📡 ذخیره در GitHub</button>
+          <div class="small">آدرس ذخیره‌شده: <span id="ghTargetPath" class="badge"></span></div>
+          <div class="small">(توجه: پیشنهاد امن‌تر استفاده از GitHub Actions است — توکن را در مرورگر نگه ندارید.)</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:12px;">پیش‌نمایش JSON</h3>
+    <pre id="output" style="max-height:320px; overflow:auto; background:#f2f6fb; padding:10px; border-radius:8px;">{}</pre>
   </div>
 
 <script>
-function saveData(){
-  const criterion = document.getElementById('criterion').value;
-  const strengths = document.getElementById('strengths').value;
-  const opportunities = document.getElementById('opportunities').value;
+/* ======= حالت و داده ها ======= */
+let model = null; // efqm2025.json content
+let entries = []; // list of { subId, criterionId, score, radar:{...}, strengths:[], opportunities:[] }
+let editingIndex = null;
 
-  let allData = JSON.parse(localStorage.getItem('efqm_data') || '{}');
-  allData[criterion] = { strengths, opportunities, date: new Date().toLocaleString('fa-IR') };
-  localStorage.setItem('efqm_data', JSON.stringify(allData));
-
-  document.getElementById('output').textContent = JSON.stringify(allData, null, 2);
-  alert('✅ داده‌ها ذخیره شدند!');
+/* ======= بارگذاری مدل از مسیر داده شده ======= */
+async function loadModel() {
+  const path = document.getElementById('modelPath').value;
+  try {
+    const resp = await fetch(path);
+    if (!resp.ok) throw new Error('خطا در بارگذاری مدل: ' + resp.status);
+    model = await resp.json();
+    populateSubcriteria();
+    console.log('Model loaded', model);
+  } catch (err) {
+    alert('خطا در بارگذاری مدل: ' + err.message + '\nلطفاً مسیر فایل را بررسی کنید.');
+    document.getElementById('subSelect').innerHTML = '<option>خطا در بارگذاری مدل</option>';
+  }
 }
 
-window.onload = function(){
-  let data = localStorage.getItem('efqm_data');
-  if(data){
-    document.getElementById('output').textContent = JSON.stringify(JSON.parse(data), null, 2);
+/* ======= پر کردن لیست زیرمعیارها ======= */
+function populateSubcriteria(){
+  const sel = document.getElementById('subSelect');
+  sel.innerHTML = '';
+  if(!model || !Array.isArray(model.criteria)) {
+    sel.innerHTML = '<option>مدل نامعتبر</option>';
+    return;
   }
-};
-</script>
+  model.criteria.forEach(c=>{
+    if(Array.isArray(c.subcriteria)) {
+      c.subcriteria.forEach(sc=>{
+        const opt = document.createElement('option');
+        // نمایش: 1.1 — عنوان فارسی — (عنوان انگلیسی کوتاه)
+        opt.value = sc.id;
+        const fa = sc.title_fa || sc.title_en || sc.id;
+        const en = sc.title_en ? ` — ${sc.title_en}` : '';
+        opt.textContent = `${sc.id} - ${fa}${en}`;
+        opt.dataset.criterionId = c.id;
+        sel.appendChild(opt);
+      });
+    }
+  });
+}
 
+/* ======= افزودن/بروزرسانی یک ورودی ======= */
+function addOrUpdateEntry(){
+  const subId = document.getElementById('subSelect').value;
+  if(!subId) return alert('لطفاً یک زیرمعیار انتخاب کنید.');
+  const opt = document.getElementById('subSelect').selectedOptions[0];
+  const criterionId = opt ? opt.dataset.criterionId : null;
+  const scoreVal = document.getElementById('score').value;
+  const score = scoreVal==="" ? null : Number(scoreVal);
+  const radar = {
+    results: document.getElementById('results').value,
+    approach: document.getElementById('approach').value,
+    deployment: document.getElementById('deployment').value,
+    refinement: document.getElementById('refinement').value
+  };
+  const strengths = document.getElementById('strengths').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const opportunities = document.getElementById('opportunities').value.split('\n').map(s=>s.trim()).filter(Boolean);
+
+  const entry = { subId, criterionId: Number(criterionId), score, radar, strengths, opportunities, updated: new Date().toISOString() };
+
+  if(editingIndex !== null) {
+    entries[editingIndex] = entry;
+    editingIndex = null;
+  } else {
+    entries.push(entry);
+  }
+  renderEntries();
+  clearEntry();
+}
+
+/* ======= پاکسازی فرم ورود زیرمعیار ======= */
+function clearEntry(){
+  document.getElementById('score').value = '';
+  document.getElementById('results').value = '';
+  document.getElementById('approach').value = '';
+  document.getElementById('deployment').value = '';
+  document.getElementById('refinement').value = '';
+  document.getElementById('strengths').value = '';
+  document.getElementById('opportunities').value = '';
+  editingIndex = null;
+}
+
+/* ======= رندر لیست آیتم‌ها و محاسبه نمرات معیارها ======= */
+function renderEntries(){
+  const wrap = document.getElementById('entriesWrap');
+  if(entries.length === 0) { wrap.innerHTML = '<div class="small">هنوز داده‌ای ثبت نشده است.</div>'; updateOutput(); return; }
+
+  // Group by criterion
+  const byCrit = {};
+  entries.forEach((e, idx) => {
+    if(!byCrit[e.criterionId]) byCrit[e.criterionId]=[];
+    byCrit[e.criterionId].push({...e, idx});
+  });
+
+  let html = '';
+  html += '<table><thead><tr><th>معیار</th><th>زیرمعیار</th><th>امتیاز</th><th>نقاط قوت</th><th>فرصت‌ها</th><th>عملیات</th></tr></thead><tbody>';
+  Object.keys(byCrit).forEach(cid=>{
+    const list = byCrit[cid];
+    list.forEach(item=>{
+      html += `<tr>
+        <td>${cid}</td>
+        <td>${item.subId}</td>
+        <td>${item.score===null? '-' : item.score}</td>
+        <td>${(item.strengths||[]).map(s=>escapeHtml(s)).join('<br>')}</td>
+        <td>${(item.opportunities||[]).map(s=>escapeHtml(s)).join('<br>')}</td>
+        <td>
+          <button onclick="editEntry(${item.idx})">ویرایش</button>
+          <button class="danger" onclick="deleteEntry(${item.idx})">حذف</button>
+        </td>
+      </tr>`;
+    });
+    // criterion aggregate
+    const avg = computeCriterionAverage(cid);
+    html += `<tr style="background:#fbfbfd"><td colspan="2" style="font-weight:700">میانگین معیار ${cid}</td><td colspan="4" style="font-weight:700">${avg===null? '-' : avg.toFixed(2)}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  renderSummaryBadges();
+  updateOutput();
+}
+
+/* ======= ویرایش / حذف ======= */
+function editEntry(idx){
+  const e = entries[idx];
+  if(!e) return;
+  editingIndex = idx;
+  // select option
+  for(let i=0;i<document.getElementById('subSelect').options.length;i++){
+    if(document.getElementById('subSelect').options[i].value === e.subId){
+      document.getElementById('subSelect').selectedIndex = i; break;
+    }
+  }
+  document.getElementById('score').value = e.score===null? '' : e.score;
+  document.getElementById('results').value = e.radar.results || '';
+  document.getElementById('approach').value = e.radar.approach || '';
+  document.getElementById('deployment').value = e.radar.deployment || '';
+  document.getElementById('refinement').value = e.radar.refinement || '';
+  document.getElementById('strengths').value = (e.strengths||[]).join('\n');
+  document.getElementById('opportunities').value = (e.opportunities||[]).join('\n');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function deleteEntry(idx){
+  if(!confirm('آیا مطمئن هستید؟')) return;
+  entries.splice(idx,1);
+  renderEntries();
+}
+
+/* ======= محاسبه میانگین یک معیار ======= */
+function computeCriterionAverage(criterionId){
+  const list = entries.filter(e=>String(e.criterionId) === String(criterionId));
+  const scores = list.map(l=>Number(l.score)).filter(n=>!isNaN(n));
+  if(scores.length===0) return null;
+  const sum = scores.reduce((a,b)=>a+b,0);
+  return sum / scores.length;
+}
+
+/* ======= نمایش خلاصه برای داشبورد کوچک ======= */
+function renderSummaryBadges(){
+  const el = document.getElementById('summaryBadges');
+  el.innerHTML = '';
+  const critIds = [...new Set(entries.map(e=>e.criterionId))];
+  critIds.forEach(cid=>{
+    const avg = computeCriterionAverage(cid);
+    const span = document.createElement('span');
+    span.className = 'badge';
+    span.textContent = `معیار ${cid}: ${avg===null? '-' : avg.toFixed(1)}`;
+    el.appendChild(span);
+    el.appendChild(document.createTextNode(' '));
+  });
+}
+
+/* ======= خروجی JSON کامل ارزیابی ======= */
+function buildFullJSON(){
+  const metadata = {
+    organization: document.getElementById('orgName').value || '',
+    evaluation_date: document.getElementById('evalDate').value || (new Date()).toISOString().slice(0,10),
+    evaluator_team: document.getElementById('evalTeam').value.split(',').map(s=>s.trim()).filter(Boolean),
+    model_version: 'EFQM 2025',
+    generated_at: new Date().toISOString()
+  };
+  // group entries by criterion for clarity
+  const grouped = {};
+  entries.forEach(e=>{
+    if(!grouped[e.criterionId]) grouped[e.criterionId]=[];
+    grouped[e.criterionId].push(e);
+  });
+  const criteria = Object.keys(grouped).map(cid=>{
+    return {
+      criterion_id: Number(cid),
+      average_score: computeCriterionAverage(cid),
+      subcriteria: grouped[cid]
+    };
+  });
+  return { metadata, criteria, raw_entries: entries };
+}
+
+/* ======= نمایش پیش‌نمایش JSON ======= */
+function updateOutput(){
+  const json = buildFullJSON();
+  document.getElementById('output').textContent = JSON.stringify(json, null, 2);
+}
+
+/* ======= ذخیره محلی ======= */
+function saveLocal(){
+  const key = 'efqm_evaluation_local';
+  localStorage.setItem(key, JSON.stringify(buildFullJSON()));
+  alert('داده‌ها در مرورگر ذخیره شد (localStorage).');
+}
+
+/* ======= دانلود JSON ======= */
+function downloadJSON(){
+  const json = buildFullJSON();
+  const blob = new Blob([JSON.stringify(json, null, 2)], {type:'application/json;charset=utf-8'});
+  const name = (json.metadata.organization || 'evaluation').replace(/\s+/g,'_') + '.json';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ======= بارگذاری از فایل JSON (ادامه/ویرایش) ======= */
+document.getElementById('loadFileInput').addEventListener('change', (ev)=>{
+  const f = ev.target.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{
+    try {
+      const obj = JSON.parse(r.result);
+      // try to map structure: metadata + criteria or raw_entries
+      if(obj.raw_entries) {
+        entries = obj.raw_entries;
+      } else if(Array.isArray(obj.criteria)) {
+        // reconstruct raw entries
+        entries = [];
+        obj.criteria.forEach(c=>{
+          (c.subcriteria||[]).forEach(sc=> entries.push(sc));
+        });
+      } else {
+        alert('فرمت فایل نامشخص است. لطفاً فایل خروجی صحیح را بارگذاری کنید.');
+        return;
+      }
+      // populate metadata
+      if(obj.metadata){
+        document.getElementById('orgName').value = obj.metadata.organization || '';
+        document.getElementById('evalDate').value = obj.metadata.evaluation_date || '';
+        document.getElementById('evalTeam').value = (obj.metadata.evaluator_team||[]).join(', ');
+      }
+      renderEntries();
+      alert('✅ فایل بارگذاری و داده‌ها وارد شدند.');
+    } catch(err){
+      alert('خطا در خواندن فایل: ' + err.message);
+    }
+  };
+  r.readAsText(f, 'utf-8');
+});
+
+/* ======= ذخیره مستقیم در GitHub (با PAT کاربر) =======
+  روش: ابتدا فایل را به صورت base64 در مسیر data/companies/{filename} ایجاد/بروزرسانی می‌کنیم.
+  توجه امنیتی: بهتر است از GitHub Actions برای ذخیره امن استفاده کنید؛ ارسال توکن در این فرم به معنی
+  نگهداری موقت آن در حافظه مرورگر است.
+*/
+async function saveToGitHub(){
+  const token = document.getElementById('ghToken').value.trim();
+  const filename = document.getElementById('ghFilename').value.trim();
+  if(!token || !filename) return alert('لطفاً توکن و نام فایل را وارد کنید.');
+  const owner = 'hamideghtedarian'; // تغییر دهید اگر لازم است
+  const repo = 'efqm2025-evaluation-system';
+  const path = `data/companies/${filename}`;
+  document.getElementById('ghTargetPath').textContent = path;
+
+  const contentStr = JSON.stringify(buildFullJSON(), null, 2);
+  const contentB64 = btoa(unescape(encodeURIComponent(contentStr)));
+
+  const api = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
+
+  // check if file exists to get sha (for update)
+  let sha = null;
+  try {
+    const headResp = await fetch(api, { headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' } });
+    if(headResp.status === 200){
+      const headJson = await headResp.json();
+      sha = headJson.sha;
+    }
+  } catch(e){
+    // ignore
+  }
+
+  const body = { message: `Add/update evaluation ${filename}`, content: contentB64, branch: 'main' };
+  if(sha) body.sha = sha;
+
+  const putResp = await fetch(api, {
+    method: 'PUT',
+    headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json', 'Content-Type':'application/json' },
+    body: JSON.stringify(body)
+  });
+  if(putResp.ok){
+    alert('✅ فایل با موفقیت در GitHub ذخیره شد.');
+  } else {
+    const txt = await putResp.text();
+    alert('خطا در ذخیره در GitHub: ' + putResp.status + ' - ' + txt);
+  }
+}
+
+/* ======= یوتیل‌ها ======= */
+function escapeHtml(s){
+  if(!s) return '';
+  return String(s).replace(/[&<>"'`=\/]/g, function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#x2F;','`':'&#x60;','=':'&#x3D;'}[ch]; });
+}
+
+/* ======= initialize ======= */
+document.getElementById('evalDate').value = new Date().toISOString().slice(0,10);
+loadModel();
+renderEntries();
+
+</script>
 </body>
 </html>
