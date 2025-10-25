@@ -3,152 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سیستم ارزیابی EFQM 2025</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>سامانه ارزیابی EFQM 2025</title>
+
+  <!-- سبک‌ها -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    body { font-family: "Vazir", sans-serif; background-color: #f9fafb; }
-    textarea { resize: vertical; }
+    body {
+      font-family: 'Vazir', sans-serif;
+      background-color: #f8fafc;
+    }
+    .card {
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-3px);
+    }
+    .link-box {
+      color: #2563eb;
+      font-weight: 600;
+    }
+    .link-box:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
-<body class="max-w-4xl mx-auto p-6">
 
-  <!-- 🔷 Header with Logo and Banner -->
+<body class="p-6">
+
   <header class="text-center mb-8">
-    <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/banner.png" alt="Banner" class="w-full rounded-xl shadow-md mb-4">
-    <img src="https://raw.githubusercontent.com/hamideghtedarian/hamideghtedarian/main/logo.png" alt="Logo" class="mx-auto w-32 h-auto mb-2">
-    <h1 class="text-2xl font-bold text-gray-800">سیستم ارزیابی تعالی سازمانی بر اساس مدل EFQM 2025</h1>
-    <p class="text-gray-600 text-sm mt-1">توسط عبدالحمید اقتداریان</p>
+    <h1 class="text-3xl font-bold text-blue-800 mb-2">سامانه ارزیابی EFQM 2025</h1>
+    <p class="text-gray-600">پشتیبانی از تحلیل‌ها، شواهد و پروژه‌های بهبود</p>
   </header>
 
-  <!-- 📋 Evaluation Form -->
-  <form id="evaluationForm" class="space-y-6 bg-white p-6 rounded-xl shadow-md">
+  <!-- بخش لینک‌های اصلی -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <div>
-      <label class="block text-gray-700">نام سازمان</label>
-      <input type="text" id="organization" class="w-full border rounded p-2" placeholder="مثلاً شرکت فولاد آریا" required />
+    <div class="card">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">🔹 معیارها و زیرمعیارها</h2>
+      <p class="text-gray-600 mb-4">دسترسی به ساختار معیارهای EFQM 2025 و زیرمعیارهای مرتبط جهت ارزیابی.</p>
+      <a href="./criteria/index.html" class="link-box">ورود به معیارها</a>
     </div>
 
-    <div>
-      <label class="block text-gray-700">ارزیاب</label>
-      <input type="text" id="evaluator" class="w-full border rounded p-2" value="عبدالحمید اقتداریان" required />
+    <div class="card">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">🔹 شواهد و تحلیل RADAR</h2>
+      <p class="text-gray-600 mb-4">ثبت و مشاهده شواهد بر اساس منطق RADAR و استخراج نقاط قوت و فرصت‌های بهبود.</p>
+      <a href="./radar/index.html" class="link-box">ورود به بخش RADAR</a>
     </div>
 
-    <div>
-      <label class="block text-gray-700">تاریخ ارزیابی</label>
-      <input type="date" id="date" class="w-full border rounded p-2" value="2025-10-24" required />
+    <div class="card">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">🔹 پروژه‌های بهبود</h2>
+      <p class="text-gray-600 mb-4">مدیریت و اولویت‌بندی پروژه‌های بهبود مطابق چارچوب EFQM.</p>
+      <a href="./improvements/index.html" class="link-box">ورود به پروژه‌ها</a>
     </div>
 
-    <div>
-      <label class="block text-gray-700">معیار</label>
-      <select id="criterion" class="w-full border rounded p-2">
-        <option>1. هدف، چشم‌انداز و راهبرد</option>
-        <option>2. رهبری، فرهنگ و ارزش‌ها</option>
-        <option>3. مشارکت‌ها و منابع</option>
-        <option>4. ایجاد ارزش برای ذی‌نفعان</option>
-        <option>5. پایداری و نوآوری</option>
-        <option>6. عملکرد و نتایج کلیدی</option>
-        <option>7. یادگیری و بهبود مستمر</option>
-      </select>
+  </section>
+
+  <!-- بخش‌های توسعه بعدی -->
+  <section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <div class="card">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">🔸 داشبورد ارزیابی</h2>
+      <p class="text-gray-600 mb-4">نمایش شاخص‌های کلیدی عملکرد و امتیازات ارزیابی در قالب داشبورد تعاملی.</p>
+      <a href="./dashboard/index.html" class="link-box">نمایش داشبورد</a>
     </div>
 
-    <div>
-      <label class="block text-gray-700">زیرمعیار</label>
-      <input type="text" id="subcriterion" class="w-full border rounded p-2" placeholder="مثلاً 1.1 درک هدف و چشم‌انداز" />
+    <div class="card">
+      <h2 class="text-xl font-bold text-gray-800 mb-2">🔸 مستندات و گزارش‌ها</h2>
+      <p class="text-gray-600 mb-4">دسترسی به گزارش‌های نهایی، خروجی‌ها و مستندات فرآیند ارزیابی.</p>
+      <a href="./reports/index.html" class="link-box">مشاهده مستندات</a>
     </div>
 
-    <div>
-      <label class="block text-gray-700">امتیاز (۰ تا ۱۰۰)</label>
-      <input type="number" id="score" min="0" max="100" class="w-full border rounded p-2" />
-    </div>
+  </section>
 
-    <!-- 🔹 RADAR Fields -->
-    <fieldset class="border p-4 rounded">
-      <legend class="text-gray-700 font-semibold">منطق RADAR</legend>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">نتایج (Results)</label>
-        <textarea id="results" class="w-full border rounded p-2" rows="2" placeholder="نتایج یا شاخص‌های قابل مشاهده"></textarea>
-      </div>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">رویکرد (Approach)</label>
-        <textarea id="approach" class="w-full border rounded p-2" rows="2" placeholder="روش‌ها و رویکردهای اتخاذ شده"></textarea>
-      </div>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">جاری‌سازی (Deployment)</label>
-        <textarea id="deployment" class="w-full border rounded p-2" rows="2" placeholder="نحوه اجرا در سازمان"></textarea>
-      </div>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">بازنگری و یادگیری (Assessment & Refinement)</label>
-        <textarea id="refinement" class="w-full border rounded p-2" rows="2" placeholder="بازنگری و اصلاحات انجام‌شده"></textarea>
-      </div>
-    </fieldset>
-
-    <!-- ✅ Strengths & Opportunities -->
-    <fieldset class="border p-4 rounded">
-      <legend class="text-gray-700 font-semibold">نقاط قوت و فرصت‌های بهبود</legend>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">نقاط قوت</label>
-        <textarea id="strengths" class="w-full border rounded p-2" rows="2" placeholder="می‌توانید چند مورد بنویسید (هر خط یک مورد)"></textarea>
-      </div>
-
-      <div class="mt-2">
-        <label class="block text-gray-700">فرصت‌های بهبود</label>
-        <textarea id="improvements" class="w-full border rounded p-2" rows="2" placeholder="می‌توانید چند مورد بنویسید (هر خط یک مورد)"></textarea>
-      </div>
-    </fieldset>
-
-    <!-- 💾 Actions -->
-    <div class="flex gap-4">
-      <button type="button" onclick="saveData()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">💾 ذخیره داده‌ها</button>
-      <button type="button" onclick="exportData()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">📤 خروجی JSON</button>
-    </div>
-  </form>
-
-  <!-- 🔻 Footer -->
-  <footer class="text-center text-sm text-gray-600 mt-10 border-t pt-4">
-    <p>© 2025 <strong>Hamid Eghtedarian</strong> — تحت لیسانس 
-      <a href="https://github.com/hamideghtedarian/hamideghtedarian/blob/main/LICENSE.md" target="_blank" class="text-blue-600 underline">Hamid Eghtedarian License</a>
-    </p>
+  <footer class="text-center text-gray-500 text-sm mt-12">
+    <hr class="my-4 border-gray-300" />
+    <p>© 2025 سامانه ارزیابی تعالی سازمانی EFQM | توسعه‌یافته با همکاری <span class="text-blue-700 font-semibold">Hamid Eghtedarian</span></p>
   </footer>
-
-  <script>
-    // 🔹 ذخیره در مرورگر
-    function saveData() {
-      const data = {
-        organization: document.getElementById("organization").value,
-        evaluator: document.getElementById("evaluator").value,
-        date: document.getElementById("date").value,
-        criterion: document.getElementById("criterion").value,
-        subcriterion: document.getElementById("subcriterion").value,
-        score: document.getElementById("score").value,
-        radar: {
-          results: document.getElementById("results").value,
-          approach: document.getElementById("approach").value,
-          deployment: document.getElementById("deployment").value,
-          refinement: document.getElementById("refinement").value
-        },
-        strengths: document.getElementById("strengths").value.split("\n").filter(s => s.trim() !== ""),
-        improvements: document.getElementById("improvements").value.split("\n").filter(s => s.trim() !== "")
-      };
-      localStorage.setItem("efqm2025_evaluation", JSON.stringify(data));
-      alert("✅ داده‌ها با موفقیت ذخیره شد (در مرورگر شما)");
-    }
-
-    // 🔹 خروجی JSON برای ذخیره در GitHub
-    function exportData() {
-      const data = localStorage.getItem("efqm2025_evaluation");
-      if (!data) return alert("⚠️ ابتدا داده‌ها را ذخیره کنید!");
-      const blob = new Blob([data], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "efqm2025_evaluation.json";
-      link.click();
-    }
-  </script>
 
 </body>
 </html>
