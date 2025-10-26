@@ -1,16 +1,137 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>داشبورد ارزیابی — EFQM</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>body{font-family:Vazirmatn;padding:18px;background:#f6f8fb} .card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.06)}</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>داشبورد تحلیلی EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; margin:0; padding:20px; color:#222; }
+h1, h2 { color:#004aad; margin-bottom:8px; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; margin-bottom:20px; }
+table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+th, td { border:1px solid #e1e5eb; padding:8px; text-align:center; }
+th { background:#e9f0ff; }
+button { background:#004aad; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+#logo { height:60px; }
+.chart-container { width:100%; max-width:700px; margin:auto; }
+footer { text-align:center; margin-top:30px; color:#777; font-size:13px; }
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1 style="text-align:center">داشبورد ارزیابی</h1>
-    <p style="text-align:center">نمودارها و KPIها اینجا نمایش داده خواهند شد. (نسخهٔ پایه)</p>
-    <p style="text-align:center"><a href="../index.html">🔙 بازگشت به صفحه اصلی</a></p>
+
+<header>
+  <div>
+    <h1>📊 داشبورد ارزیابی EFQM 2025</h1>
+    <p style="margin:0;">نمایش تحلیلی امتیازات و نقاط قوت و بهبود</p>
   </div>
+  <img id="logo" src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true" alt="لوگو" />
+</header>
+
+<div class="card">
+  <h2>📁 انتخاب فایل ارزیابی شرکت</h2>
+  <input type="file" id="jsonInput" accept=".json" />
+  <p class="small">فایل باید از خروجی فرم ارزیابی (criteria) تولید شده باشد.</p>
+</div>
+
+<div class="card">
+  <h2>🧭 شناسنامه سازمان</h2>
+  <div id="meta"></div>
+</div>
+
+<div class="card">
+  <h2>📈 نمودار امتیاز معیارها</h2>
+  <div class="chart-container"><canvas id="barChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h2>🕸️ نمودار راداری EFQM 2025</h2>
+  <div class="chart-container"><canvas id="radarChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h2>📋 جدول خلاصه ارزیابی</h2>
+  <div id="tableWrap">فایلی بارگذاری نشده است.</div>
+</div>
+
+<div style="text-align:center;">
+  <button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px; margin-top:10px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Evaluation System</p>
+</footer>
+
+<script>
+let barChart, radarChart;
+
+/* ======= بارگذاری فایل ======= */
+document.getElementById('jsonInput').addEventListener('change', e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const data=JSON.parse(reader.result);
+    renderDashboard(data);
+  };
+  reader.readAsText(file);
+});
+
+/* ======= رندر داشبورد ======= */
+function renderDashboard(data){
+  renderMeta(data.metadata);
+  const scores=data.criteria.map(c=>({id:c.criterion_id, score:c.average_score||0}));
+  renderCharts(scores);
+  renderTable(data.criteria);
+}
+
+/* ======= نمایش متادیتا ======= */
+function renderMeta(meta){
+  const div=document.getElementById('meta');
+  div.innerHTML=`
+    <table>
+      <tr><th>سازمان</th><td>${meta.organization}</td></tr>
+      <tr><th>تاریخ ارزیابی</th><td>${meta.evaluation_date}</td></tr>
+      <tr><th>تیم ارزیابی</th><td>${meta.evaluator_team.join(', ')}</td></tr>
+      <tr><th>نسخه مدل</th><td>${meta.model_version}</td></tr>
+    </table>`;
+}
+
+/* ======= نمودارها ======= */
+function renderCharts(scores){
+  const labels=scores.map(s=>'معیار '+s.id);
+  const dataVals=scores.map(s=>s.score);
+  const ctx1=document.getElementById('barChart').getContext('2d');
+  const ctx2=document.getElementById('radarChart').getContext('2d');
+  if(barChart) barChart.destroy();
+  if(radarChart) radarChart.destroy();
+
+  barChart=new Chart(ctx1,{
+    type:'bar',
+    data:{labels,datasets:[{label:'امتیاز معیارها',data:dataVals,backgroundColor:'#004aad88'}]},
+    options:{scales:{y:{beginAtZero:true,max:100}},plugins:{legend:{display:false}}}
+  });
+
+  radarChart=new Chart(ctx2,{
+    type:'radar',
+    data:{labels,datasets:[{label:'EFQM 2025',data:dataVals,backgroundColor:'#004aad44',borderColor:'#004aad',pointBackgroundColor:'#004aad'}]},
+    options:{scales:{r:{min:0,max:100,ticks:{stepSize:20}}}}
+  });
+}
+
+/* ======= جدول ======= */
+function renderTable(criteria){
+  let html='<table><tr><th>معیار</th><th>میانگین امتیاز</th><th>زیرمعیارها</th></tr>';
+  criteria.forEach(c=>{
+    const subs=c.subcriteria.map(s=>`${s.subId} (${s.score??'-'})`).join(', ');
+    html+=`<tr><td>${c.criterion_id}</td><td>${c.average_score?.toFixed(1)??'-'}</td><td>${subs}</td></tr>`;
+  });
+  html+='</table>';
+  document.getElementById('tableWrap').innerHTML=html;
+}
+</script>
 </body>
 </html>
