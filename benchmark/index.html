@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>📊 داشبورد بهینه‌کاوی EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; padding:20px; color:#222; }
+h1, h2 { color:#004aad; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; margin-bottom:20px; }
+button { background:#004aad; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+.chart-container { width:100%; max-width:800px; margin:auto; }
+table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+th, td { border:1px solid #e1e5eb; padding:8px; text-align:center; }
+th { background:#e9f0ff; }
+footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
+</style>
+</head>
+<body>
+
+<header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+  <div>
+    <h1>📊 داشبورد بهینه‌کاوی EFQM 2025</h1>
+    <p>مقایسه عملکرد سازمان‌ها در معیارهای مدل تعالی</p>
+  </div>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true" height="60">
+</header>
+
+<div class="card">
+  <h2>📁 انتخاب فایل‌های سازمان‌ها</h2>
+  <input type="file" id="multiInput" multiple accept=".json">
+  <p class="small">فایل‌ها باید از خروجی فرم ارزیابی (criteria) استخراج شده باشند.</p>
+</div>
+
+<div class="card">
+  <h2>📈 مقایسه امتیازات معیارها (نمودار میله‌ای)</h2>
+  <div class="chart-container"><canvas id="barChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h2>🕸️ مقایسه راداری EFQM 2025</h2>
+  <div class="chart-container"><canvas id="radarChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h2>📋 جدول مقایسه‌ای امتیازات</h2>
+  <div id="tableWrap">فایلی انتخاب نشده است.</div>
+</div>
+
+<div style="text-align:center;">
+  <button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Benchmarking Dashboard</p>
+</footer>
+
+<script>
+let barChart, radarChart;
+
+document.getElementById('multiInput').addEventListener('change', async e=>{
+  const files=e.target.files;
+  if(!files.length) return;
+  const datasets=[], orgNames=[], allCriteria=new Set();
+
+  for(const f of files){
+    const text=await f.text();
+    const json=JSON.parse(text);
+    const org=json.metadata.organization||f.name;
+    orgNames.push(org);
+    const data=json.criteria.map(c=>({id:c.criterion_id,score:c.average_score||0}));
+    data.forEach(d=>allCriteria.add(d.id));
+    datasets.push({org,data});
+  }
+
+  const criteria=Array.from(allCriteria).sort((a,b)=>a-b);
+  renderCharts(criteria,datasets);
+  renderTable(criteria,datasets);
+});
+
+function renderCharts(criteria,datasets){
+  const labels=criteria.map(c=>'معیار '+c);
+  const colors=['#004aad','#00b894','#e17055','#6c5ce7','#fdcb6e','#0984e3','#d63031'];
+  const barData=datasets.map((d,i)=>({
+    label:d.org,
+    data:criteria.map(cid=>d.data.find(x=>x.id===cid)?.score||0),
+    backgroundColor:colors[i%colors.length]+'88'
+  }));
+
+  const ctx1=document.getElementById('barChart').getContext('2d');
+  if(barChart) barChart.destroy();
+  barChart=new Chart(ctx1,{
+    type:'bar',
+    data:{labels,datasets:barData},
+    options:{scales:{y:{beginAtZero:true,max:100}},plugins:{legend:{position:'bottom'}}}
+  });
+
+  const radarData=datasets.map((d,i)=>({
+    label:d.org,
+    data:criteria.map(cid=>d.data.find(x=>x.id===cid)?.score||0),
+    backgroundColor:colors[i%colors.length]+'33',
+    borderColor:colors[i%colors.length],
+    pointBackgroundColor:colors[i%colors.length]
+  }));
+  const ctx2=document.getElementById('radarChart').getContext('2d');
+  if(radarChart) radarChart.destroy();
+  radarChart=new Chart(ctx2,{
+    type:'radar',
+    data:{labels,datasets:radarData},
+    options:{scales:{r:{min:0,max:100,ticks:{stepSize:20}}},plugins:{legend:{position:'bottom'}}}
+  });
+}
+
+function renderTable(criteria,datasets){
+  let html='<table><tr><th>معیار</th>';
+  datasets.forEach(d=>html+=`<th>${d.org}</th>`);
+  html+='</tr>';
+  criteria.forEach(cid=>{
+    html+=`<tr><td>${cid}</td>`;
+    datasets.forEach(d=>{
+      const val=d.data.find(x=>x.id===cid)?.score||'-';
+      html+=`<td>${val.toFixed?val.toFixed(1):'-'}</td>`;
+    });
+    html+='</tr>';
+  });
+  html+='</table>';
+  document.getElementById('tableWrap').innerHTML=html;
+}
+</script>
+</body>
+</html>
