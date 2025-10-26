@@ -54,6 +54,7 @@
 
     <label>زیرمعیار (از مدل بارگذاری شود)</label>
     <select id="subSelect"><option>در حال بارگذاری...</option></select>
+<div id="criterionTooltip" style="margin-top:10px;"></div>
 
     <label>امتیاز زیرمعیار (۰–۱۰۰)</label>
     <input type="number" id="score" min="0" max="100" />
@@ -133,6 +134,54 @@ async function loadModel() {
     alert('خطا در بارگذاری مدل: ' + err.message + '\nلطفاً مسیر فایل را بررسی کنید.');
     document.getElementById('subSelect').innerHTML = '<option>خطا در بارگذاری مدل</option>';
   }
+}
+/* ======= پر کردن لیست زیرمعیارها با Tooltip ======= */
+function populateSubcriteria(){
+  const sel = document.getElementById('subSelect');
+  sel.innerHTML = '';
+  if(!model || !Array.isArray(model.criteria)) {
+    sel.innerHTML = '<option>مدل نامعتبر</option>';
+    return;
+  }
+
+  model.criteria.forEach(c=>{
+    if(Array.isArray(c.subcriteria)) {
+      // گروه‌بندی با optgroup بر اساس معیار
+      const group = document.createElement('optgroup');
+      group.label = `${c.id} - ${c.title_fa}`;
+      c.subcriteria.forEach(sc=>{
+        const opt = document.createElement('option');
+        opt.value = sc.id;
+        opt.dataset.criterionId = c.id;
+        opt.dataset.description = sc.description || "";
+        opt.dataset.title_en = sc.title_en || "";
+        opt.dataset.title_fa = sc.title_fa || "";
+        opt.textContent = `${sc.id} - ${sc.title_fa}`;
+        group.appendChild(opt);
+      });
+      sel.appendChild(group);
+    }
+  });
+
+  // نمایش Tooltip هنگام انتخاب
+  sel.addEventListener('change', showTooltipForSelected);
+}
+
+/* ======= نمایش Tooltip توضیح زیرمعیار ======= */
+function showTooltipForSelected(){
+  const sel = document.getElementById('subSelect');
+  const selected = sel.selectedOptions[0];
+  if(!selected) return;
+  const desc = selected.dataset.description || "";
+  const titleEn = selected.dataset.title_en || "";
+  const titleFa = selected.dataset.title_fa || "";
+  const tooltip = document.getElementById('criterionTooltip');
+  tooltip.innerHTML = `
+    <div style="background:#f1f5ff;border-radius:10px;padding:10px;margin-top:8px;">
+      <b>${selected.value}</b> — <span style="color:#004080;">${titleEn}</span><br>
+      <span>${titleFa}</span><br>
+      <small style="color:#333;">${desc}</small>
+    </div>`;
 }
 
 /* ======= پر کردن لیست زیرمعیارها ======= */
