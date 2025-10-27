@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎯 تحلیل هم‌راستایی بهبودها با معیارهای EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; padding:20px; color:#222; }
+h1, h2 { color:#004aad; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; margin-bottom:20px; }
+button { background:#004aad; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+th, td { border:1px solid #e1e5eb; padding:8px; text-align:center; }
+th { background:#e9f0ff; }
+footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+header img { height:60px; }
+.chart-container { width:100%; max-width:800px; margin:auto; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🎯 تحلیل هم‌راستایی فرصت‌های بهبود</h1>
+    <p>نقشه تطبیق فرصت‌های بهبود با معیارهای EFQM 2025</p>
+  </div>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true">
+</header>
+
+<div class="card">
+  <h2>📁 انتخاب فایل‌های سازمان‌ها</h2>
+  <input type="file" id="multiInput" multiple accept=".json">
+  <p class="small">سیستم محتوای فرصت‌های بهبود را خوانده و با معیارهای EFQM تطبیق می‌دهد.</p>
+</div>
+
+<div class="card">
+  <h2>📊 توزیع فرصت‌های بهبود بر اساس معیارها</h2>
+  <div class="chart-container"><canvas id="alignChart"></canvas></div>
+</div>
+
+<div class="card">
+  <h2>📋 جدول تحلیل هم‌راستایی</h2>
+  <div id="tableWrap">فایلی انتخاب نشده است.</div>
+</div>
+
+<div style="text-align:center;">
+  <button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Alignment Analysis</p>
+</footer>
+
+<script>
+let chart;
+
+document.getElementById('multiInput').addEventListener('change', async e=>{
+  const files=e.target.files;
+  if(!files.length) return;
+
+  const keywords={
+    1:["purpose","vision","strategy","چشم","راهبرد","استراتژی","هدف"],
+    2:["stakeholder","customer","مشتری","ذی‌نفع","اعتماد","ارتباط"],
+    3:["leader","leadership","رهبری","مدیر","ارزش","فرهنگ"],
+    4:["employee","کارکن","آموزش","توانمندسازی","منابع","انگیزش"],
+    5:["process","فرآیند","نوآوری","دیجیتال","فناوری","بهبود"],
+    6:["result","performance","نتیجه","شاخص","اثربخشی"],
+    7:["sustain","پایداری","محیط","جامعه","مسئولیت"]
+  };
+
+  const counts={1:0,2:0,3:0,4:0,5:0,6:0,7:0};
+  const detailed={1:[],2:[],3:[],4:[],5:[],6:[],7:[]};
+
+  for(const f of files){
+    const text=await f.text();
+    const json=JSON.parse(text);
+    json.criteria.forEach(c=>{
+      c.subcriteria.forEach(sc=>{
+        sc.opportunities?.forEach(o=>{
+          const match=findCriterion(o,keywords);
+          if(match){ counts[match]++; detailed[match].push(o); }
+        });
+      });
+    });
+  }
+
+  renderChart(counts);
+  renderTable(counts,detailed);
+});
+
+/* ======= تطبیق متن با معیار ======= */
+function findCriterion(text,keywords){
+  const lower=text.toLowerCase();
+  for(const [cid,words] of Object.entries(keywords)){
+    if(words.some(w=>lower.includes(w))) return Number(cid);
+  }
+  return null;
+}
+
+/* ======= نمودار ======= */
+function renderChart(counts){
+  const labels=["1- هدف و راهبرد","2- ذی‌نفعان","3- رهبری","4- نیروی انسانی","5- فرآیندها و نوآوری","6- نتایج","7- پایداری"];
+  const values=Object.values(counts);
+  const ctx=document.getElementById('alignChart').getContext('2d');
+  if(chart) chart.destroy();
+  chart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{label:'تعداد فرصت‌های بهبود مرتبط',data:values,backgroundColor:'#004aad99'}]
+    },
+    options:{
+      scales:{y:{beginAtZero:true}},
+      plugins:{legend:{display:false}}
+    }
+  });
+}
+
+/* ======= جدول ======= */
+function renderTable(counts,detailed){
+  let html='<table><tr><th>معیار</th><th>تعداد</th><th>نمونه فرصت‌های مرتبط</th></tr>';
+  for(let i=1;i<=7;i++){
+    html+=`<tr><td>${i}</td><td>${counts[i]}</td><td>${detailed[i].slice(0,3).join("<br>")}</td></tr>`;
+  }
+  html+='</table>';
+  document.getElementById('tableWrap').innerHTML=html;
+}
+</script>
+</body>
+</html>
