@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>📊 داشبورد جامع مدیریتی EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; padding:20px; color:#222; }
+h1, h2 { color:#004aad; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; margin-top:20px; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; text-align:center; cursor:pointer; transition:all .2s ease-in-out; }
+.card:hover { transform:translateY(-4px); box-shadow:0 6px 14px rgba(0,0,0,0.1); }
+.card h3 { color:#004aad; margin-bottom:8px; }
+.card p { font-size:14px; color:#555; }
+footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+header img { height:60px; }
+.summary { background:#fff; border-radius:12px; padding:20px; margin-top:20px; box-shadow:0 3px 10px rgba(0,0,0,0.08); }
+.chart-container { max-width:800px; margin:auto; }
+button { background:#004aad; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>📊 داشبورد جامع مدیریتی EFQM 2025</h1>
+    <p>مرور وضعیت کلی ارزیابی، بهبود و هم‌راستایی سازمان</p>
+  </div>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true">
+</header>
+
+<div class="grid">
+  <div class="card" onclick="openPage('criteria')">
+    <h3>📝 ارزیابی معیارها</h3>
+    <p>ورود امتیازات و گزارش بازخورد</p>
+  </div>
+  <div class="card" onclick="openPage('dashboard')">
+    <h3>📈 داشبورد عملکرد</h3>
+    <p>مشاهده نتایج ارزیابی سازمان</p>
+  </div>
+  <div class="card" onclick="openPage('alignment')">
+    <h3>🎯 تحلیل هم‌راستایی</h3>
+    <p>تطبیق فرصت‌های بهبود با معیارهای EFQM</p>
+  </div>
+  <div class="card" onclick="openPage('priority')">
+    <h3>⚖️ ماتریس اولویت پروژه‌ها</h3>
+    <p>تحلیل اثرگذاری و امکان‌پذیری</p>
+  </div>
+  <div class="card" onclick="openPage('benchmark')">
+    <h3>🤝 بهینه‌کاوی</h3>
+    <p>مقایسه نتایج میان چند سازمان</p>
+  </div>
+</div>
+
+<div class="summary">
+  <h2>📋 خلاصه امتیازات معیارها</h2>
+  <div class="chart-container"><canvas id="scoreChart"></canvas></div>
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+  <button onclick="window.print()">🖨️ چاپ گزارش</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Management Dashboard</p>
+</footer>
+
+<script>
+async function loadScores(){
+  try{
+    const res=await fetch('../data/companies/foolad-arya.json');
+    const data=await res.json();
+    const labels=data.criteria.map(c=>c.title);
+    const scores=data.criteria.map(c=>{
+      const subs=c.subcriteria.map(s=>s.score);
+      return Math.round(subs.reduce((a,b)=>a+b,0)/subs.length);
+    });
+    renderChart(labels,scores);
+  }catch(e){
+    console.log("Error loading data:",e);
+  }
+}
+
+function renderChart(labels,scores){
+  const ctx=document.getElementById('scoreChart').getContext('2d');
+  new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[{label:'میانگین امتیاز معیار',data:scores,backgroundColor:'#004aadaa'}]
+    },
+    options:{
+      scales:{y:{beginAtZero:true,max:100}},
+      plugins:{legend:{display:false}}
+    }
+  });
+}
+
+function openPage(folder){
+  window.location.href=`../${folder}/index.html`;
+}
+
+loadScores();
+</script>
+</body>
+</html>
