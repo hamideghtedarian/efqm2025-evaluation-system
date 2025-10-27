@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🎯 ماتریس اولویت پروژه‌های بهبود EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; padding:20px; color:#222; }
+h1, h2 { color:#004aad; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; margin-bottom:20px; }
+input, textarea { width:100%; padding:8px; border:1px solid #ccc; border-radius:8px; margin-top:5px; }
+button { background:#004aad; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+th, td { border:1px solid #e1e5eb; padding:8px; text-align:center; }
+th { background:#e9f0ff; }
+footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
+.chart-container { max-width:800px; margin:auto; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+header img { height:60px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🎯 ماتریس اولویت پروژه‌های بهبود</h1>
+    <p>تحلیل اثرگذاری و امکان‌پذیری اقدامات بهبود در چارچوب EFQM 2025</p>
+  </div>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true">
+</header>
+
+<div class="card">
+  <h2>➕ افزودن پروژه بهبود</h2>
+  <label>عنوان پروژه</label>
+  <input id="projTitle" placeholder="مثلاً ارتقای سیستم مدیریت عملکرد" />
+  <label>توضیح پروژه</label>
+  <textarea id="projDesc"></textarea>
+  <div style="display:flex;gap:10px;">
+    <div style="flex:1;">
+      <label>اثرگذاری (Impact)</label>
+      <input type="number" id="impact" min="0" max="100" placeholder="۰ تا ۱۰۰" />
+    </div>
+    <div style="flex:1;">
+      <label>امکان‌پذیری (Feasibility)</label>
+      <input type="number" id="feasibility" min="0" max="100" placeholder="۰ تا ۱۰۰" />
+    </div>
+  </div>
+  <button onclick="addProject()">💾 افزودن</button>
+</div>
+
+<div class="card">
+  <h2>📋 فهرست پروژه‌ها</h2>
+  <div id="projTable">پروژه‌ای ثبت نشده است.</div>
+</div>
+
+<div class="card">
+  <h2>📈 ماتریس اولویت‌بندی</h2>
+  <div class="chart-container"><canvas id="priorityChart"></canvas></div>
+</div>
+
+<div style="text-align:center;">
+  <button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Priority Matrix</p>
+</footer>
+
+<script>
+let projects=[], chart=null;
+
+function addProject(){
+  const title=projTitle.value.trim();
+  const desc=projDesc.value.trim();
+  const impact=Number(document.getElementById('impact').value);
+  const feas=Number(document.getElementById('feasibility').value);
+  if(!title || isNaN(impact) || isNaN(feas)) return alert("تمام فیلدها باید تکمیل شوند.");
+  projects.push({title,desc,impact,feas});
+  projTitle.value=projDesc.value=impact.value=feas.value="";
+  renderTable();
+  renderMatrix();
+}
+
+function renderTable(){
+  if(projects.length===0){ projTable.innerHTML="پروژه‌ای ثبت نشده است."; return; }
+  let html="<table><tr><th>عنوان</th><th>اثرگذاری</th><th>امکان‌پذیری</th><th>اولویت</th></tr>";
+  projects.forEach(p=>{
+    const cat=category(p);
+    html+=`<tr><td>${p.title}</td><td>${p.impact}</td><td>${p.feas}</td><td>${cat}</td></tr>`;
+  });
+  html+="</table>";
+  projTable.innerHTML=html;
+}
+
+function category(p){
+  if(p.impact>=70 && p.feas>=70) return "🔥 حیاتی";
+  if(p.impact>=70 && p.feas<70) return "🚀 استراتژیک";
+  if(p.impact<70 && p.feas>=70) return "⚙️ تاکتیکی";
+  return "💤 کم‌اهمیت";
+}
+
+function renderMatrix(){
+  const ctx=document.getElementById('priorityChart').getContext('2d');
+  if(chart) chart.destroy();
+  chart=new Chart(ctx,{
+    type:'scatter',
+    data:{
+      datasets:projects.map(p=>({
+        label:p.title,
+        data:[{x:p.feas,y:p.impact}],
+        backgroundColor:getColor(p)
+      }))
+    },
+    options:{
+      plugins:{legend:{position:'bottom'}},
+      scales:{
+        x:{title:{display:true,text:'امکان‌پذیری'},min:0,max:100},
+        y:{title:{display:true,text:'اثرگذاری'},min:0,max:100}
+      }
+    }
+  });
+}
+
+function getColor(p){
+  const cat=category(p);
+  if(cat.includes("حیاتی")) return "#004aad";
+  if(cat.includes("استراتژیک")) return "#ff6600";
+  if(cat.includes("تاکتیکی")) return "#00b894";
+  return "#cccccc";
+}
+</script>
+</body>
+</html>
