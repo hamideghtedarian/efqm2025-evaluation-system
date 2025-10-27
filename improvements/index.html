@@ -1,16 +1,136 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>پروژه‌های بهبود — EFQM</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>body{font-family:Vazirmatn;padding:18px;background:#f6f8fb} .card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.06)}</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🧭 داشبورد تحلیل بهبود و اشتراکات EFQM 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; padding:20px; color:#222; }
+h1, h2 { color:#004aad; }
+.card { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:18px; margin-bottom:20px; }
+button { background:#004aad; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+button:hover { background:#003b8e; }
+table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+th, td { border:1px solid #e1e5eb; padding:8px; text-align:center; }
+th { background:#e9f0ff; }
+footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+header img { height:60px; }
+.badge { background:#dfe9ff; border-radius:10px; padding:4px 8px; margin:2px; display:inline-block; }
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1 style="text-align:center">پروژه‌های بهبود</h1>
-    <p>اینجا فهرست پروژه‌های بهبود استخراج‌شده از امتیازات و نقاط قوت/فرصت‌ها نمایش داده خواهد شد.</p>
-    <p style="text-align:center"><a href="../index.html">🔙 بازگشت به صفحه اصلی</a></p>
+
+<header>
+  <div>
+    <h1>🧭 تحلیل نقاط قوت و فرصت‌های بهبود</h1>
+    <p>مقایسه و تجمیع یافته‌های کیفی در ارزیابی EFQM 2025</p>
   </div>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true">
+</header>
+
+<div class="card">
+  <h2>📁 انتخاب فایل‌های سازمان‌ها</h2>
+  <input type="file" id="multiInput" multiple accept=".json">
+  <p class="small">فایل‌ها باید از خروجی ارزیابی (criteria) استخراج شده باشند.</p>
+</div>
+
+<div class="card">
+  <h2>🌟 تحلیل نقاط قوت و فرصت‌ها</h2>
+  <div id="summary"></div>
+  <canvas id="improvementChart" style="max-width:800px;margin:auto;"></canvas>
+</div>
+
+<div class="card">
+  <h2>📋 جدول فراوانی موضوعات بهبود و قوت</h2>
+  <div id="tableWrap">فایلی انتخاب نشده است.</div>
+</div>
+
+<div style="text-align:center;">
+  <button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button>
+</div>
+
+<footer>
+  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
+  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Improvement Analysis</p>
+</footer>
+
+<script>
+let chart;
+
+/* ======= بارگذاری فایل‌ها ======= */
+document.getElementById('multiInput').addEventListener('change', async e=>{
+  const files=e.target.files;
+  if(!files.length) return;
+  const strengths=[], opportunities=[];
+  for(const f of files){
+    const text=await f.text();
+    const json=JSON.parse(text);
+    json.criteria.forEach(c=>{
+      c.subcriteria.forEach(sc=>{
+        sc.strengths?.forEach(s=>strengths.push(s.trim()));
+        sc.opportunities?.forEach(o=>opportunities.push(o.trim()));
+      });
+    });
+  }
+  renderSummary(strengths, opportunities);
+  renderTables(strengths, opportunities);
+});
+
+/* ======= نمایش خلاصه ======= */
+function renderSummary(strengths, opportunities){
+  const sCount=strengths.length, oCount=opportunities.length;
+  document.getElementById('summary').innerHTML=`
+    <p>تعداد کل نقاط قوت: <b>${sCount}</b> | تعداد کل فرصت‌های بهبود: <b>${oCount}</b></p>
+  `;
+}
+
+/* ======= جدول و تحلیل ======= */
+function renderTables(strengths, opportunities){
+  const sFreq=frequency(strengths);
+  const oFreq=frequency(opportunities);
+  const allKeys=Array.from(new Set([...Object.keys(sFreq), ...Object.keys(oFreq)]));
+  let html='<table><tr><th>موضوع</th><th>تکرار در قوت‌ها</th><th>تکرار در فرصت‌ها</th></tr>';
+  allKeys.forEach(k=>{
+    html+=`<tr><td>${k}</td><td>${sFreq[k]||0}</td><td>${oFreq[k]||0}</td></tr>`;
+  });
+  html+='</table>';
+  document.getElementById('tableWrap').innerHTML=html;
+
+  const labels=allKeys.slice(0,20); // فقط ۲۰ موضوع پرتکرار
+  const sVals=labels.map(l=>sFreq[l]||0);
+  const oVals=labels.map(l=>oFreq[l]||0);
+
+  const ctx=document.getElementById('improvementChart').getContext('2d');
+  if(chart) chart.destroy();
+  chart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'نقاط قوت',data:sVals,backgroundColor:'#00b89499'},
+        {label:'فرصت‌های بهبود',data:oVals,backgroundColor:'#e1705599'}
+      ]
+    },
+    options:{
+      responsive:true,
+      scales:{y:{beginAtZero:true}},
+      plugins:{legend:{position:'bottom'}}
+    }
+  });
+}
+
+/* ======= محاسبه فراوانی ======= */
+function frequency(arr){
+  const freq={};
+  arr.forEach(a=>{
+    if(!a) return;
+    const key=a.replace(/[،.,;]/g,'').trim();
+    freq[key]=(freq[key]||0)+1;
+  });
+  return freq;
+}
+</script>
 </body>
 </html>
