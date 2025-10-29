@@ -1,97 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>📘 مرکز راهنمای سامانه EFQM 2025</title>
-<style>
-body { font-family: Vazirmatn, Tahoma; background:#f6f8fb; color:#222; padding:30px; line-height:1.8; }
-h1, h2 { color:#004aad; }
-.box { background:white; border-radius:12px; padding:20px; margin-bottom:20px; box-shadow:0 3px 8px rgba(0,0,0,0.08); }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px; }
-.card { background:white; border-radius:12px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:all .2s ease-in-out; text-align:center; cursor:pointer; }
-.card:hover { transform:translateY(-4px); box-shadow:0 6px 12px rgba(0,0,0,0.1); }
-input[type="text"] { width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:10px; }
-footer { text-align:center; margin-top:25px; color:#777; font-size:13px; }
-img.logo { height:70px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مرکز راهنمای سامانه EFQM 2025</title>
+  <style>
+    body {
+      font-family: "Vazirmatn", "IRANSans", sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    header {
+      text-align: center;
+      background-color: #e5e7eb;
+      padding: 20px 10px;
+      border-bottom: 3px solid #9ca3af;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #374151;
+      border-right: 4px solid #9ca3af;
+      padding-right: 10px;
+    }
+    section {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    ul {
+      line-height: 1.9;
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+      padding: 20px;
+      border-top: 1px solid #d1d5db;
+      margin-top: 40px;
+    }
+    .button {
+      background-color: #4b5563;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 25px;
+      font-size: 15px;
+    }
+    .button:hover {
+      background-color: #374151;
+    }
+    .en {
+      direction: ltr;
+      text-align: left;
+      font-size: 13px;
+      color: #6b7280;
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <img src="../help/banner.png" alt="Banner" style="max-width:90%; border-radius:10px;">
+    <h1>مرکز راهنمای سامانه ارزیابی EFQM 2025</h1>
+    <p>توسط عبدالحمید اقتداریان – ارزیاب ارشد و مشاور مدل تعالی EFQM</p>
+  </header>
 
-<header style="text-align:center; margin-bottom:20px;">
-  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/logo.png?raw=true" class="logo">
-  <h1>📘 مرکز راهنمای سامانه EFQM 2025</h1>
-  <p>راهنمای کامل استفاده از ماژول‌های ارزیابی، تحلیل و تصمیم‌سازی</p>
-  <input type="text" id="searchBox" placeholder="🔍 جست‌وجو در راهنماها ..." oninput="filterCards()">
-</header>
+  <section>
+    <h2>📘 معرفی کلی</h2>
+    <p>این سامانه برای ارزیابان و مدیران طراحی شده است تا بتوانند فرآیند ارزیابی بر اساس مدل تعالی EFQM 2025 را به‌صورت ساخت‌یافته، تحلیلی و مستند انجام دهند.</p>
+    <p>The system is designed to help assessors and managers implement EFQM 2025 evaluations in a structured and professional way.</p>
+  </section>
 
-<div class="box">
-<h2>🎯 درباره سامانه</h2>
-<p>این سامانه بر اساس چارچوب رسمی <b>مدل EFQM 2025</b> طراحی شده است تا ارزیابان، مدیران و تیم‌های بهبود بتوانند فرآیندهای ارزیابی، تحلیل هم‌راستایی و تصمیم‌گیری پروژه‌های بهبود را در یک محیط یکپارچه انجام دهند.</p>
-<p>تمام تحلیل‌ها بر پایه منطق <b>RADAR</b> شامل چهار مؤلفه اصلی انجام می‌شود:</p>
-<ul>
-<li><b>Results:</b> نتایج مورد انتظار و واقعی</li>
-<li><b>Approach:</b> رویکردها و روش‌های طراحی‌شده</li>
-<li><b>Deployment:</b> نحوه اجرا و استقرار در سطح سازمان</li>
-<li><b>Assessment & Refinement:</b> بازنگری، یادگیری و بهبود مستمر</li>
-</ul>
-</div>
+  <section>
+    <h2>🧭 ماژول‌های اصلی سامانه</h2>
+    <ul>
+      <li><b>ارزیابی (Criteria):</b> ثبت امتیاز و تحلیل زیرمعیارها بر اساس منطق RADAR.</li>
+      <li><b>هم‌راستایی (Alignment):</b> بررسی ارتباط اهداف، اقدامات و نتایج.</li>
+      <li><b>اولویت پروژه‌ها (Priority):</b> انتخاب پروژه‌های بهبود با رویکرد EFQM.</li>
+      <li><b>داشبورد (Dashboard):</b> پایش شاخص‌های عملکرد و نتایج سازمان.</li>
+      <li><b>داشبورد مدیریتی (Dashboard Master):</b> تحلیل کلان برای مدیران ارشد.</li>
+    </ul>
+  </section>
 
-<h2>📚 راهنماهای موجود</h2>
-<div class="grid" id="helpGrid">
-  <div class="card" onclick="openHelp('criteria.html')">
-    <h3>📝 ارزیابی معیارها (Criteria)</h3>
-    <p>ورود امتیازات، ثبت نقاط قوت و فرصت‌های بهبود بر پایه RADAR</p>
-  </div>
+  <section>
+    <h2>📖 راهنما و منابع</h2>
+    <ul>
+      <li><a href="../criteria/index.html" target="_blank">🔹 راهنمای ماژول ارزیابی (Criteria)</a></li>
+      <li><a href="../alignment/index.html" target="_blank">🔹 راهنمای ماژول هم‌راستایی (Alignment)</a></li>
+      <li><a href="../priority/index.html" target="_blank">🔹 راهنمای ماژول اولویت پروژه‌ها (Priority)</a></li>
+      <li><a href="../dashboard/index.html" target="_blank">🔹 راهنمای ماژول داشبورد (Dashboard)</a></li>
+      <li><a href="../dashboard-master/index.html" target="_blank">🔹 راهنمای ماژول داشبورد مدیریتی (Dashboard Master)</a></li>
+    </ul>
 
-  <div class="card" onclick="openHelp('alignment.html')">
-    <h3>🎯 تحلیل هم‌راستایی (Alignment)</h3>
-    <p>تطبیق فرصت‌های بهبود با معیارهای EFQM 2025</p>
-  </div>
+    <!-- دکمه دانلود PDF -->
+    <div style="text-align:center; margin-top:30px;">
+      <a class="button" href="EFQM2025_HelpCenter_Official.pdf" target="_blank">
+        📄 مشاهده و دانلود نسخه رسمی PDF
+      </a>
+      <p style="font-size:13px; color:#6b7280;">نسخه رسمی با امضای عبدالحمید اقتداریان</p>
+    </div>
+  </section>
 
-  <div class="card" onclick="openHelp('priority.html')">
-    <h3>⚖️ اولویت‌بندی پروژه‌ها (Priority Matrix)</h3>
-    <p>تحلیل اثرگذاری و امکان‌پذیری پروژه‌های بهبود</p>
-  </div>
-
-  <div class="card" onclick="openHelp('dashboard.html')">
-    <h3>📈 داشبورد عملکرد (Dashboard)</h3>
-    <p>تحلیل نتایج ارزیابی برای هر سازمان</p>
-  </div>
-
-  <div class="card" onclick="openHelp('dashboard-master.html')">
-    <h3>🏛️ داشبورد مدیریتی جامع</h3>
-    <p>دسترسی به همه ماژول‌ها، خلاصه امتیازات و گزارش نهایی</p>
-  </div>
-</div>
-
-<div class="box">
-<h2>💡 نکات حرفه‌ای</h2>
-<ul>
-<li>از منوی بالای هر ماژول با دکمه <b>❓ راهنما</b> به توضیحات سریع همان صفحه دسترسی دارید.</li>
-<li>در صورت نیاز به ویرایش راهنماها، فایل‌های موجود در مسیر <code>/help/</code> را مستقیماً در GitHub ویرایش کنید.</li>
-<li>نسخه‌های جدید Help Center می‌توانند شامل ویدیوهای آموزشی و فایل‌های PDF نیز باشند.</li>
-</ul>
-</div>
-
-<footer>
-  <img src="https://github.com/hamideghtedarian/hamideghtedarian-hamideghtedarian/blob/main/banner.png?raw=true" style="max-width:250px;"><br>
-  <p>© 2025 Hamid Eghtedarian — EFQM 2025 Help Center</p>
-</footer>
-
-<script>
-function openHelp(file){
-  window.open(file,"_blank");
-}
-
-function filterCards(){
-  const q=document.getElementById('searchBox').value.toLowerCase();
-  const cards=document.querySelectorAll('.card');
-  cards.forEach(c=>{
-    c.style.display=c.textContent.toLowerCase().includes(q)?'block':'none';
-  });
-}
-</script>
-
+  <footer>
+    <p>© 2025 hamideghtedarian | Inspired by the EFQM Model 2025</p>
+    <div class="en">For official EFQM 2025 evaluation documentation</div>
+    <img src="../help/logo_gray.png" alt="Logo" style="margin-top:10px; height:40px; opacity:0.6;">
+  </footer>
 </body>
 </html>
