@@ -1,3 +1,9 @@
+"""
+EFQM 2025 Help Center Official PDF Generator
+Author: Abdulhamid Eghtedarian
+License: © hamideghtedarian-hamideghtedarian | Inspired by EFQM 2025
+"""
+
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
