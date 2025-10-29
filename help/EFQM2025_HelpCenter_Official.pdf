@@ -1,1 +1,260 @@
+EFQM 2025 Help Center Official PDF Generator
+Author: Abdulhamid Eghtedarian
+License: © hamideghtedarian | Inspired by EFQM 2025
+
+نصب کتابخانه‌های مورد نیاز:
+pip install reportlab arabic-reshaper python-bidi pillow
+“””
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
+from reportlab.lib.units import cm
+from reportlab.lib import colors
+import os
+
+# برای نمایش صحیح فارسی
+
+try:
+from arabic_reshaper import reshape
+from bidi.algorithm import get_display
+PERSIAN_SUPPORT = True
+except ImportError:
+PERSIAN_SUPPORT = False
+print(“⚠️ برای نمایش بهتر فارسی، کتابخانه‌های زیر را نصب کنید:”)
+print(“pip install arabic-reshaper python-bidi”)
+
+def fix_persian(text):
+“”“تبدیل متن فارسی به فرمت قابل نمایش در PDF”””
+if PERSIAN_SUPPORT:
+try:
+reshaped = reshape(text)
+return get_display(reshaped)
+except:
+return text
+return text
+
+# 📂 تنظیم مسیرها
+
+script_dir = os.path.dirname(os.path.abspath(**file**))
+help_dir = os.path.join(script_dir, “help”)
+
+# ایجاد پوشه help اگر وجود نداره
+
+if not os.path.exists(help_dir):
+os.makedirs(help_dir)
+print(f”✅ پوشه help ایجاد شد: {help_dir}”)
+
+output_path = os.path.join(help_dir, “EFQM2025_HelpCenter_Official.pdf”)
+banner_path = os.path.join(help_dir, “banner.png”)
+signature_path = os.path.join(help_dir, “signature-template.png”)
+logo_path = os.path.join(help_dir, “logo_gray.png”)
+
+# 📘 ایجاد سند
+
+doc = SimpleDocTemplate(
+output_path,
+pagesize=A4,
+rightMargin=2*cm,
+leftMargin=2*cm,
+topMargin=2*cm,
+bottomMargin=2*cm,
+title=“EFQM 2025 Help Center”,
+author=“Abdulhamid Eghtedarian”
+)
+
+# ✨ استایل‌ها (با فونت‌های استاندارد که همه جا کار می‌کنن)
+
+styles = getSampleStyleSheet()
+styles.add(ParagraphStyle(
+name=‘TitleFa’,
+fontName=‘Helvetica-Bold’,
+alignment=TA_CENTER,
+fontSize=18,
+leading=24,
+textColor=colors.HexColor(’#1f2937’),
+spaceAfter=12
+))
+styles.add(ParagraphStyle(
+name=‘Heading2’,
+fontName=‘Helvetica-Bold’,
+alignment=TA_RIGHT,
+fontSize=14,
+leading=20,
+textColor=colors.HexColor(’#374151’),
+spaceBefore=16,
+spaceAfter=8
+))
+styles.add(ParagraphStyle(
+name=‘BodyFa’,
+fontName=‘Helvetica’,
+alignment=TA_RIGHT,
+fontSize=11,
+leading=18,
+spaceAfter=6
+))
+styles.add(ParagraphStyle(
+name=‘BodyEn’,
+fontName=‘Helvetica’,
+alignment=TA_LEFT,
+fontSize=10,
+leading=16,
+textColor=colors.HexColor(’#6b7280’),
+spaceAfter=6
+))
+styles.add(ParagraphStyle(
+name=‘BulletFa’,
+fontName=‘Helvetica’,
+alignment=TA_RIGHT,
+fontSize=11,
+leading=18,
+leftIndent=20,
+spaceAfter=4
+))
+
+story = []
+
+# 🏛 صفحه جلد
+
+if os.path.exists(banner_path):
+try:
+story.append(Image(banner_path, width=16*cm, height=3*cm))
+story.append(Spacer(1, 20))
+except Exception as e:
+print(f”⚠️ خطا در بارگذاری banner: {e}”)
+story.append(Spacer(1, 40))
+else:
+print(“⚠️ فایل banner.png یافت نشد”)
+story.append(Spacer(1, 40))
+
+story.append(Paragraph(fix_persian(“سامانه ارزیابی EFQM 2025”), styles[‘TitleFa’]))
+story.append(Spacer(1, 8))
+story.append(Paragraph(“EFQM 2025 Evaluation System – Official Help & Guidance”, styles[‘BodyEn’]))
+story.append(Spacer(1, 20))
+story.append(Paragraph(fix_persian(“عبدالحمید اقتداریان”), styles[‘BodyFa’]))
+story.append(Paragraph(fix_persian(“ارزیاب ارشد و مشاور مدل تعالی EFQM”), styles[‘BodyFa’]))
+story.append(Spacer(1, 12))
+story.append(Paragraph(“October 2025”, styles[‘BodyEn’]))
+story.append(PageBreak())
+
+# 📘 چکیده مدیریتی
+
+story.append(Paragraph(fix_persian(“چکیده مدیریتی”), styles[‘Heading2’]))
+story.append(Spacer(1, 10))
+story.append(Paragraph(
+fix_persian(“این سند راهنمای جامع برای ارزیابان و مدیران بر اساس مدل تعالی EFQM 2025 است. هدف آن تسهیل فرآیند ارزیابی سازمانی و ایجاد چارچوب ساختاریافته برای تحلیل، گزارش‌دهی و بهبود مستمر است.”),
+styles[‘BodyFa’]
+))
+story.append(Spacer(1, 8))
+story.append(Paragraph(
+“This document provides comprehensive guidance for assessors and managers based on the EFQM 2025 Excellence Model. Its purpose is to facilitate organizational assessment and create a structured framework for analysis, reporting, and continuous improvement.”,
+styles[‘BodyEn’]
+))
+story.append(PageBreak())
+
+# 📙 فصل 1
+
+story.append(Paragraph(fix_persian(“فصل ۱: مدل EFQM 2025 و منطق RADAR”), styles[‘Heading2’]))
+story.append(Spacer(1, 10))
+story.append(Paragraph(
+fix_persian(“مدل EFQM 2025 بر سه بُعد اصلی استوار است:”),
+styles[‘BodyFa’]
+))
+story.append(Spacer(1, 6))
+
+data = [
+[fix_persian(‘جهت‌گیری’), ‘Direction’],
+[fix_persian(‘اجرا’), ‘Execution’],
+[fix_persian(‘نتایج’), ‘Results’]
+]
+table = Table(data, colWidths=[8*cm, 8*cm])
+table.setStyle(TableStyle([
+(‘BACKGROUND’, (0, 0), (-1, -1), colors.HexColor(’#f3f4f6’)),
+(‘TEXTCOLOR’, (0, 0), (-1, -1), colors.black),
+(‘ALIGN’, (0, 0), (0, -1), ‘RIGHT’),
+(‘ALIGN’, (1, 0), (1, -1), ‘LEFT’),
+(‘FONTNAME’, (0, 0), (-1, -1), ‘Helvetica’),
+(‘FONTSIZE’, (0, 0), (-1, -1), 10),
+(‘GRID’, (0, 0), (-1, -1), 0.5, colors.grey)
+]))
+story.append(table)
+story.append(Spacer(1, 12))
+
+story.append(Paragraph(fix_persian(“منطق RADAR چهار محور اصلی دارد:”), styles[‘BodyFa’]))
+story.append(Spacer(1, 6))
+story.append(Paragraph(”• Results (نتایج)”, styles[‘BulletFa’]))
+story.append(Paragraph(”• Approach (رویکرد)”, styles[‘BulletFa’]))
+story.append(Paragraph(”• Deployment (استقرار)”, styles[‘BulletFa’]))
+story.append(Paragraph(”• Assessment & Refinement (ارزیابی و بهبود)”, styles[‘BulletFa’]))
+story.append(PageBreak())
+
+# 📗 فصل 2
+
+story.append(Paragraph(fix_persian(“فصل ۲: ماژول‌های سامانه”), styles[‘Heading2’]))
+story.append(Spacer(1, 10))
+story.append(Paragraph(fix_persian(“این سامانه شامل پنج ماژول اصلی است:”), styles[‘BodyFa’]))
+story.append(Spacer(1, 8))
+story.append(Paragraph(fix_persian(“۱. ماژول ارزیابی (Criteria): ثبت امتیاز و تحلیل معیارها”), styles[‘BulletFa’]))
+story.append(Paragraph(fix_persian(“۲. ماژول هم‌راستایی (Alignment): بررسی ارتباط اهداف و نتایج”), styles[‘BulletFa’]))
+story.append(Paragraph(fix_persian(“۳. ماژول اولویت (Priority): تعیین اولویت پروژه‌های بهبود”), styles[‘BulletFa’]))
+story.append(Paragraph(fix_persian(“۴. داشبورد (Dashboard): پایش عملکرد”), styles[‘BulletFa’]))
+story.append(Paragraph(fix_persian(“۵. داشبورد مدیریتی (Dashboard Master): تحلیل کلان”), styles[‘BulletFa’]))
+story.append(PageBreak())
+
+# 📕 فصل 3
+
+story.append(Paragraph(fix_persian(“فصل ۳: توصیه‌های تخصصی”), styles[‘Heading2’]))
+story.append(Spacer(1, 10))
+story.append(Paragraph(
+fix_persian(“ارزیابان باید با رعایت اصول RADAR، نقاط قوت و فرصت‌های بهبود را ثبت کنند و از شواهد مستند استفاده نمایند.”),
+styles[‘BodyFa’]
+))
+story.append(Spacer(1, 8))
+story.append(Paragraph(
+“Assessors should follow RADAR principles to document strengths and improvement opportunities using verified evidence.”,
+styles[‘BodyEn’]
+))
+story.append(PageBreak())
+
+# ✍️ صفحه امضا
+
+story.append(Spacer(1, 50))
+if os.path.exists(signature_path):
+try:
+story.append(Image(signature_path, width=12*cm, height=3*cm))
+except Exception as e:
+print(f”⚠️ خطا در بارگذاری signature: {e}”)
+story.append(Paragraph(”***********************”, styles[‘BodyEn’]))
+story.append(Paragraph(“Abdulhamid Eghtedarian”, styles[‘BodyEn’]))
+else:
+story.append(Paragraph(”***********************”, styles[‘BodyEn’]))
+story.append(Paragraph(“Abdulhamid Eghtedarian”, styles[‘BodyEn’]))
+
+story.append(Spacer(1, 20))
+story.append(Paragraph(“For official EFQM 2025 evaluation documentation”, styles[‘BodyEn’]))
+story.append(Paragraph(“© 2025 hamideghtedarian | Inspired by EFQM Model 2025”, styles[‘BodyEn’]))
+
+# نمایش لوگو اگر وجود داشته باشه
+
+if os.path.exists(logo_path):
+try:
+story.append(Spacer(1, 10))
+story.append(Image(logo_path, width=3*cm, height=3*cm))
+except:
+pass
+
+# ✅ ساخت PDF
+
+try:
+doc.build(story)
+print(”\n” + “=”*60)
+print(“✅ فایل PDF با موفقیت ایجاد شد!”)
+print(f”📂 مسیر: {output_path}”)
+print(f”📄 حجم: {os.path.getsize(output_path)/1024:.1f} KB”)
+print(”=”*60)
+except Exception as e:
+print(f”\n❌ خطا در ساخت PDF: {e}”)
+import traceback
+traceback.print_exc()
 
