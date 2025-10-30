@@ -1,259 +1,72 @@
-EFQM 2025 Help Center Official PDF Generator
-Author: Abdulhamid Eghtedarian
-License: © hamideghtedarian | Inspired by EFQM 2025
-
-نصب کتابخانه‌های مورد نیاز:
-pip install reportlab arabic-reshaper python-bidi pillow
-“””
-
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, Table, TableStyle
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
-from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
 from reportlab.lib import colors
-import os
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.pdfbase import pdfmetrics
 
-# برای نمایش صحیح فارسی
+# 🧠 تنظیم فونت فارسی (HeiseiMin برای ژاپنی/فارسی مناسب است)
+pdfmetrics.registerFont(UnicodeCIDFont('HeiseiMin-W3'))
 
-try:
-from arabic_reshaper import reshape
-from bidi.algorithm import get_display
-PERSIAN_SUPPORT = True
-except ImportError:
-PERSIAN_SUPPORT = False
-print(“⚠️ برای نمایش بهتر فارسی، کتابخانه‌های زیر را نصب کنید:”)
-print(“pip install arabic-reshaper python-bidi”)
+# مسیر فایل خروجی
+output_path = "help/EFQM2025_HelpCenter_Official.pdf"
 
-def fix_persian(text):
-“”“تبدیل متن فارسی به فرمت قابل نمایش در PDF”””
-if PERSIAN_SUPPORT:
-try:
-reshaped = reshape(text)
-return get_display(reshaped)
-except:
-return text
-return text
+# مسیر تصاویر
+banner_path = "help/banner.png"
+logo_path = "help/logo_gray.png"
+signature_path = "help/signature-template.png"
 
-# 📂 تنظیم مسیرها
+# تنظیم صفحه
+doc = SimpleDocTemplate(output_path, pagesize=A4,
+                        rightMargin=50, leftMargin=50, topMargin=60, bottomMargin=60)
 
-script_dir = os.path.dirname(os.path.abspath(**file**))
-help_dir = os.path.join(script_dir, “help”)
-
-# ایجاد پوشه help اگر وجود نداره
-
-if not os.path.exists(help_dir):
-os.makedirs(help_dir)
-print(f”✅ پوشه help ایجاد شد: {help_dir}”)
-
-output_path = os.path.join(help_dir, “EFQM2025_HelpCenter_Official.pdf”)
-banner_path = os.path.join(help_dir, “banner.png”)
-signature_path = os.path.join(help_dir, “signature-template.png”)
-logo_path = os.path.join(help_dir, “logo_gray.png”)
-
-# 📘 ایجاد سند
-
-doc = SimpleDocTemplate(
-output_path,
-pagesize=A4,
-rightMargin=2*cm,
-leftMargin=2*cm,
-topMargin=2*cm,
-bottomMargin=2*cm,
-title=“EFQM 2025 Help Center”,
-author=“Abdulhamid Eghtedarian”
-)
-
-# ✨ استایل‌ها (با فونت‌های استاندارد که همه جا کار می‌کنن)
-
+# سبک‌ها
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle(
-name=‘TitleFa’,
-fontName=‘Helvetica-Bold’,
-alignment=TA_CENTER,
-fontSize=18,
-leading=24,
-textColor=colors.HexColor(’#1f2937’),
-spaceAfter=12
-))
-styles.add(ParagraphStyle(
-name=‘Heading2’,
-fontName=‘Helvetica-Bold’,
-alignment=TA_RIGHT,
-fontSize=14,
-leading=20,
-textColor=colors.HexColor(’#374151’),
-spaceBefore=16,
-spaceAfter=8
-))
-styles.add(ParagraphStyle(
-name=‘BodyFa’,
-fontName=‘Helvetica’,
-alignment=TA_RIGHT,
-fontSize=11,
-leading=18,
-spaceAfter=6
-))
-styles.add(ParagraphStyle(
-name=‘BodyEn’,
-fontName=‘Helvetica’,
-alignment=TA_LEFT,
-fontSize=10,
-leading=16,
-textColor=colors.HexColor(’#6b7280’),
-spaceAfter=6
-))
-styles.add(ParagraphStyle(
-name=‘BulletFa’,
-fontName=‘Helvetica’,
-alignment=TA_RIGHT,
-fontSize=11,
-leading=18,
-leftIndent=20,
-spaceAfter=4
-))
+styles.add(ParagraphStyle(name='Persian', fontName='HeiseiMin-W3', fontSize=12, leading=20, rightIndent=0, alignment=4))
+styles.add(ParagraphStyle(name='Title', fontName='HeiseiMin-W3', fontSize=18, leading=24, alignment=1, spaceAfter=20))
+styles.add(ParagraphStyle(name='SubTitle', fontName='HeiseiMin-W3', fontSize=14, leading=20, alignment=1, textColor=colors.gray))
+styles.add(ParagraphStyle(name='English', fontName='HeiseiMin-W3', fontSize=10, leading=14, alignment=1, textColor=colors.darkgray))
 
-story = []
+content = []
 
-# 🏛 صفحه جلد
+# بنر بالا
+content.append(Image(banner_path, width=480, height=120))
+content.append(Spacer(1, 20))
 
-if os.path.exists(banner_path):
-try:
-story.append(Image(banner_path, width=16*cm, height=3*cm))
-story.append(Spacer(1, 20))
-except Exception as e:
-print(f”⚠️ خطا در بارگذاری banner: {e}”)
-story.append(Spacer(1, 40))
-else:
-print(“⚠️ فایل banner.png یافت نشد”)
-story.append(Spacer(1, 40))
+# عنوان فارسی
+content.append(Paragraph("راهنمای رسمی سامانه ارزیابی EFQM 2025", styles['Title']))
+content.append(Paragraph("تهیه و تنظیم: عبدالحمید اقتداریان – ارزیاب ارشد مدل تعالی EFQM", styles['SubTitle']))
+content.append(Spacer(1, 20))
 
-story.append(Paragraph(fix_persian(“سامانه ارزیابی EFQM 2025”), styles[‘TitleFa’]))
-story.append(Spacer(1, 8))
-story.append(Paragraph(“EFQM 2025 Evaluation System – Official Help & Guidance”, styles[‘BodyEn’]))
-story.append(Spacer(1, 20))
-story.append(Paragraph(fix_persian(“عبدالحمید اقتداریان”), styles[‘BodyFa’]))
-story.append(Paragraph(fix_persian(“ارزیاب ارشد و مشاور مدل تعالی EFQM”), styles[‘BodyFa’]))
-story.append(Spacer(1, 12))
-story.append(Paragraph(“October 2025”, styles[‘BodyEn’]))
-story.append(PageBreak())
+# توضیح فارسی
+text_fa = """
+این سند برای راهنمایی ارزیابان و مدیران تدوین شده است تا فرآیند ارزیابی بر اساس مدل تعالی EFQM 2025 را به‌صورت ساخت‌یافته، 
+مستند و هم‌راستا با منطق RADAR انجام دهند. تمامی بخش‌ها شامل معیارها، زیرمعیارها، شواهد و تحلیل‌های RADAR در سامانه طراحی شده‌اند.
+"""
+content.append(Paragraph(text_fa, styles['Persian']))
+content.append(Spacer(1, 20))
 
-# 📘 چکیده مدیریتی
+# English section
+text_en = """
+This document is prepared to guide assessors and managers in performing evaluations based on the EFQM 2025 Model 
+using a structured approach aligned with the RADAR logic. All components including criteria, sub-criteria, evidence, 
+and improvement actions are embedded within the system.
+"""
+content.append(Paragraph(text_en, styles['English']))
+content.append(Spacer(1, 30))
 
-story.append(Paragraph(fix_persian(“چکیده مدیریتی”), styles[‘Heading2’]))
-story.append(Spacer(1, 10))
-story.append(Paragraph(
-fix_persian(“این سند راهنمای جامع برای ارزیابان و مدیران بر اساس مدل تعالی EFQM 2025 است. هدف آن تسهیل فرآیند ارزیابی سازمانی و ایجاد چارچوب ساختاریافته برای تحلیل، گزارش‌دهی و بهبود مستمر است.”),
-styles[‘BodyFa’]
-))
-story.append(Spacer(1, 8))
-story.append(Paragraph(
-“This document provides comprehensive guidance for assessors and managers based on the EFQM 2025 Excellence Model. Its purpose is to facilitate organizational assessment and create a structured framework for analysis, reporting, and continuous improvement.”,
-styles[‘BodyEn’]
-))
-story.append(PageBreak())
+# بنر پایین
+content.append(Image(logo_path, width=120, height=40))
+content.append(Spacer(1, 40))
 
-# 📙 فصل 1
+# امضا
+content.append(Paragraph("عبدالحمید اقتداریان", styles['Persian']))
+content.append(Image(signature_path, width=180, height=60))
+content.append(Spacer(1, 10))
+content.append(Paragraph("© 2025 hamideghtedarian | EFQM2025 Evaluation System", styles['English']))
 
-story.append(Paragraph(fix_persian(“فصل ۱: مدل EFQM 2025 و منطق RADAR”), styles[‘Heading2’]))
-story.append(Spacer(1, 10))
-story.append(Paragraph(
-fix_persian(“مدل EFQM 2025 بر سه بُعد اصلی استوار است:”),
-styles[‘BodyFa’]
-))
-story.append(Spacer(1, 6))
-
-data = [
-[fix_persian(‘جهت‌گیری’), ‘Direction’],
-[fix_persian(‘اجرا’), ‘Execution’],
-[fix_persian(‘نتایج’), ‘Results’]
-]
-table = Table(data, colWidths=[8*cm, 8*cm])
-table.setStyle(TableStyle([
-(‘BACKGROUND’, (0, 0), (-1, -1), colors.HexColor(’#f3f4f6’)),
-(‘TEXTCOLOR’, (0, 0), (-1, -1), colors.black),
-(‘ALIGN’, (0, 0), (0, -1), ‘RIGHT’),
-(‘ALIGN’, (1, 0), (1, -1), ‘LEFT’),
-(‘FONTNAME’, (0, 0), (-1, -1), ‘Helvetica’),
-(‘FONTSIZE’, (0, 0), (-1, -1), 10),
-(‘GRID’, (0, 0), (-1, -1), 0.5, colors.grey)
-]))
-story.append(table)
-story.append(Spacer(1, 12))
-
-story.append(Paragraph(fix_persian(“منطق RADAR چهار محور اصلی دارد:”), styles[‘BodyFa’]))
-story.append(Spacer(1, 6))
-story.append(Paragraph(”• Results (نتایج)”, styles[‘BulletFa’]))
-story.append(Paragraph(”• Approach (رویکرد)”, styles[‘BulletFa’]))
-story.append(Paragraph(”• Deployment (استقرار)”, styles[‘BulletFa’]))
-story.append(Paragraph(”• Assessment & Refinement (ارزیابی و بهبود)”, styles[‘BulletFa’]))
-story.append(PageBreak())
-
-# 📗 فصل 2
-
-story.append(Paragraph(fix_persian(“فصل ۲: ماژول‌های سامانه”), styles[‘Heading2’]))
-story.append(Spacer(1, 10))
-story.append(Paragraph(fix_persian(“این سامانه شامل پنج ماژول اصلی است:”), styles[‘BodyFa’]))
-story.append(Spacer(1, 8))
-story.append(Paragraph(fix_persian(“۱. ماژول ارزیابی (Criteria): ثبت امتیاز و تحلیل معیارها”), styles[‘BulletFa’]))
-story.append(Paragraph(fix_persian(“۲. ماژول هم‌راستایی (Alignment): بررسی ارتباط اهداف و نتایج”), styles[‘BulletFa’]))
-story.append(Paragraph(fix_persian(“۳. ماژول اولویت (Priority): تعیین اولویت پروژه‌های بهبود”), styles[‘BulletFa’]))
-story.append(Paragraph(fix_persian(“۴. داشبورد (Dashboard): پایش عملکرد”), styles[‘BulletFa’]))
-story.append(Paragraph(fix_persian(“۵. داشبورد مدیریتی (Dashboard Master): تحلیل کلان”), styles[‘BulletFa’]))
-story.append(PageBreak())
-
-# 📕 فصل 3
-
-story.append(Paragraph(fix_persian(“فصل ۳: توصیه‌های تخصصی”), styles[‘Heading2’]))
-story.append(Spacer(1, 10))
-story.append(Paragraph(
-fix_persian(“ارزیابان باید با رعایت اصول RADAR، نقاط قوت و فرصت‌های بهبود را ثبت کنند و از شواهد مستند استفاده نمایند.”),
-styles[‘BodyFa’]
-))
-story.append(Spacer(1, 8))
-story.append(Paragraph(
-“Assessors should follow RADAR principles to document strengths and improvement opportunities using verified evidence.”,
-styles[‘BodyEn’]
-))
-story.append(PageBreak())
-
-# ✍️ صفحه امضا
-
-story.append(Spacer(1, 50))
-if os.path.exists(signature_path):
-try:
-story.append(Image(signature_path, width=12*cm, height=3*cm))
-except Exception as e:
-print(f”⚠️ خطا در بارگذاری signature: {e}”)
-story.append(Paragraph(”***********************”, styles[‘BodyEn’]))
-story.append(Paragraph(“Abdulhamid Eghtedarian”, styles[‘BodyEn’]))
-else:
-story.append(Paragraph(”***********************”, styles[‘BodyEn’]))
-story.append(Paragraph(“Abdulhamid Eghtedarian”, styles[‘BodyEn’]))
-
-story.append(Spacer(1, 20))
-story.append(Paragraph(“For official EFQM 2025 evaluation documentation”, styles[‘BodyEn’]))
-story.append(Paragraph(“© 2025 hamideghtedarian | Inspired by EFQM Model 2025”, styles[‘BodyEn’]))
-
-# نمایش لوگو اگر وجود داشته باشه
-
-if os.path.exists(logo_path):
-try:
-story.append(Spacer(1, 10))
-story.append(Image(logo_path, width=3*cm, height=3*cm))
-except:
-pass
-
-# ✅ ساخت PDF
-
-try:
-doc.build(story)
-print(”\n” + “=”*60)
-print(“✅ فایل PDF با موفقیت ایجاد شد!”)
-print(f”📂 مسیر: {output_path}”)
-print(f”📄 حجم: {os.path.getsize(output_path)/1024:.1f} KB”)
-print(”=”*60)
-except Exception as e:
-print(f”\n❌ خطا در ساخت PDF: {e}”)
-import traceback
-traceback.print_exc()
+# ساخت PDF
+doc.build(content)
+print("✅ فایل PDF رسمی با موفقیت تولید شد:", output_path)
