@@ -23,7 +23,7 @@ doc = SimpleDocTemplate(output_path, pagesize=A4,
 
 styles = getSampleStyleSheet()
 styles.add(ParagraphStyle(name='Persian', fontName='Helvetica', fontSize=12, leading=20, alignment=4))
-styles.add(ParagraphStyle(name='Title', fontName='Helvetica-Bold', fontSize=18, leading=24, alignment=1, spaceAfter=20))
+styles.add(ParagraphStyle(name='MyTitle', fontName='Helvetica-Bold', fontSize=18, leading=24, alignment=1, spaceAfter=20))
 styles.add(ParagraphStyle(name='SubTitle', fontName='Helvetica', fontSize=13, leading=18, alignment=1, textColor=colors.gray))
 styles.add(ParagraphStyle(name='English', fontName='Helvetica', fontSize=10, leading=14, alignment=1, textColor=colors.darkgray))
 
@@ -37,7 +37,7 @@ except Exception as e:
 content.append(Spacer(1, 20))
 
 # عنوان اصلی
-content.append(Paragraph("راهنمای رسمی سامانه ارزیابی EFQM 2025", styles['Title']))
+content.append(Paragraph("راهنمای رسمی سامانه ارزیابی EFQM 2025", styles['MyTitle']))
 content.append(Paragraph("تهیه و تنظیم: عبدالحمید اقتداریان – ارزیاب ارشد مدل تعالی EFQM", styles['SubTitle']))
 content.append(Spacer(1, 20))
 
