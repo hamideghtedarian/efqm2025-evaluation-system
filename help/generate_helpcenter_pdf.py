@@ -66,7 +66,7 @@ except Exception as e:
     print("⚠️ لوگو بارگذاری نشد:", e)
 content.append(Spacer(1, 40))
 
-# امضا
+# امضا 
 content.append(Paragraph("عبدالحمید اقتداریان", styles['Persian']))
 try:
     content.append(Image(ImageReader(signature_path), width=180, height=60))
