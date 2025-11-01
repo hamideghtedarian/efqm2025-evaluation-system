@@ -2,28 +2,22 @@ from reportlab.lib.pagesizes import A4
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.lib import colors
 from reportlab.lib.utils import ImageReader
 import os
 
-# مسیر پایه
+# مسیر پایه پروژه
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-# ثبت فونت فارسی
-font_path = os.path.join(base_dir, "fonts", "Vazirmatn.ttf")
-if os.path.exists(font_path):
-    pdfmetrics.registerFont(TTFont('Vazirmatn', font_path))
-    farsi_font = 'Vazirmatn'
-else:
-    print("⚠️ فونت فارسی یافت نشد، از Helvetica استفاده می‌شود.")
-    farsi_font = 'Helvetica'
-
-# مسیرها
+# مسیرهای فایل‌ها
 output_path = os.path.join(base_dir, "help", "EFQM2025_HelpCenter_Official.pdf")
 banner_path = os.path.join(base_dir, "help", "banner.png")
 logo_path = os.path.join(base_dir, "help", "logo_gray.png")
 signature_path = os.path.join(base_dir, "help", "signature-template.png")
+
+# ثبت فونت یونی‌کد رسمی (پشتیبانی کامل فارسی)
+pdfmetrics.registerFont(UnicodeCIDFont('HeiseiMin-W3'))
 
 # تنظیم سند
 doc = SimpleDocTemplate(output_path, pagesize=A4,
@@ -31,14 +25,14 @@ doc = SimpleDocTemplate(output_path, pagesize=A4,
                         topMargin=60, bottomMargin=60)
 
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle(name='MyTitle', fontName=farsi_font, fontSize=18, alignment=1, spaceAfter=20))
-styles.add(ParagraphStyle(name='MySubTitle', fontName=farsi_font, fontSize=13, alignment=1, textColor=colors.gray))
-styles.add(ParagraphStyle(name='MyPersian', fontName=farsi_font, fontSize=12, alignment=2, leading=20))
+styles.add(ParagraphStyle(name='MyTitle', fontName='HeiseiMin-W3', fontSize=18, alignment=1, spaceAfter=20))
+styles.add(ParagraphStyle(name='MySubTitle', fontName='HeiseiMin-W3', fontSize=13, alignment=1, textColor=colors.gray))
+styles.add(ParagraphStyle(name='MyPersian', fontName='HeiseiMin-W3', fontSize=12, alignment=2, leading=20))
 styles.add(ParagraphStyle(name='MyEnglish', fontName='Helvetica', fontSize=10, leading=14, alignment=1, textColor=colors.darkgray))
 
 content = []
 
-# بنر
+# بنر بالا
 if os.path.exists(banner_path):
     content.append(Image(ImageReader(banner_path), width=480, height=120))
 content.append(Spacer(1, 20))
@@ -64,18 +58,18 @@ aligned with the RADAR logic. All criteria, sub-criteria, and evidence are manag
 content.append(Paragraph(text_en, styles['MyEnglish']))
 content.append(Spacer(1, 30))
 
-# لوگو
+# لوگو و امضا
 if os.path.exists(logo_path):
     content.append(Image(ImageReader(logo_path), width=120, height=40))
 content.append(Spacer(1, 30))
 
-# امضا
 content.append(Paragraph("عبدالحمید اقتداریان", styles['MyPersian']))
 if os.path.exists(signature_path):
     content.append(Image(ImageReader(signature_path), width=180, height=60))
 content.append(Spacer(1, 10))
+
 content.append(Paragraph("© 2025 hamideghtedarian | EFQM2025 Evaluation System", styles['MyEnglish']))
 
 # ساخت PDF
 doc.build(content)
-print("✅ فایل PDF فارسی با موفقیت ساخته شد:", output_path)
+print("✅ فایل PDF نهایی با پشتیبانی کامل از فارسی ساخته شد:", output_path)
