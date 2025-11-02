@@ -12,8 +12,8 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 base_dir = os.path.dirname(base_dir)  # یک سطح بالاتر (ریشه پروژه)
 
 # مسیر داده‌ها (با نام‌های فارسی)
-companies_dir = os.path.join(base_dir, "data", "کمپانی")
-criteria_file = os.path.join(base_dir, "data", "معیارها", "efqm2025.json")
+companies_dir = os.path.join(base_dir, "data", "companies")
+criteria_file = os.path.join(base_dir, "data", "criteria", "efqm2025.json")
 
 # مسیر خروجی‌ها
 reports_dir = os.path.join(base_dir, "reports", "company_reports")
