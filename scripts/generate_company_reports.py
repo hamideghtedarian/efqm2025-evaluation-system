@@ -1,108 +1,102 @@
-import os
 import json
-from datetime import datetime
-from reportlab.lib.pagesizes import A4
+import os
+import sys
+from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from zipfile import ZipFile
+from reportlab.lib.utils import ImageReader
+import arabic_reshaper
+from bidi.algorithm import get_display
 
-# مسیر اصلی پروژه
-base_dir = os.path.dirname(os.path.abspath(__file__))
-base_dir = os.path.dirname(base_dir)  # یک سطح بالاتر (ریشه پروژه)
+# اضافه کردن مسیر اصلی پروژه برای import
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from persian_pdf import PersianPDF
 
-# مسیر داده‌ها (با نام‌های فارسی)
-companies_dir = os.path.join(base_dir, "data", "companies")
-criteria_file = os.path.join(base_dir, "data", "criteria", "efqm2025.json")
+def load_company_data(company_name):
+    """بارگذاری داده‌های شرکت"""
+    company_path = f"data/companies/{company_name}.json"
+    if os.path.exists(company_path):
+        with open(company_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return None
 
-# مسیر خروجی‌ها
-reports_dir = os.path.join(base_dir, "reports", "company_reports")
-os.makedirs(reports_dir, exist_ok=True)
-
-# مسیر فونت
-fonts_dir = os.path.join(base_dir, "fonts")
-font_path = os.path.join(fonts_dir, "Vazirmatn.ttf")
-
-# ثبت فونت فارسی (در صورت موجود بودن)
-if os.path.exists(font_path):
-    pdfmetrics.registerFont(TTFont("Vazirmatn", font_path))
-    font_name = "Vazirmatn"
-else:
-    font_name = "Helvetica"
-
-# بارگذاری فایل معیارها
-if not os.path.exists(criteria_file):
-    raise FileNotFoundError(f"❌ فایل معیارها یافت نشد: {criteria_file}")
-
-with open(criteria_file, "r", encoding="utf-8") as f:
-    criteria_data = json.load(f)
-
-# بررسی وجود پوشه شرکت‌ها
-if not os.path.exists(companies_dir):
-    raise FileNotFoundError(f"❌ پوشه شرکت‌ها یافت نشد: {companies_dir}")
-
-# ایجاد گزارش برای هر شرکت
-for filename in os.listdir(companies_dir):
-    if filename.endswith(".json"):
-        company_path = os.path.join(companies_dir, filename)
-        with open(company_path, "r", encoding="utf-8") as f:
-            company_data = json.load(f)
-
-        org_name = company_data.get("organization", "نامشخص")
-        evaluator = company_data.get("evaluator", "ارزیاب نامشخص")
-        date = company_data.get("date", datetime.now().strftime("%Y-%m-%d"))
-
-        # مسیر فایل PDF خروجی
-        pdf_filename = f"{org_name}_feedback.pdf"
-        pdf_path = os.path.join(reports_dir, pdf_filename)
-
-        # شروع تولید فایل PDF
-        c = canvas.Canvas(pdf_path, pagesize=A4)
+def create_feedback_pdf(company_data, output_path):
+    """ایجاد PDF بازخورد"""
+    try:
+        c = canvas.Canvas(output_path, pagesize=A4)
         width, height = A4
-
-        c.setFont(font_name, 14)
-        c.drawString(100, height - 80, f"گزارش بازخورد مدل EFQM 2025")
-        c.setFont(font_name, 12)
-        c.drawString(100, height - 110, f"نام سازمان: {org_name}")
-        c.drawString(100, height - 130, f"ارزیاب: {evaluator}")
-        c.drawString(100, height - 150, f"تاریخ ارزیابی: {date}")
-        c.line(100, height - 160, 480, height - 160)
-
-        y = height - 190
-        c.setFont(font_name, 11)
-
-        # چاپ معیارها و زیرمعیارها
-        for criterion in criteria_data.get("criteria", []):
-            c.drawString(80, y, f"معیار {criterion['id']}: {criterion['title']}")
-            y -= 20
-
-            for sub in criterion.get("subcriteria", []):
-                c.drawString(100, y, f"   زیرمعیار {sub['id']}: {sub['title']}")
-                y -= 15
-
-                if y < 100:  # رفتن به صفحه جدید در صورت پر شدن صفحه
-                    c.showPage()
-                    c.setFont(font_name, 11)
-                    y = height - 80
-
-        # امضا و پاورقی
-        c.showPage()
-        c.setFont(font_name, 10)
-        c.drawString(100, height - 100,
-                     "© گزارش تولیدشده به‌صورت خودکار توسط سیستم ارزیابی EFQM2025")
+        
+        # ایجاد نمونه PersianPDF
+        persian_pdf = PersianPDF()
+        
+        # هدر
+        c.setFillColorRGB(0.2, 0.4, 0.6)
+        c.rect(0, height-100, width, 100, fill=1)
+        
+        c.setFillColorRGB(1, 1, 1)
+        
+        # استفاده از PersianPDF برای متن فارسی
+        company_name_fa = company_data.get('name_fa', 'شرکت')
+        persian_pdf.draw_persian_text(c, f"گزارش ارزیابی {company_name_fa}", 50, height-50, 16)
+        persian_pdf.draw_persian_text(c, "چارچوب EFQM 2025", 50, height-70, 12)
+        
+        # محتوای اصلی
+        c.setFillColorRGB(0, 0, 0)
+        y_position = height - 150
+        
+        # بخش‌های مختلف
+        sections = [
+            ("نقاط قوت", company_data.get('strengths', [])),
+            ("فرصت‌های بهبود", company_data.get('improvements', [])),
+            ("پیشنهادات", company_data.get('recommendations', []))
+        ]
+        
+        for section_title, items in sections:
+            if items:
+                persian_pdf.draw_persian_text(c, section_title, 50, y_position, 14)
+                y_position -= 30
+                
+                for item in items:
+                    if y_position < 100:
+                        c.showPage()
+                        y_position = height - 100
+                        persian_pdf = PersianPDF()  # ایجاد مجدد برای صفحه جدید
+                    
+                    persian_pdf.draw_persian_text(c, f"• {item}", 70, y_position, 10)
+                    y_position -= 20
+        
         c.save()
+        print(f"✅ PDF ایجاد شد: {output_path}")
+        
+    except Exception as e:
+        print(f"❌ خطا در ایجاد PDF: {e}")
 
-        print(f"✅ گزارش برای {org_name} ایجاد شد: {pdf_filename}")
+def main():
+    """تابع اصلی"""
+    companies = [
+        "alfa petrochemical co",
+        "beta petrochmical co", 
+        "شرکت پتروشیمی الفا",
+        "شرکت پتروشیمی بتا"
+    ]
+    
+    # ایجاد پوشه خروجی
+    os.makedirs("reports/company_reports", exist_ok=True)
+    
+    for company in companies:
+        print(f"📊 در حال پردازش: {company}")
+        company_data = load_company_data(company)
+        
+        if company_data:
+            # نام فایل خروجی
+            if any('\u0600' <= char <= '\u06FF' for char in company):
+                output_name = f"{company}_feedback.pdf"
+            else:
+                output_name = f"{company}_feedback.pdf"
+            
+            output_path = f"reports/company_reports/{output_name}"
+            create_feedback_pdf(company_data, output_path)
+        else:
+            print(f"⚠️ داده‌ای برای {company} یافت نشد")
 
-# ایجاد فایل ZIP نهایی از همه گزارش‌ها
-zip_name = f"EFQM2025_Assessment_Pack_{datetime.now().strftime('%Y%m%d')}.zip"
-zip_path = os.path.join(base_dir, "reports", zip_name)
-
-with ZipFile(zip_path, "w") as zipf:
-    for file in os.listdir(reports_dir):
-        if file.endswith(".pdf"):
-            zipf.write(os.path.join(reports_dir, file),
-                       arcname=f"company_reports/{file}")
-
-print(f"\n📦 بسته نهایی ایجاد شد: {zip_path}")
-print("🎉 عملیات با موفقیت پایان یافت.")
+if __name__ == "__main__":
+    main()
