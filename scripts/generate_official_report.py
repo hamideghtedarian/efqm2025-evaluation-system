@@ -4,6 +4,12 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+# ثبت فونت‌های فارسی
+fonts_dir = os.path.join(base_dir, "fonts")
+pdfmetrics.registerFont(TTFont("Vazirmatn", os.path.join(fonts_dir, "Vazirmatn-Regular.ttf")))
+pdfmetrics.registerFont(TTFont("Vazirmatn-Bold", os.path.join(fonts_dir, "Vazirmatn-Bold.ttf")))
 
 print("🚀 Script started...")
 
@@ -44,10 +50,10 @@ try:
     c = canvas.Canvas(pdf_path, pagesize=A4)
     width, height = A4
 
-    c.setFont("Helvetica-Bold", 16)
+    c.setFont("Vazirmatn-Bold", 16)
     c.drawCentredString(width / 2, height - 3 * cm, "Organizational Excellence Assessment Report")
 
-    c.setFont("Helvetica", 12)
+    c.setFont("Vazirmatn", 12)
     c.drawCentredString(width / 2, height - 4 * cm, f"Company: {company_name}")
     c.drawCentredString(width / 2, height - 4.7 * cm, f"Evaluator: {evaluator}")
     c.drawCentredString(width / 2, height - 5.4 * cm, f"Date: {date_str}")
