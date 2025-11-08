@@ -15,12 +15,12 @@ from datetime import datetime
 print("🚀 Starting EFQM Official Report Generator...")
 
 # --------------------------------------------------------------
-# مسیر پایه پروژه (تعریف قبل از هر چیز)
+# مسیر پایه پروژه (حتماً در اولین خط‌ها)
 # --------------------------------------------------------------
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # --------------------------------------------------------------
-# مسیرهای مهم
+# مسیرها
 # --------------------------------------------------------------
 companies_dir = os.path.join(base_dir, "data", "companies")
 fonts_dir = os.path.join(base_dir, "fonts")
@@ -39,55 +39,60 @@ except Exception as e:
     print("⚠️ Font registration failed:", e)
 
 # --------------------------------------------------------------
-# یافتن فایل شرکت
+# پیدا کردن فایل شرکت
 # --------------------------------------------------------------
 company_files = [f for f in os.listdir(companies_dir) if f.endswith(".json")]
 if not company_files:
     raise FileNotFoundError("❌ هیچ فایل شرکتی در مسیر data/companies یافت نشد.")
 
-first_company = company_files[0]
-data_file = os.path.join(companies_dir, first_company)
-print(f"🧾 Using company file: {data_file}")
-
-# --------------------------------------------------------------
-# بارگذاری داده شرکت
-# --------------------------------------------------------------
+data_file = os.path.join(companies_dir, company_files[0])
 with open(data_file, "r", encoding="utf-8") as f:
     company_data = json.load(f)
 
-company_name = company_data.get("organization", os.path.splitext(first_company)[0])
+company_name = company_data.get("organization", "نام شرکت مشخص نیست")
 evaluator = company_data.get("evaluator", "ارزیاب ناشناس")
 date_str = datetime.now().strftime("%Y-%m-%d")
 
 # --------------------------------------------------------------
-# مسیر خروجی PDF
+# خروجی PDF
 # --------------------------------------------------------------
-pdf_filename = f"{company_name.replace(' ', '_')}_feedback_official.pdf"
+pdf_filename = f"{company_name.replace(' ', '_')}_official_feedback.pdf"
 pdf_path = os.path.join(output_dir, pdf_filename)
-print(f"📄 Generating PDF: {pdf_path}")
 
-# --------------------------------------------------------------
-# ایجاد فایل PDF
-# --------------------------------------------------------------
 c = canvas.Canvas(pdf_path, pagesize=A4)
 width, height = A4
 
 # --------------------------------------------------------------
-# سرصفحه گزارش
+# سرصفحه و اطلاعات اصلی
 # --------------------------------------------------------------
 c.setFont("Vazirmatn-Bold", 16)
-c.drawCentredString(width / 2, height - 3 * cm, "گزارش رسمی ارزیابی تعالی سازمانی")
+c.drawCentredString(width/2, height - 3*cm, "گزارش رسمی ارزیابی تعالی سازمانی")
 
 c.setFont("Vazirmatn", 12)
-c.drawCentredString(width / 2, height - 4 * cm, f"نام شرکت: {company_name}")
-c.drawCentredString(width / 2, height - 4.8 * cm, f"ارزیاب: {evaluator}")
-c.drawCentredString(width / 2, height - 5.6 * cm, f"تاریخ گزارش: {date_str}")
-
-c.line(2 * cm, height - 6.2 * cm, width - 2 * cm, height - 6.2 * cm)
+c.drawCentredString(width/2, height - 4*cm, f"نام شرکت: {company_name}")
+c.drawCentredString(width/2, height - 4.8*cm, f"ارزیاب: {evaluator}")
+c.drawCentredString(width/2, height - 5.6*cm, f"تاریخ گزارش: {date_str}")
+c.line(2*cm, height - 6.2*cm, width - 2*cm, height - 6.2*cm)
 
 # --------------------------------------------------------------
-# درج امضا در پایین صفحه
+# درج امضا
 # --------------------------------------------------------------
-signature_width = 5 * cm
-signature_height = 2 * cm
-print(f"🔍
+if os.path.exists(signature_file):
+    c.drawImage(ImageReader(signature_file), width - 8*cm, 2*cm, 5*cm, 2*cm, mask='auto')
+    print("✍️ Signature added.")
+else:
+    print("⚠️ Signature file not found.")
+
+# --------------------------------------------------------------
+# اطلاعات امضا
+# --------------------------------------------------------------
+c.setFont("Vazirmatn", 10)
+c.drawString(2*cm, 3*cm, f"ارزیاب: {evaluator}")
+c.drawString(2*cm, 2.4*cm, "ارزیاب ارشد مدل‌های تعالی سازمانی")
+c.drawString(2*cm, 1.8*cm, f"تاریخ: {date_str}")
+
+c.showPage()
+c.save()
+
+print("✅ Report generated successfully!")
+print(f"📄 File saved at: {pdf_path}")
