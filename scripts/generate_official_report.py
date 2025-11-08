@@ -15,9 +15,9 @@ from datetime import datetime
 print("🚀 Starting EFQM Official Report Generator...")
 
 # --------------------------------------------------------------
-# تعریف مسیر پایه (base_dir) باید اولین باشد
+# مسیر پایه پروژه (تعریف قبل از هر چیز)
 # --------------------------------------------------------------
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # --------------------------------------------------------------
 # مسیرهای مهم
@@ -29,7 +29,7 @@ output_dir = os.path.join(base_dir, "reports", "company_reports")
 os.makedirs(output_dir, exist_ok=True)
 
 # --------------------------------------------------------------
-# ثبت فونت‌های فارسی Vazirmatn
+# ثبت فونت فارسی Vazirmatn
 # --------------------------------------------------------------
 try:
     pdfmetrics.registerFont(TTFont("Vazirmatn", os.path.join(fonts_dir, "Vazirmatn-Regular.ttf")))
@@ -39,7 +39,7 @@ except Exception as e:
     print("⚠️ Font registration failed:", e)
 
 # --------------------------------------------------------------
-# یافتن فایل شرکت برای گزارش
+# یافتن فایل شرکت
 # --------------------------------------------------------------
 company_files = [f for f in os.listdir(companies_dir) if f.endswith(".json")]
 if not company_files:
@@ -90,37 +90,4 @@ c.line(2 * cm, height - 6.2 * cm, width - 2 * cm, height - 6.2 * cm)
 # --------------------------------------------------------------
 signature_width = 5 * cm
 signature_height = 2 * cm
-print(f"🔍 Searching for signature file at: {signature_file}")
-
-if os.path.exists(signature_file):
-    try:
-        c.drawImage(
-            ImageReader(signature_file),
-            width - (signature_width + 3 * cm),
-            2 * cm,
-            signature_width,
-            signature_height,
-            mask='auto'
-        )
-        print("✅ Signature added successfully.")
-    except Exception as e:
-        print("⚠️ Error while adding signature:", e)
-else:
-    print("⚠️ Signature file not found!")
-
-# --------------------------------------------------------------
-# درج اطلاعات ارزیاب در کنار امضا
-# --------------------------------------------------------------
-c.setFont("Vazirmatn", 10)
-c.drawString(2 * cm, 3 * cm, f"ارزیاب: {evaluator}")
-c.drawString(2 * cm, 2.4 * cm, "ارزیاب ارشد مدل‌های تعالی سازمانی")
-c.drawString(2 * cm, 1.8 * cm, f"تاریخ: {date_str}")
-
-# --------------------------------------------------------------
-# پایان گزارش
-# --------------------------------------------------------------
-c.showPage()
-c.save()
-
-print("✅ Official EFQM Report generated successfully!")
-print(f"📁 File saved at: {pdf_path}")
+print(f"🔍
