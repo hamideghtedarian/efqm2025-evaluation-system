@@ -1,0 +1,72 @@
+{
+  "id": "1",
+  "title_fa": "راهبری",
+  "title_en": "Direction",
+  "subcriteria": [
+    {
+      "id": "1.1",
+      "title_fa": "تعیین هدف، رسالت، چشم‌انداز و جهت‌گیری‌های سازمانی",
+      "title_en": "Define Purpose, Vision and Strategic Direction",
+      "description_fa": "سازمان باید هدف وجودی خود، رسالت، چشم‌انداز و جهت‌گیری‌های کلان خود را به‌طور روشن تدوین و مستندسازی نماید. این مولفه‌ها باید الهام‌بخش، قابل‌درک، قابل‌اجرا و مرتبط با نیازها و انتظارات ذی‌نفعان کلیدی باشند. رهبری باید اطمینان یابد که این عناصر به‌صورت گسترده و مؤثر در سراسر سازمان ارتباط، ترویج و جاری‌سازی می‌شوند.",
+      "description_en": "The organization defines its purpose, mission, vision, and strategic directions in a clear and inspiring manner. These elements should be meaningful, actionable, and aligned with the needs and expectations of key stakeholders. Leadership ensures that these elements are communicated, understood, and embedded across the organization.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "1.2",
+      "title_fa": "شناخت زیست‌بوم، روندها، محرک‌ها و قابلیت‌های سازمان",
+      "title_en": "Understand the Ecosystem, Trends, Drivers and Organizational Capabilities",
+      "description_fa": "سازمان زیست‌بوم داخلی و خارجی خود را شناسایی، تحلیل و پایش می‌کند تا بتواند روندهای نوظهور، ریسک‌ها، فرصت‌ها، تغییرات فناوری، نیازهای آینده ذی‌نفعان و محرک‌های کلیدی ایجاد ارزش را درک نماید. همچنین قابلیت‌ها، منابع، ظرفیت‌ها و بلوغ سیستم‌های داخلی خود را ارزیابی می‌کند تا بتواند تصمیمات استراتژیک آگاهانه اتخاذ نماید.",
+      "description_en": "The organization identifies and analyses its internal and external ecosystem to understand emerging trends, risks, opportunities, technological shifts, future stakeholder needs and key value drivers. It also assesses its internal capabilities, resources, capacities and maturity to support informed strategic decision-making.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "1.3",
+      "title_fa": "درک نیازها، انتظارات و اولویت‌های ذی‌نفعان",
+      "title_en": "Understand Stakeholder Needs, Expectations and Priorities",
+      "description_fa": "سازمان ذی‌نفعان کلیدی خود را شناسایی کرده، نیازها، انتظارات و اولویت‌های آن‌ها را از طریق روش‌های معتبر و مشارکتی جمع‌آوری، تحلیل و به‌روز می‌کند. این داده‌ها باید نقش محوری در تصمیم‌گیری‌های راهبردی، تعیین جهت‌گیری‌ها و طراحی مدل‌های ایجاد ارزش داشته باشند.",
+      "description_en": "The organization identifies its key stakeholders and systematically gathers, analyses and updates their needs, expectations and priorities using reliable and participatory methods. These insights play a key role in strategic decision-making and in shaping the organization's value-creation model.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "1.4",
+      "title_fa": "تدوین، انتخاب و انطباق استراتژی‌های سازمان",
+      "title_en": "Develop, Select and Align Organizational Strategy",
+      "description_fa": "سازمان مجموعه‌ای از گزینه‌های راهبردی را ایجاد و ارزیابی می‌کند و استراتژی‌های مناسب را بر پایه تحلیل داده‌های زیست‌بوم، نظرات ذی‌نفعان، قابلیت‌های سازمان و چشم‌انداز انتخاب می‌نماید. استراتژی‌ها باید منسجم، قابل اجرا، هم‌راستا با جهت‌گیری‌های کلان و مبتنی بر مدل ایجاد ارزش باشند.",
+      "description_en": "The organization generates and evaluates a range of strategic options and selects the most appropriate strategies based on ecosystem insights, stakeholder expectations, organizational capabilities and long-term vision. The strategies must be coherent, executable and aligned with the value-creation model.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "1.5",
+      "title_fa": "ایجاد سیستم یکپارچه راهبری، مدیریت عملکرد و پاسخ‌گویی",
+      "title_en": "Establish Integrated Governance, Performance Management and Accountability",
+      "description_fa": "سازمان یک سیستم راهبری و مدیریت عملکرد شفاف، پاسخ‌گو، اخلاق‌محور و منسجم ایجاد می‌کند که از اجرای اثربخش استراتژی‌ها حمایت می‌کند. این سیستم شامل سازوکارهای تصمیم‌گیری، تخصیص منابع، مدیریت ریسک، پایش، سنجش و گزارش‌دهی عملکرد است.",
+      "description_en": "The organization establishes an integrated governance and performance management system that is transparent, ethical, accountable and aligned with its strategic direction. This includes decision-making mechanisms, resource allocation, risk management, monitoring, measurement and performance reporting.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    }
+  ]
+}
