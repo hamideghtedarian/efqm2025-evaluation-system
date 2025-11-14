@@ -1,0 +1,72 @@
+{
+  "id": "2",
+  "title_fa": "ایجاد ارزش پایدار",
+  "title_en": "Create Sustainable Value",
+  "subcriteria": [
+    {
+      "id": "2.1",
+      "title_fa": "درک و طراحی مدل ایجاد ارزش سازمان",
+      "title_en": "Understand and Design the Organization’s Value-Creation Model",
+      "description_fa": "سازمان مدل ایجاد ارزش خود را بر مبنای نیازهای ذی‌نفعان، روندهای زیست‌بوم، قابلیت‌ها، منابع و مأموریت سازمان طراحی و مستندسازی می‌کند. این مدل باید روشن کند که چگونه سازمان در کوتاه‌مدت، میان‌مدت و بلندمدت برای ذی‌نفعان اصلی خود ارزش ایجاد می‌کند. طراحی مدل باید منعکس‌کننده محرک‌های کلیدی موفقیت، عوامل اثرگذار، حوزه‌های اولویت‌دار و ارتباط آن با استراتژی باشد.",
+      "description_en": "The organization defines and documents its value-creation model based on stakeholder needs, ecosystem trends, capabilities, resources and its mission. The model clarifies how the organization creates value in the short, medium and long term for its key stakeholders. It identifies critical success factors, influencing elements, priority areas and how the model supports the organization's strategy.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "2.2",
+      "title_fa": "طراحی، مدیریت و بهبود محصولات، خدمات و راه‌حل‌های ارزش‌آفرین",
+      "title_en": "Design, Manage and Improve Value-Creating Products, Services and Solutions",
+      "description_fa": "سازمان محصولات، خدمات و راه‌حل‌های خود را به گونه‌ای طراحی و مدیریت می‌کند که ارزش مورد انتظار ذی‌نفعان را تأمین کند و رقابت‌پذیری پایدار ایجاد نماید. سازمان سازوکارهای مشخص برای نوآوری، چرخه عمر محصول، بررسی تغییرات بازار، ترجیحات مشتریان و مدیریت کیفیت دارد. همچنین، بازطراحی و بهبود محصولات و خدمات بر پایه داده، بازخورد و تحلیل عملکرد انجام می‌شود.",
+      "description_en": "The organization designs and manages its products, services and solutions to ensure they deliver expected stakeholder value and maintain long-term competitiveness. It has structured mechanisms for innovation, product lifecycle management, market evolution analysis, customer preferences and quality assurance. Redesign and improvement are data-driven and based on feedback and performance analysis.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "2.3",
+      "title_fa": "ایجاد و ارائه تجربیات ارزشمند و سازگار با نیازهای ذی‌نفعان",
+      "title_en": "Create and Deliver Stakeholder-Aligned and Value-Driven Experiences",
+      "description_fa": "سازمان تجربه‌هایی که ذی‌نفعان از تعامل با آن دارند را طراحی، مدیریت و بهبود می‌بخشد. این تجربه باید از لحظه شروع تعامل تا پایان چرخه ارزش، سازگار، یکپارچه، قابل اعتماد و فراتر از انتظارات باشد. سازمان باید صدا، احساسات، ادراک و بازخورد ذی‌نفعان را به‌طور مستمر پایش کرده و برای ارتقاء تجربه کلی، اقداماتی مبتنی بر داده انجام دهد.",
+      "description_en": "The organization designs, manages and improves the experiences that stakeholders have throughout their interactions. These experiences should be consistent, reliable, integrated and aligned with expectations throughout the value journey. The organization continually monitors voice, perceptions and emotions of stakeholders and uses data-driven actions to enhance overall experience.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "2.4",
+      "title_fa": "مدیریت روابط، مشارکت‌ها و اکوسیستم برای ایجاد ارزش مشترک",
+      "title_en": "Manage Relationships, Partnerships and Ecosystem for Shared Value",
+      "description_fa": "سازمان روابط، مشارکت‌ها، تأمین‌کنندگان و شبکه‌ اکوسیستم خود را به نحوی مدیریت می‌کند که ارزش مشترک و پایدار ایجاد شود. این همکاری‌ها باید بر اعتماد، شفافیت، منافع مشترک، اشتراک دانش، پذیرش ریسک و مسئولیت‌پذیری متقابل بنا شده باشند. سازمان باید نقش خود را در اکوسیستم و نقش دیگران را در مدل ارزش به وضوح تعریف کند.",
+      "description_en": "The organization manages its relationships, partnerships, suppliers and ecosystem networks to create shared and sustainable value. These collaborations are built on trust, transparency, mutual benefit, shared knowledge, risk acceptance and accountability. The organization clearly defines its role and the roles of others in the value-creation model.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    },
+    {
+      "id": "2.5",
+      "title_fa": "ایجاد ارزش پایدار اقتصادی، اجتماعی و زیست‌محیطی",
+      "title_en": "Generate Sustainable Economic, Social and Environmental Value",
+      "description_fa": "سازمان ارزش اقتصادی، اجتماعی و زیست‌محیطی پایدار ایجاد می‌کند و اثرات مثبت و منفی فعالیت‌های خود را در ذی‌نفعان و اکوسیستم مدیریت می‌نماید. این شامل خلق ارزش اقتصادی پایدار، رعایت مسئولیت اجتماعی، حفاظت از محیط زیست، کاهش اثرات نامطلوب و ایجاد تأثیرات مثبت بلندمدت است. سازمان باید تعهدات ESG و اصول پایداری را در استراتژی و عملکرد خود ادغام نماید.",
+      "description_en": "The organization generates sustainable economic, social and environmental value while managing the positive and negative impacts of its activities on stakeholders and the ecosystem. This includes sustainable economic performance, social responsibility, environmental protection, reducing adverse impacts and creating long-term positive value. ESG principles must be integrated into strategy and daily operations.",
+      "radar": {
+        "approach": "",
+        "deployment": "",
+        "assessment": "",
+        "refinement": ""
+      }
+    }
+  ]
+}
