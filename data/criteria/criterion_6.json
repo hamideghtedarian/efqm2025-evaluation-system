@@ -3,16 +3,16 @@
   "code": "C6",
   "title_fa": "ادراک ذی‌نفعان",
   "title_en": "Stakeholder Perceptions",
-  "description_fa": "این معیار به ارزیابی ادراک و تجربه واقعی ذی‌نفعان کلیدی از عملکرد، ارزش‌آفرینی و تعامل سازمان می‌پردازد. این نتایج نشان می‌دهد که ذی‌نفعان تا چه حد سازمان را قابل اعتماد، پاسخگو، ارزش‌ساز و پایدار می‌دانند.",
-  "description_en": "This criterion evaluates the perception and real experience of key stakeholders regarding the organisation’s performance, value creation and interactions. These results show how stakeholders view the organisation’s reliability, responsiveness, value creation and sustainability.",
+  "description_fa": "این معیار به ارزیابی ادراک و تجربه واقعی ذی‌نفعان کلیدی از عملکرد، ارزش‌آفرینی و تعامل سازمان می‌پردازد. نتایج نشان می‌دهد ذی‌نفعان تا چه میزان سازمان را ارزش‌ساز، چابک، قابل اعتماد، نوآور و پایدار می‌دانند.",
+  "description_en": "This criterion evaluates the perceptions and real experiences of key stakeholders regarding the organisation’s performance, value creation and interactions. The results indicate how stakeholders view the organisation’s reliability, agility, innovation and sustainability.",
   "subcriteria": [
     {
       "id": "6.1",
       "code": "C6-1",
       "title_fa": "ادراک مشتریان و کاربران",
       "title_en": "Customer & User Perceptions",
-      "description_fa": "ادراک مشتریان و کاربران از کیفیت محصولات و خدمات، تجربه مشتری، وفاداری، رضایت، ارزش دریافت‌شده، سهولت تعامل، اعتماد، نوآوری و مقایسه با رقبا.",
-      "description_en": "Stakeholder views on product and service quality, customer experience, loyalty, satisfaction, perceived value, ease of interaction, trust, innovation and comparison with competitors.",
+      "description_fa": "ادراک مشتریان و کاربران از کیفیت محصولات و خدمات، تجربه مشتری، وفاداری، اعتماد، نوآوری، ارزش ادراک‌شده و سهولت تعامل.",
+      "description_en": "Stakeholder perceptions of product and service quality, customer experience, loyalty, trust, innovation, perceived value and ease of interaction.",
       "radar_template": {
         "score": null,
         "strengths": [],
@@ -28,8 +28,8 @@
       "code": "C6-2",
       "title_fa": "ادراک کارکنان",
       "title_en": "People Perceptions",
-      "description_fa": "ادراک کارکنان درباره فرهنگ، رهبری، ایمنی، توسعه فردی، انگیزش، فرصت‌ها، عدالت، مشارکت، تجربه کاری، کیفیت ارتباطات و تعهد.",
-      "description_en": "Employee perceptions of culture, leadership, safety, personal development, motivation, opportunities, fairness, engagement, work experience, communication quality and commitment.",
+      "description_fa": "ادراک کارکنان در مورد فرهنگ، رهبری، مشارکت، انگیزش، توسعه فردی، کیفیت محیط کار، ایمنی، عدالت و تجربه کاری.",
+      "description_en": "Employee perceptions of culture, leadership, engagement, motivation, personal development, work environment quality, safety, fairness and overall work experience.",
       "radar_template": {
         "score": null,
         "strengths": [],
@@ -43,10 +43,10 @@
     {
       "id": "6.3",
       "code": "C6-3",
-      "title_fa": "ادراک شرکای کلیدی و تأمین‌کنندگان",
-      "title_en": "Partner & Supplier Perceptions",
-      "description_fa": "ادراک شرکای تجاری، تأمین‌کنندگان و پیمانکاران از سطح همکاری، شفافیت، انصاف، اعتماد، مدیریت ریسک، ارزش مشترک و عملکرد سازمان.",
-      "description_en": "Perceptions of partners, suppliers and contractors regarding collaboration, transparency, fairness, trust, risk management, shared value and organisational performance.",
+      "title_fa": "ادراک جامعه و نهادهای بیرونی",
+      "title_en": "Society & External Stakeholder Perceptions",
+      "description_fa": "ادراک جامعه، نهادهای دولتی، رسانه‌ها، سازمان‌های مدنی و محیط‌زیست از مسئولیت‌پذیری اجتماعی، عملکرد محیط‌زیستی، شفافیت، انطباق قانونی و تأثیرات اجتماعی سازمان.",
+      "description_en": "Perceptions held by society, government bodies, media, civil organisations and environmental groups regarding social responsibility, environmental performance, transparency, legal compliance and societal impact.",
       "radar_template": {
         "score": null,
         "strengths": [],
@@ -60,10 +60,27 @@
     {
       "id": "6.4",
       "code": "C6-4",
-      "title_fa": "ادراک جامعه و نهادهای بیرونی",
-      "title_en": "Society & External Stakeholder Perceptions",
-      "description_fa": "ادراک جامعه، سازمان‌های محلی، نهادهای نظارتی، رسانه‌ها و سایر بازیگران بیرونی درباره مسئولیت‌پذیری اجتماعی، پایداری، محیط‌زیست، رعایت قوانین، شفافیت و اثرات اجتماعی.",
-      "description_en": "Perception of communities, local organisations, regulatory bodies, media and other external actors regarding social responsibility, sustainability, environment, compliance, transparency and societal impact.",
+      "title_fa": "ادراک سرمایه‌گذاران و مالکان",
+      "title_en": "Investor & Owner Perceptions",
+      "description_fa": "ادراک مالکان، سهامداران و سرمایه‌گذاران درباره سودآوری، بازده سرمایه‌گذاری، شفافیت مالی، مدیریت ریسک، اعتبار سازمان، پایداری و چشم‌انداز آینده.",
+      "description_en": "Perceptions of owners, shareholders and investors regarding profitability, return on investment, financial transparency, risk management, organisational credibility, sustainability and future outlook.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    },
+    {
+      "id": "6.5",
+      "code": "C6-5",
+      "title_fa": "ادراک شرکا و تأمین‌کنندگان",
+      "title_en": "Partner & Supplier Perceptions",
+      "description_fa": "ادراک تأمین‌کنندگان، پیمانکاران، شرکای تجاری و همکاران کلیدی در مورد سطح همکاری، اعتماد، انصاف، مدیریت ریسک مشترک، نوآوری مشترک، ایجاد ارزش مشترک، کیفیت روابط و عملکرد سازمان.",
+      "description_en": "Perceptions of suppliers, contractors, business partners and key collaborators regarding collaboration quality, trust, fairness, joint risk management, co-innovation, shared value creation, relationship quality and organisational performance.",
       "radar_template": {
         "score": null,
         "strengths": [],
