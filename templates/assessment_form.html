@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>فرم ارزیابی EFQM 2025</title>
+
+    <style>
+        body {
+            font-family: Vazirmatn, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+        }
+
+        .subcriteria-container {
+            margin-top: 20px;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .subcriteria-item {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .subcriteria-item:last-child {
+            border-bottom: none;
+        }
+
+        .sub-desc {
+            font-size: 13px;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>فرم ارزیابی معیارهای EFQM 2025</h2>
+
+    <!-- انتخاب معیار -->
+    <label for="criteriaDropdown">انتخاب معیار:</label>
+    <select id="criteriaDropdown" onchange="populateSubcriteria()">
+        <option>در حال بارگذاری...</option>
+    </select>
+
+    <!-- نمایش زیرمعیارها -->
+    <div id="subcriteriaList" class="subcriteria-container">
+        <!-- زیرمعیارها با JS بارگذاری می‌شوند -->
+    </div>
+
+    <button onclick="alert('ذخیره‌سازی مرحله بعد است')">ثبت اطلاعات</button>
+</div>
+
+<script src="/static/js/load_criteria.js"></script>
+</body>
+</html>
