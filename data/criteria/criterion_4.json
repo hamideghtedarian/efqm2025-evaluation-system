@@ -1,0 +1,74 @@
+{
+  "id": 4,
+  "code": "C4",
+  "title_fa": "ایجاد ارزش پایدار",
+  "title_en": "Creating Sustainable Value",
+  "description_fa": "این معیار بر خلق، ارائه و توسعه ارزش برای همه ذینفعان، در سراسر زنجیره فعالیت‌های سازمان تمرکز دارد. سازمان باید ارزش پیشنهادی خود را تعریف کرده، آن را به‌طور اثربخش به مشتریان و ذینفعان ارائه دهد و تجربه کلی آن‌ها را مدیریت کند.",
+  "description_en": "This criterion focuses on defining, creating and delivering sustainable value for all stakeholders throughout the organisation’s value chain. The organisation must clearly articulate its value proposition, deliver it effectively and manage the overall stakeholder experience.",
+  "subcriteria": [
+    {
+      "id": "4.1",
+      "code": "C4-1",
+      "title_fa": "ارزش و نحوه ایجاد آن را تعریف می‌کند",
+      "title_en": "Defines the Value & How It Is Created",
+      "description_fa": "سازمان ارزش پیشنهادی خود را برای مشتریان و سایر ذینفعان به‌طور شفاف مشخص می‌کند. این ارزش بر اساس نیازها، انتظارات، روندهای محیطی، نوآوری و قابلیت‌های کلیدی سازمان طراحی می‌شود. مدل کسب‌وکار و نحوه خلق ارزش به‌صورت پویا بازنگری می‌گردد.",
+      "description_en": "The organisation clearly defines its value proposition for customers and other stakeholders. Value is designed based on needs, expectations, environmental trends, innovation and organisational capabilities. The business model and value creation logic are regularly reviewed and adapted.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "4.2",
+      "code": "C4-2",
+      "title_fa": "ارزش را به‌طور مؤثر ارتباط و عرضه می‌کند",
+      "title_en": "Communicates & Sells the Value",
+      "description_fa": "سازمان ارزش پیشنهادی خود را به‌طور مؤثر به مشتریان و ذینفعان منتقل می‌کند. ارتباطات شفاف، دقیق و هدفمند برای ارائه و ترویج ارزش مورد استفاده قرار می‌گیرد. کانال‌های ارتباطی، فرآیندهای بازاریابی و مکانیسم‌های فروش منسجم و مبتنی بر تجربه مشتری طراحی می‌شوند.",
+      "description_en": "The organisation effectively communicates and promotes its value proposition to customers and stakeholders. Clear and targeted communication channels, marketing processes and sales mechanisms are designed consistently with the intended experience.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "4.3",
+      "code": "C4-3",
+      "title_fa": "ارزش را تحویل می‌دهد",
+      "title_en": "Delivers the Value",
+      "description_fa": "سازمان ارزش طراحی‌شده را از طریق عملیات، فرآیندها، فناوری، زنجیره تأمین، کیفیت، زمان‌بندی و سازوکارهای خدماتی به‌طور مؤثر و کارآمد ارائه می‌دهد. تحویل ارزش باید پایدار، قابل اعتماد، پیش‌بینی‌پذیر و مطابق با وعده‌های ارزش پیشنهادی باشد.",
+      "description_en": "The organisation delivers its designed value effectively and efficiently through operations, processes, technology, supply chain, quality and service mechanisms. Value delivery must be reliable, predictable, sustainable and aligned with the promised value proposition.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "4.4",
+      "code": "C4-4",
+      "title_fa": "تجربه کلی را طراحی و مدیریت می‌کند",
+      "title_en": "Designs & Manages the Overall Experience",
+      "description_fa": "سازمان تجربه ذینفعان را در تمامی نقاط تماس (Touchpoints) طراحی، مدیریت و بهینه‌سازی می‌کند. تجربه مشتری، کارکنان، شرکا و سایر ذینفعان باید پایدار، هماهنگ، یکپارچه و فراتر از انتظارات باشد. بازخوردها و داده‌ها برای بهبود تجربه و نوآوری استفاده می‌شوند.",
+      "description_en": "The organisation designs, manages and optimises stakeholder experiences across all touchpoints. Customer, employee, partner and stakeholder experiences must be consistent, integrated and exceed expectations. Data and feedback are used to drive improvements and innovation.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    }
+  ]
+}
