@@ -1,0 +1,100 @@
+{
+  "id": 7,
+  "code": "C7",
+  "title_fa": "نتایج عملکرد استراتژیک و عملیاتی",
+  "title_en": "Strategic & Operational Performance",
+  "description_fa": "این معیار به نتایج کلیدی عملکرد سازمان در سطوح استراتژیک و عملیاتی می‌پردازد. این نتایج شامل روندها، اهداف، مقایسه‌ها، عملکرد فرآیندها، پایداری، نوآوری، مدیریت ریسک، بهره‌وری، درآمد، هزینه، کیفیت، ایمنی، محیط زیست و اثربخشی فعالیت‌هاست. این معیار نشان می‌دهد سازمان چگونه در دستیابی به نتایج مورد انتظار برای ذی‌نفعان عمل کرده است.",
+  "description_en": "This criterion covers the organisation’s key strategic and operational performance results. These include trends, targets, comparisons, process performance, sustainability, innovation, risk management, productivity, revenue, cost, quality, safety, environment and operational effectiveness. This criterion reflects how well the organisation achieves the results expected by its stakeholders.",
+  "subcriteria": [
+    {
+      "id": "7.1",
+      "code": "C7-1",
+      "title_fa": "نتایج عملکرد استراتژیک",
+      "title_en": "Strategic Performance Results",
+      "description_fa": "نتایج حاصل از تحقق اهداف استراتژیک، نقشه راه تحول، ارزش آفرینی بلندمدت، مزیت رقابتی، نوآوری، دیجیتالی‌سازی، ریسک‌های کلان، پایداری و تحقق چشم‌انداز.",
+      "description_en": "Results reflecting progress toward strategic objectives, transformation roadmap, long-term value creation, competitive advantage, innovation, digitalisation, major risk management, sustainability and realisation of the organisational vision.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "indicators": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    },
+    {
+      "id": "7.2",
+      "code": "C7-2",
+      "title_fa": "نتایج عملکرد عملیاتی",
+      "title_en": "Operational Performance Results",
+      "description_fa": "نتایج مربوط به کیفیت، بهره‌وری، کارایی، هزینه‌ها، ظرفیت، زمان تحویل، قابلیت اطمینان، نگهداری و تعمیرات، خطاها، ضایعات، چابکی و اثربخشی عملیات.",
+      "description_en": "Results relating to quality, productivity, efficiency, cost performance, capacity, delivery time, reliability, maintenance, defects, waste, agility and operational effectiveness.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "indicators": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    },
+    {
+      "id": "7.3",
+      "code": "C7-3",
+      "title_fa": "نتایج عملکرد فرآیندها",
+      "title_en": "Process Performance Results",
+      "description_fa": "نشان‌دهنده عملکرد فرآیندهای کلیدی سازمان شامل زمان چرخه، پایایی فرآیند، یکنواختی کیفیت، نرخ خطا، شاخص‌های Lean، Six Sigma، کنترل کیفیت و میزان تحقق استانداردهای فرآیندی.",
+      "description_en": "Results related to key process performance such as cycle time, process stability, quality consistency, defect rate, Lean metrics, Six Sigma measures, quality control and compliance with process standards.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "indicators": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    },
+    {
+      "id": "7.4",
+      "code": "C7-4",
+      "title_fa": "نتایج پایداری، محیط‌زیست و مسئولیت‌پذیری اجتماعی",
+      "title_en": "Sustainability, Environmental & Social Responsibility Results",
+      "description_fa": "نتایج مرتبط با مدیریت پایداری، انتشار کربن، انرژی، آب، بازیافت، اثرات اجتماعی، اخلاق، رعایت قوانین، تنوع، مسئولیت‌پذیری اجتماعی و ESG.",
+      "description_en": "Results related to sustainability management, carbon emissions, energy, water usage, recycling, social impacts, ethics, legal compliance, diversity, social responsibility and ESG performance.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "indicators": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    },
+    {
+      "id": "7.5",
+      "code": "C7-5",
+      "title_fa": "نتایج مالی و اقتصادی",
+      "title_en": "Financial & Economic Results",
+      "description_fa": "عملکرد مالی شامل سودآوری، درآمد، هزینه‌ها، بازده سرمایه، حاشیه سود، نقدینگی، مدیریت ریسک مالی، جریان نقدی، ثبات و رشد اقتصادی سازمان.",
+      "description_en": "Financial performance results including profitability, revenue, cost structure, return on investment, profit margins, liquidity, financial risk management, cash flow, stability and economic growth.",
+      "radar_template": {
+        "score": null,
+        "strengths": [],
+        "opportunities_for_improvement": [],
+        "indicators": [],
+        "trends": [],
+        "targets": [],
+        "comparisons": [],
+        "comments": ""
+      }
+    }
+  ]
+}
