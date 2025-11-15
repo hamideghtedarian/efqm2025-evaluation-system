@@ -1,66 +1,154 @@
 {
-  "model": "EFQM",
-  "version": "2025",
-  "structure": {
-    "direction": [
-      {
-        "id": 1,
-        "title": "Purpose, Vision & Strategy",
-        "subcriteria": [
-          { "id": "1.1", "title": "Purpose" },
-          { "id": "1.2", "title": "Vision" },
-          { "id": "1.3", "title": "Strategy" }
-        ]
-      },
-      {
-        "id": 2,
-        "title": "Organisational Culture & Leadership",
-        "subcriteria": [
-          { "id": "2.1", "title": "Organisational Culture" },
-          { "id": "2.2", "title": "Leadership" }
-        ]
-      }
-    ],
-    "execution": [
-      {
-        "id": 3,
-        "title": "Engaging Stakeholders",
-        "subcriteria": [
-          { "id": "3.1", "title": "Engaging Stakeholders" }
-        ]
-      },
-      {
-        "id": 4,
-        "title": "Creating Sustainable Value",
-        "subcriteria": [
-          { "id": "4.1", "title": "Creating Sustainable Value" }
-        ]
-      },
-      {
-        "id": 5,
-        "title": "Driving Performance & Transformation",
-        "subcriteria": [
-          { "id": "5.1", "title": "Driving Performance" },
-          { "id": "5.2", "title": "Driving Transformation" }
-        ]
-      }
-    ],
-    "results": [
-      {
-        "id": 6,
-        "title": "Stakeholder Perceptions",
-        "subcriteria": [
-          { "id": "6.1", "title": "Stakeholder Perceptions" }
-        ]
-      },
-      {
-        "id": 7,
-        "title": "Strategic & Operational Performance",
-        "subcriteria": [
-          { "id": "7.1", "title": "Strategic Performance" },
-          { "id": "7.2", "title": "Operational Performance" }
-        ]
-      }
-    ]
-  }
+  "criteria": [
+    {
+      "id": 1,
+      "code": "C1",
+      "title_fa": "مبنای وجودی، چشم‌انداز و استراتژی",
+      "title_en": "Purpose, Vision & Strategy",
+      "description_fa": "این معیار بر تعریف مبنای وجودی، چشم‌انداز مهیج و استراتژی منسجم برای خلق ارزش پایدار و هدایت اجرای سازمان تمرکز دارد.",
+      "description_en": "This criterion focuses on defining a clear purpose, aspirational vision and coherent strategy to drive sustainable value creation and execution.",
+      "subcriteria": [
+        {
+          "id": "1.1",
+          "code": "C1-1",
+          "title_fa": "مبنای وجودی و چشم‌انداز را تعریف می‌کند",
+          "title_en": "Defines Purpose & Vision",
+          "description_fa": "سازمان مبنای وجودی خود را روشن می‌سازد، اثر مثبت بر اکوسیستم را هدف می‌گیرد و چشم‌اندازی الهام‌بخش و همسو با انتظارات ذینفعان خلق می‌کند.",
+          "description_en": "The organisation clarifies its purpose, aims for a positive impact on its ecosystem and creates an inspiring vision that resonates with key stakeholders.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "1.2",
+          "code": "C1-2",
+          "title_fa": "اکوسیستم، قابلیت‌های خود و چالش‌های اصلی را درک می‌کند",
+          "title_en": "Understands its Ecosystem, its Own Capabilities & Major Challenges",
+          "description_fa": "سازمان اکوسیستم، ذینفعان، روندها، قابلیت‌های فعلی و بالقوه و چالش‌های اصلی خود را تحلیل کرده و آن‌ها را در مبنای وجودی، چشم‌انداز، استراتژی و نتایج منعکس می‌کند.",
+          "description_en": "The organisation analyses its ecosystem, stakeholders, trends, capabilities and key challenges and reflects these in its purpose, vision, strategy and results.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "1.3",
+          "code": "C1-3",
+          "title_fa": "نیازهای ذینفعان کلیدی را شناسایی و درک می‌کند",
+          "title_en": "Identifies & Understands the Needs of Key Stakeholders",
+          "description_fa": "سازمان ذینفعان کلیدی و رسته‌های آنان را اولویت‌بندی کرده، نیازها و انتظاراتشان را در بستر مبنای وجودی، چشم‌انداز و استراتژی تحلیل می‌کند و تأثیر آن‌ها را بر ارزش‌آفرینی می‌شناسد.",
+          "description_en": "The organisation prioritises key stakeholders, understands their segments, needs and expectations and analyses their impact on value creation and strategy.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "1.4",
+          "code": "C1-4",
+          "title_fa": "استراتژی را توسعه و تطبیق می‌دهد",
+          "title_en": "Develops & Adapts Strategy",
+          "description_fa": "سازمان بر پایه تحلیل اکوسیستم، قابلیت‌ها و نیازهای ذینفعان، استراتژی و اولویت‌های استراتژیک را تدوین کرده، به اهداف و نتایج کوتاه‌مدت و بلندمدت ترجمه و به‌طور پویا آن را بازنگری می‌کند.",
+          "description_en": "The organisation develops strategy and priorities based on its ecosystem, capabilities and stakeholder needs, translates them into targets and initiatives and regularly reviews and adapts them.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "1.5",
+          "code": "C1-5",
+          "title_fa": "سیستم مدیریت عملکرد و حاکمیت سازمانی را طراحی و پیاده‌سازی می‌کند",
+          "title_en": "Designs & Implements a Performance Management & Governance System",
+          "description_fa": "سازمان سیستم مدیریت عملکرد و حاکمیت را بر پایه مبنای وجودی، چشم‌انداز و استراتژی طراحی و استقرار می‌دهد تا شفافیت، پاسخگویی، تصمیم‌گیری به‌موقع و انطباق با الزامات و اصول پایداری تضمین شود.",
+          "description_en": "The organisation designs and deploys performance management and governance systems built on purpose, vision and strategy to ensure transparency, accountability, timely decisions and compliance with sustainability requirements.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        }
+      ]
+    }
+  ]
 }
