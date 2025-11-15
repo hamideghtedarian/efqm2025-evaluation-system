@@ -84,6 +84,8 @@
 
 <div class="container">
     <h2>فرم ارزیابی معیارهای EFQM 2025</h2>
+<label for="companyName">نام شرکت:</label>
+<input id="companyName" type="text" placeholder="مثال: شرکت پتروشیمی تندگویان">
 
     <!-- انتخاب معیار -->
     <label for="criteriaDropdown">انتخاب معیار:</label>
@@ -96,9 +98,12 @@
         <!-- زیرمعیارها با JS بارگذاری می‌شوند -->
     </div>
 
-    <button onclick="alert('ذخیره‌سازی مرحله بعد است')">ثبت اطلاعات</button>
+    <button onclick="saveAssessmentToServer()">ثبت اطلاعات</button>
+
 </div>
 
 <script src="/static/js/load_criteria.js"></script>
+<script src="/static/js/save_assessment.js"></script>
+
 </body>
 </html>
