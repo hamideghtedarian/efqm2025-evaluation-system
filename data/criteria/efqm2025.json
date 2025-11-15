@@ -1,4 +1,7 @@
 {
+  "model": "EFQM2025",
+  "version": "1.0",
+  "languages": ["fa", "en"],
   "criteria": [
     {
       "id": 1,
@@ -145,6 +148,577 @@
               "strengths": [],
               "opportunities_for_improvement": []
             },
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "code": "C2",
+      "title_fa": "فرهنگ سازمانی و رهبری",
+      "title_en": "Organisational Culture & Leadership",
+      "description_fa": "این معیار بر ایجاد فرهنگ قوی، ارزش‌محور و مبتنی بر یادگیری، نوآوری و اعتماد تمرکز دارد و از رهبران انتظار دارد که الگوی رفتاری، الهام‌بخش و محرّک تغییر باشند.",
+      "description_en": "This criterion focuses on shaping a strong, values-based organisational culture built on trust, learning and innovation, and expects leaders to act as role models who inspire people and drive meaningful change.",
+      "subcriteria": [
+        {
+          "id": "2.1",
+          "code": "C2-1",
+          "title_fa": "فرهنگ سازمانی و ارزش‌های بنیادین را هدایت و تقویت می‌کند",
+          "title_en": "Steers the Organisation’s Culture & Nurtures its Core Values",
+          "description_fa": "رهبری، فرهنگ سازمانی مطلوب را تعریف، تقویت و پاسداری می‌کند. ارزش‌های بنیادین در همه فرآیندها، تصمیم‌گیری‌ها و رفتارهای روزمره نهادینه شده و مبنایی برای هدایت، همکاری، اعتماد و عملکرد پایدار قرار می‌گیرند.",
+          "description_en": "Leadership defines, strengthens and safeguards the desired organisational culture. Core values are embedded across processes and behaviours and used to guide collaboration, trust and sustainable performance.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "2.2",
+          "code": "C2-2",
+          "title_fa": "شرایط لازم برای تحقق تغییر را ایجاد می‌کند",
+          "title_en": "Creates the Conditions for Realising Change",
+          "description_fa": "رهبران، سازمان را برای تغییر توانمند کرده و شرایط مناسب برای چابکی، انعطاف‌پذیری و آمادگی برای روبه‌رو شدن با عدم‌قطعیت‌ها را فراهم می‌سازند. فرهنگ یادگیری، پذیرش اشتباه و بازاندیشی به‌صورت فعال ترویج می‌شود.",
+          "description_en": "Leaders enable the organisation for change by nurturing agility, adaptability and readiness to navigate uncertainty. Learning, reflection and acceptance of honest mistakes are actively promoted.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "2.3",
+          "code": "C2-3",
+          "title_fa": "نوآوری و خلاقیت را توانمندسازی و تسهیل می‌کند",
+          "title_en": "Enables Creativity & Innovation",
+          "description_fa": "رهبری محیطی ایجاد می‌کند که در آن ایده‌پردازی، نوآوری، خلاقیت، ریسک‌پذیری هوشمندانه، همکاری بین‌واحدی و تبدیل ایده به ارزش تشویق و حمایت می‌شود.",
+          "description_en": "Leadership creates an environment where ideation, innovation, creative thinking, smart risk-taking and cross-functional collaboration are encouraged and supported.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        },
+        {
+          "id": "2.4",
+          "code": "C2-4",
+          "title_fa": "ذینفعان را با مبنای وجودی، چشم‌انداز و استراتژی متحد و درگیر می‌کند",
+          "title_en": "Unites & Engages Key Stakeholders with Purpose, Vision & Strategy",
+          "description_fa": "رهبران الهام‌بخش بوده و توانمندی ایجاد تعهد و اتحاد در میان کارکنان، شرکای کلیدی و سایر ذینفعان را دارند. ارتباطات شفاف، مداوم و هدفمند به‌عنوان رکن اصلی مشارکت و هم‌سویی ذینفعان مورد استفاده قرار می‌گیرد.",
+          "description_en": "Leaders inspire and unite people, partners and key stakeholders. Transparent and purposeful communication plays a central role in building engagement and alignment with purpose, vision and strategy.",
+          "radar_template": {
+            "score": null,
+            "approach": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "deployment": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "assessment_refinement": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "results": {
+              "strengths": [],
+              "opportunities_for_improvement": []
+            },
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "code": "C3",
+      "title_fa": "مشارکت و درگیری ذینفعان",
+      "title_en": "Engaging Stakeholders",
+      "description_fa": "این معیار بر شناسایی ذینفعان، ایجاد روابط پایدار، درگیری مؤثر، و مدیریت ارزش متقابل در تمامی تعاملات تمرکز دارد.",
+      "description_en": "This criterion focuses on identifying stakeholders, building sustainable relationships, engaging them effectively and managing mutual value across all interactions.",
+      "subcriteria": [
+        {
+          "id": "3.1",
+          "code": "C3-1",
+          "title_fa": "مشتریان",
+          "title_en": "Customers",
+          "description_fa": "سازمان مشتریان کلیدی، نیازها، رفتارها و انتظارات آن‌ها را درک کرده و برای ایجاد وفاداری، اعتماد و تجربه مطلوب، ارتباطات و تعاملات هدفمند برقرار می‌کند.",
+          "description_en": "The organisation understands its key customers, their needs, behaviours and expectations and builds trust, loyalty and meaningful interactions.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "3.2",
+          "code": "C3-2",
+          "title_fa": "سرمایه انسانی (کارکنان)",
+          "title_en": "People",
+          "description_fa": "سازمان برای کارکنان خود ارزش قائل است، مشارکت آن‌ها را در تصمیم‌سازی و بهبود تشویق می‌کند و محیطی مبتنی بر اعتماد، توانمندسازی، یادگیری و همکاری ایجاد می‌نماید.",
+          "description_en": "The organisation values its people, encourages their participation in decision-making and fosters a culture of trust, empowerment, learning and collaboration.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "3.3",
+          "code": "C3-3",
+          "title_fa": "ذینفعان کسب‌وکار و حکمرانی",
+          "title_en": "Business & Governing Stakeholders",
+          "description_fa": "سازمان با مالکان، سهامداران، نهادهای حکمرانی و شرکای کلیدی ارتباط سازنده برقرار کرده و شفافیت، اعتماد و پاسخ‌گویی را در سطح عالی برقرار می‌کند.",
+          "description_en": "The organisation engages constructively with owners, shareholders, governing bodies and business partners, ensuring transparency, accountability and trust.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "3.4",
+          "code": "C3-4",
+          "title_fa": "جامعه",
+          "title_en": "Society",
+          "description_fa": "سازمان اثرات اجتماعی، زیست‌محیطی و اقتصادی خود را بر جامعه شناسایی، پایش و مدیریت می‌کند و روابط فعال با نهادهای اجتماعی و محیط‌زیست برقرار می‌نماید.",
+          "description_en": "The organisation identifies, monitors and manages its social, environmental and economic impacts on society and engages actively with community and environmental stakeholders.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "3.5",
+          "code": "C3-5",
+          "title_fa": "شرکا و تأمین‌کنندگان",
+          "title_en": "Partners & Suppliers",
+          "description_fa": "سازمان روابط مشارکتی و بلندمدت با شرکا و تأمین‌کنندگان ایجاد می‌کند و ارزش‌آفرینی مشترک، مدیریت ریسک، عملکرد، نوآوری و شفافیت را در تعاملات تضمین می‌نماید.",
+          "description_en": "The organisation builds long-term partnerships with suppliers and partners, ensuring co-created value, transparency, risk management, performance and innovation.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "code": "C4",
+      "title_fa": "ایجاد ارزش پایدار",
+      "title_en": "Creating Sustainable Value",
+      "description_fa": "این معیار بر خلق، ارائه و توسعه ارزش برای همه ذینفعان، در سراسر زنجیره فعالیت‌های سازمان تمرکز دارد.",
+      "description_en": "This criterion focuses on defining, creating and delivering sustainable value for all stakeholders throughout the organisation’s value chain.",
+      "subcriteria": [
+        {
+          "id": "4.1",
+          "code": "C4-1",
+          "title_fa": "ارزش و نحوه ایجاد آن را تعریف می‌کند",
+          "title_en": "Defines the Value & How It Is Created",
+          "description_fa": "سازمان ارزش پیشنهادی خود را برای مشتریان و سایر ذینفعان به‌طور شفاف مشخص می‌کند و مدل کسب‌وکار و نحوه خلق ارزش را به‌صورت پویا بازنگری می‌کند.",
+          "description_en": "The organisation clearly defines its value proposition and regularly reviews its business model and value creation logic.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "4.2",
+          "code": "C4-2",
+          "title_fa": "ارزش را به‌طور مؤثر ارتباط و عرضه می‌کند",
+          "title_en": "Communicates & Sells the Value",
+          "description_fa": "سازمان ارزش پیشنهادی خود را به‌طور مؤثر به مشتریان و ذینفعان منتقل می‌کند و کانال‌ها و پیام‌های خود را با تجربه مورد انتظار هم‌راستا می‌سازد.",
+          "description_en": "The organisation effectively communicates and promotes its value proposition to customers and stakeholders, aligning channels and messages with the intended experience.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "4.3",
+          "code": "C4-3",
+          "title_fa": "ارزش را تحویل می‌دهد",
+          "title_en": "Delivers the Value",
+          "description_fa": "سازمان ارزش طراحی‌شده را از طریق عملیات، فرآیندها، زنجیره تأمین و خدمات به‌طور مؤثر، قابل اعتماد و پایدار ارائه می‌دهد.",
+          "description_en": "The organisation delivers its designed value effectively and reliably through operations, processes, supply chain and services.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "4.4",
+          "code": "C4-4",
+          "title_fa": "تجربه کلی را طراحی و مدیریت می‌کند",
+          "title_en": "Designs & Manages the Overall Experience",
+          "description_fa": "سازمان تجربه ذینفعان را در تمامی نقاط تماس طراحی، مدیریت و بهینه‌سازی می‌کند و بازخوردها و داده‌ها را برای بهبود و نوآوری به‌کار می‌گیرد.",
+          "description_en": "The organisation designs, manages and optimises stakeholder experiences across all touchpoints, using data and feedback to drive improvements and innovation.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "code": "C5",
+      "title_fa": "رهبری عملکرد و تحول",
+      "title_en": "Driving Performance & Transformation",
+      "description_fa": "این معیار بر رهبری و مدیریت عملکرد جاری، هدایت تحول آینده، بهره‌گیری از نوآوری و فناوری، استفاده اثربخش از داده و دانش، و مدیریت دارایی‌ها و منابع تمرکز دارد.",
+      "description_en": "This criterion focuses on leading and managing current performance, driving future transformation, leveraging innovation and technology, using data and knowledge effectively, and managing assets and resources.",
+      "subcriteria": [
+        {
+          "id": "5.1",
+          "code": "C5-1",
+          "title_fa": "عملکرد را هدایت و پایش می‌کند",
+          "title_en": "Drives Performance",
+          "description_fa": "سازمان اهداف، شاخص‌ها و هدف‌گذاری‌های عملکردی خود را تعریف و با استراتژی و ارزش‌ها هم‌راستا می‌کند و از طریق پایش منظم و اقدامات اصلاحی، عملکرد را هدایت می‌کند.",
+          "description_en": "The organisation defines performance goals and KPIs, aligns them with strategy and values and drives performance through regular monitoring and corrective actions.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "5.2",
+          "code": "C5-2",
+          "title_fa": "سازمان را برای آینده متحول می‌کند",
+          "title_en": "Transforms the Organisation for the Future",
+          "description_fa": "سازمان با درک روندهای آینده و سناریوهای محتمل، برنامه‌های تحول، نوسازی مدل کسب‌وکار و توسعه قابلیت‌های جدید را تعریف و اجرا می‌کند.",
+          "description_en": "The organisation understands future trends and scenarios and defines and executes transformation programmes, business model renewal and capability development.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "5.3",
+          "code": "C5-3",
+          "title_fa": "نوآوری و فناوری را راهبری و به‌کار می‌گیرد",
+          "title_en": "Drives Innovation & Technology",
+          "description_fa": "سازمان رویکردی سیستماتیک برای شناسایی، ارزیابی و به‌کارگیری نوآوری‌ها و فناوری‌های نوظهور در محصولات، خدمات، فرآیندها و مدل کسب‌وکار دارد.",
+          "description_en": "The organisation uses a systematic approach to identify, evaluate and deploy innovations and emerging technologies in products, services, processes and business models.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "5.4",
+          "code": "C5-4",
+          "title_fa": "بینش‌های مبتنی بر داده و دانش را به کار می‌گیرد",
+          "title_en": "Leverages Data-Driven Insights & Knowledge",
+          "description_fa": "سازمان داده‌های داخلی و خارجی را جمع‌آوری، یکپارچه و تحلیل می‌کند و آن را به دانش قابل استفاده برای تصمیم‌گیری و بهبود تبدیل می‌کند.",
+          "description_en": "The organisation collects, integrates and analyses internal and external data and turns it into actionable knowledge for decision-making and improvement.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        },
+        {
+          "id": "5.5",
+          "code": "C5-5",
+          "title_fa": "دارایی‌ها و منابع را مدیریت می‌کند",
+          "title_en": "Manages Assets & Resources",
+          "description_fa": "سازمان دارایی‌های مشهود و نامشهود، منابع مالی، زیرساخت‌ها، فناوری، سرمایه انسانی و روابط خود را به‌گونه‌ای مدیریت می‌کند که استفاده بهینه، پایداری و هم‌راستایی با استراتژی تضمین شود.",
+          "description_en": "The organisation manages its tangible and intangible assets, financial resources, infrastructure, technology, people and relationships to ensure optimal use, sustainability and alignment with strategy.",
+          "radar_template": {
+            "score": null,
+            "approach": { "strengths": [], "opportunities_for_improvement": [] },
+            "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+            "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+            "results": { "strengths": [], "opportunities_for_improvement": [] },
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "code": "C6",
+      "title_fa": "ادراک ذی‌نفعان",
+      "title_en": "Stakeholder Perceptions",
+      "description_fa": "این معیار به ارزیابی ادراک و تجربه واقعی ذی‌نفعان کلیدی از عملکرد، ارزش‌آفرینی و تعامل سازمان می‌پردازد.",
+      "description_en": "This criterion evaluates the perceptions and real experiences of key stakeholders regarding the organisation’s performance, value creation and interactions.",
+      "subcriteria": [
+        {
+          "id": "6.1",
+          "code": "C6-1",
+          "title_fa": "ادراک مشتریان و کاربران",
+          "title_en": "Customer & User Perceptions",
+          "description_fa": "ادراک مشتریان و کاربران از کیفیت، تجربه، اعتماد، وفاداری، ارزش ادراک‌شده و سهولت تعامل.",
+          "description_en": "Perceptions of customers and users regarding quality, experience, trust, loyalty, perceived value and ease of interaction.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "6.2",
+          "code": "C6-2",
+          "title_fa": "ادراک کارکنان",
+          "title_en": "People Perceptions",
+          "description_fa": "ادراک کارکنان از فرهنگ، رهبری، انگیزش، مشارکت، توسعه فردی، عدالت و تجربه کاری.",
+          "description_en": "Employee perceptions of culture, leadership, motivation, engagement, development, fairness and overall work experience.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "6.3",
+          "code": "C6-3",
+          "title_fa": "ادراک جامعه و نهادهای بیرونی",
+          "title_en": "Society & External Stakeholder Perceptions",
+          "description_fa": "ادراک جامعه، نهادهای دولتی، رسانه‌ها و سازمان‌های مدنی از مسئولیت‌پذیری اجتماعی، محیط‌زیست، شفافیت و انطباق قانونی.",
+          "description_en": "Perceptions of society, public bodies, media and civil organisations regarding social responsibility, environment, transparency and compliance.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "6.4",
+          "code": "C6-4",
+          "title_fa": "ادراک سرمایه‌گذاران و مالکان",
+          "title_en": "Investor & Owner Perceptions",
+          "description_fa": "ادراک مالکان، سهامداران و سرمایه‌گذاران درباره سودآوری، شفافیت، مدیریت ریسک، پایداری و چشم‌انداز آینده.",
+          "description_en": "Perceptions of owners, shareholders and investors regarding profitability, transparency, risk management, sustainability and future outlook.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "6.5",
+          "code": "C6-5",
+          "title_fa": "ادراک شرکا و تأمین‌کنندگان",
+          "title_en": "Partner & Supplier Perceptions",
+          "description_fa": "ادراک شرکا، تأمین‌کنندگان و پیمانکاران درباره همکاری، اعتماد، انصاف، ارزش مشترک، کیفیت روابط و عملکرد سازمان.",
+          "description_en": "Perceptions of partners, suppliers and contractors regarding collaboration, trust, fairness, shared value, relationship quality and organisational performance.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "code": "C7",
+      "title_fa": "نتایج عملکرد استراتژیک و عملیاتی",
+      "title_en": "Strategic & Operational Performance",
+      "description_fa": "این معیار به نتایج کلیدی عملکرد سازمان در سطوح استراتژیک و عملیاتی می‌پردازد.",
+      "description_en": "This criterion covers the organisation’s key strategic and operational performance results.",
+      "subcriteria": [
+        {
+          "id": "7.1",
+          "code": "C7-1",
+          "title_fa": "نتایج عملکرد استراتژیک",
+          "title_en": "Strategic Performance Results",
+          "description_fa": "نتایج تحقق اهداف استراتژیک، تحول، ارزش‌آفرینی بلندمدت، مزیت رقابتی و نوآوری.",
+          "description_en": "Results reflecting progress toward strategic objectives, transformation, long-term value creation, competitive advantage and innovation.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "indicators": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "7.2",
+          "code": "C7-2",
+          "title_fa": "نتایج عملکرد عملیاتی",
+          "title_en": "Operational Performance Results",
+          "description_fa": "نتایج کیفیت، بهره‌وری، کارایی، هزینه، ظرفیت، زمان تحویل، قابلیت اطمینان و اثربخشی عملیات.",
+          "description_en": "Results relating to quality, productivity, efficiency, cost, capacity, delivery time, reliability and operational effectiveness.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "indicators": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "7.3",
+          "code": "C7-3",
+          "title_fa": "نتایج عملکرد فرآیندها",
+          "title_en": "Process Performance Results",
+          "description_fa": "نتایج عملکرد فرآیندهای کلیدی شامل زمان چرخه، پایداری، خطاها، ضایعات و شاخص‌های بهبود فرآیند.",
+          "description_en": "Results related to key process performance such as cycle time, stability, defects, waste and process improvement indicators.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "indicators": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "7.4",
+          "code": "C7-4",
+          "title_fa": "نتایج پایداری، محیط‌زیست و مسئولیت‌پذیری اجتماعی",
+          "title_en": "Sustainability, Environmental & Social Responsibility Results",
+          "description_fa": "نتایج مرتبط با پایداری، انتشار کربن، انرژی، آب، بازیافت، اثرات اجتماعی، اخلاق و رعایت قوانین.",
+          "description_en": "Results related to sustainability, carbon emissions, energy, water, recycling, social impact, ethics and legal compliance.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "indicators": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
+            "comments": ""
+          }
+        },
+        {
+          "id": "7.5",
+          "code": "C7-5",
+          "title_fa": "نتایج مالی و اقتصادی",
+          "title_en": "Financial & Economic Results",
+          "description_fa": "نتایج سودآوری، درآمد، هزینه‌ها، بازده سرمایه، حاشیه سود، نقدینگی، ریسک مالی و رشد اقتصادی سازمان.",
+          "description_en": "Financial performance results including profitability, revenue, costs, return on investment, margins, liquidity, financial risk and economic growth.",
+          "radar_template": {
+            "score": null,
+            "strengths": [],
+            "opportunities_for_improvement": [],
+            "indicators": [],
+            "trends": [],
+            "targets": [],
+            "comparisons": [],
             "comments": ""
           }
         }
