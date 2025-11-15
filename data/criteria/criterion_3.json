@@ -1,0 +1,90 @@
+{
+  "id": 3,
+  "code": "C3",
+  "title_fa": "مشارکت و درگیری ذینفعان",
+  "title_en": "Engaging Stakeholders",
+  "description_fa": "این معیار بر شناسایی ذینفعان، ایجاد روابط پایدار، درگیری مؤثر، و مدیریت ارزش متقابل در تمامی تعاملات تمرکز دارد. سازمان باید انتظارات، نیازها و تجربه ذینفعان را درک کرده و از طریق تعاملات سازنده ارزش بلندمدت خلق کند.",
+  "description_en": "This criterion focuses on identifying stakeholders, building sustainable relationships, engaging them effectively and managing mutual value across all interactions. The organisation must understand stakeholder needs, expectations and experiences while creating long-term value.",
+  "subcriteria": [
+    {
+      "id": "3.1",
+      "code": "C3-1",
+      "title_fa": "مشتریان",
+      "title_en": "Customers",
+      "description_fa": "سازمان مشتریان کلیدی، نیازها، رفتارها و انتظارات آن‌ها را درک کرده و برای ایجاد وفاداری، اعتماد و تجربه مطلوب، ارتباطات و تعاملات هدفمند برقرار می‌کند. درگیری مشتریان در نوآوری و بهبود ارزش از طریق بازخورد، تحلیل داده و مشارکت فعال پیگیری می‌شود.",
+      "description_en": "The organisation understands its key customers, their needs, behaviours and expectations. It builds trust, loyalty and meaningful interactions, using feedback, data analysis and co-creation to drive innovation and value improvement.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "3.2",
+      "code": "C3-2",
+      "title_fa": "سرمایه انسانی (کارکنان)",
+      "title_en": "People",
+      "description_fa": "سازمان برای کارکنان خود ارزش قائل است، مشارکت آن‌ها را در تصمیم‌سازی و بهبود تشویق می‌کند و محیطی مبتنی بر اعتماد، توانمندسازی، یادگیری و همکاری ایجاد می‌نماید. اطلاعات، بازخورد، عملکرد و تجربه کارکنان به‌طور پیوسته پایش و مدیریت می‌شود.",
+      "description_en": "The organisation values its people, encourages their participation in decision-making and improvement and fosters a culture of trust, empowerment, learning and collaboration. Employee experience, feedback and performance are continuously monitored and managed.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "3.3",
+      "code": "C3-3",
+      "title_fa": "ذینفعان کسب‌وکار و حکمرانی",
+      "title_en": "Business & Governing Stakeholders",
+      "description_fa": "سازمان با مالکان، سهامداران، نهادهای حکمرانی و شرکای کلیدی ارتباط سازنده برقرار کرده و شفافیت، اعتماد و پاسخ‌گویی را در سطح عالی برقرار می‌کند. ریسک‌ها، الزامات قانونی، اخلاقی و حکمرانی به‌طور کامل در تعاملات مدیریت می‌شوند.",
+      "description_en": "The organisation engages constructively with owners, shareholders, governing bodies and business partners. It ensures transparency, accountability and trust while managing risks, legal requirements and governance expectations.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "3.4",
+      "code": "C3-4",
+      "title_fa": "جامعه",
+      "title_en": "Society",
+      "description_fa": "سازمان اثرات اجتماعی، زیست‌محیطی و اقتصادی خود را بر جامعه شناسایی، پایش و مدیریت می‌کند و روابط فعال با نهادهای اجتماعی، محیط‌زیست، دانشگاه‌ها و گروه‌های مسئولیت اجتماعی برقرار می‌نماید. تعهد به پایداری و توسعه پایدار در همه تعاملات لحاظ می‌شود.",
+      "description_en": "The organisation identifies, monitors and manages its social, environmental and economic impacts on society. It engages actively with community institutions, environmental groups, universities and social responsibility partners, ensuring sustainability is embedded.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    },
+    {
+      "id": "3.5",
+      "code": "C3-5",
+      "title_fa": "شرکا و تأمین‌کنندگان",
+      "title_en": "Partners & Suppliers",
+      "description_fa": "سازمان روابط مشارکتی و بلندمدت با شرکا و تأمین‌کنندگان ایجاد می‌کند و ارزش‌آفرینی مشترک، مدیریت ریسک، عملکرد، نوآوری و شفافیت را در تعاملات تضمین می‌نماید. انتخاب و ارزیابی شرکا بر اساس اثربخشی، کیفیت، خلق ارزش و پایداری انجام می‌شود.",
+      "description_en": "The organisation builds long-term partnerships with suppliers and partners, ensuring co-created value, transparency, risk management, performance and innovation. Partner selection and evaluation consider effectiveness, quality, value creation and sustainability.",
+      "radar_template": {
+        "score": null,
+        "approach": { "strengths": [], "opportunities_for_improvement": [] },
+        "deployment": { "strengths": [], "opportunities_for_improvement": [] },
+        "assessment_refinement": { "strengths": [], "opportunities_for_improvement": [] },
+        "results": { "strengths": [], "opportunities_for_improvement": [] },
+        "comments": ""
+      }
+    }
+  ]
+}
