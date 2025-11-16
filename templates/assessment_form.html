@@ -2,29 +2,30 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>فرم ارزیابی EFQM 2025</title>
+    <title>فرم ارزیابی مدل EFQM 2025</title>
 
     <style>
         body {
             font-family: Vazirmatn, sans-serif;
-            background: #f4f4f4;
+            background: #eef1f5;
+            padding: 25px;
             margin: 0;
-            padding: 20px;
         }
 
         .container {
-            background: white;
+            background: #fff;
             padding: 25px;
             border-radius: 12px;
             width: 90%;
-            max-width: 900px;
+            max-width: 950px;
             margin: auto;
-            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
         }
 
         h2 {
             text-align: center;
             margin-bottom: 25px;
+            font-size: 22px;
         }
 
         label {
@@ -33,20 +34,25 @@
             display: block;
         }
 
-        select, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 12px;
             margin-top: 8px;
-            border: 1px solid #aaa;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
             border-radius: 8px;
         }
 
+        textarea {
+            resize: vertical;
+        }
+
         .subcriteria-container {
-            margin-top: 20px;
             background: #fafafa;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #ddd;
+            margin-top: 20px;
         }
 
         .subcriteria-item {
@@ -64,17 +70,18 @@
             color: #555;
         }
 
-        button {
+        .btn {
             background: #007bff;
             color: white;
-            padding: 10px 25px;
+            padding: 12px 25px;
             border: none;
             border-radius: 8px;
-            margin-top: 20px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
+            margin-top: 15px;
         }
-        button:hover {
+
+        .btn:hover {
             background: #0056b3;
         }
     </style>
@@ -83,9 +90,12 @@
 <body>
 
 <div class="container">
-    <h2>فرم ارزیابی معیارهای EFQM 2025</h2>
-<label for="companyName">نام شرکت:</label>
-<input id="companyName" type="text" placeholder="مثال: شرکت پتروشیمی تندگویان">
+
+    <h2>فرم ارزیابی EFQM 2025</h2>
+
+    <!-- نام شرکت -->
+    <label for="companyName">نام شرکت:</label>
+    <input id="companyName" type="text" placeholder="مثال: شرکت پتروشیمی تندگویان">
 
     <!-- انتخاب معیار -->
     <label for="criteriaDropdown">انتخاب معیار:</label>
@@ -95,17 +105,59 @@
 
     <!-- نمایش زیرمعیارها -->
     <div id="subcriteriaList" class="subcriteria-container">
-        <!-- زیرمعیارها با JS بارگذاری می‌شوند -->
+        <!-- زیرمعیارها به‌صورت خودکار نمایش داده می‌شوند -->
     </div>
 
-    <button onclick="saveAssessmentToServer()">ثبت اطلاعات</button>
+
+    <!-- نقاط قوت -->
+    <label>نقاط قوت:</label>
+    <textarea id="strengths" rows="4" placeholder="هر خط یک نقطه قوت"></textarea>
+
+    <!-- فرصت‌های بهبود -->
+    <label>فرصت‌های بهبود:</label>
+    <textarea id="opportunities" rows="4" placeholder="هر خط یک فرصت بهبود"></textarea>
+
+    <!-- نمرات RADAR -->
+    <h3 style="margin-top:25px;">امتیازدهی RADAR</h3>
+
+    <label>Approach:</label>
+    <input id="radar_approach" type="number" min="0" max="100">
+
+    <label>Deployment:</label>
+    <input id="radar_deployment" type="number" min="0" max="100">
+
+    <label>Assessment & Refinement:</label>
+    <input id="radar_ar" type="number" min="0" max="100">
+
+    <label>Results:</label>
+    <input id="radar_results" type="number" min="0" max="100">
+
+    <!-- دکمه ثبت زیرمعیار -->
+    <button class="btn" onclick="submitSubcriterion()">ثبت زیرمعیار</button>
 
 </div>
 
 <script src="/static/js/load_criteria.js"></script>
-<script src="/static/js/save_assessment.js"></script>
-<label>نقاط قوت:</label>
-<textarea id="strengths" rows="4" placeholder="هر خط یک نقطه قوت"></textarea>
+<script src="/static/js/subcriterion_save.js"></script>
+
+<script>
+    function submitSubcriterion() {
+        const company = document.getElementById("companyName").value;
+        const criterion = document.getElementById("criteriaDropdown").value;
+
+        // زیرمعیار انتخاب‌شده از لیست نمایش زیرمعیارها
+        const subcriteriaList = document.querySelectorAll(".subcriteria-item");
+        if (subcriteriaList.length === 0) {
+            alert("هیچ زیرمعیاری انتخاب نشده است.");
+            return;
+        }
+
+        // اولین زیرمعیار (در مرحله بعد داینامیک شدنی است)
+        const firstSub = subcriteriaList[0].getAttribute("data-code");
+
+        saveSubcriterion(company, criterion, firstSub);
+    }
+</script>
 
 </body>
 </html>
