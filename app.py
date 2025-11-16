@@ -75,4 +75,24 @@ def save_assessment():
         with open(assessment_file, "w", encoding="utf-8") as f:
             json.dump(assessment_data, f, ensure_ascii=False, indent=2)
 
+        from modules.assessment_manager import update_subcriterion
+
+@app.post("/api/save-subcriterion")
+def save_subcriterion_api():
+    data = request.json
+
+    company = data.get("company")
+    criterion = data.get("criterion")
+    subcriterion = data.get("subcriterion")
+    strengths = data.get("strengths", [])
+    opportunities = data.get("opportunities", [])
+    radar = data.get("radar", {})
+
+    if not all([company, criterion, subcriterion]):
+        return jsonify({"error": "Missing required fields"}), 400
+
+    update_subcriterion(company, criterion, subcriterion, strengths, opportunities, radar)
+
+    return jsonify({"message": "Subcriterion saved"})
+
         return
