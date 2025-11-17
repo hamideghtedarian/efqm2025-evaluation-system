@@ -183,22 +183,23 @@
 <script src="/static/js/subcriterion_save.js"></script>
 
 <script>
-    function submitSubcriterion() {
-        const company = document.getElementById("companyName").value;
-        const criterion = document.getElementById("criteriaDropdown").value;
+function submitSubcriterion() {
+    const company = document.getElementById("companyName").value;
+    const criterion = document.getElementById("criteriaDropdown").value;
+    const subcriterion = window.selectedSubcriterion;
 
-        // زیرمعیار انتخاب‌شده از لیست نمایش زیرمعیارها
-        const subcriteriaList = document.querySelectorAll(".subcriteria-item");
-        if (subcriteriaList.length === 0) {
-            alert("هیچ زیرمعیاری انتخاب نشده است.");
-            return;
-        }
-
-        // اولین زیرمعیار (در مرحله بعد داینامیک شدنی است)
-        const firstSub = subcriteriaList[0].getAttribute("data-code");
-
-        saveSubcriterion(company, criterion, firstSub);
+    if (!company.trim()) {
+        alert("لطفاً نام شرکت را وارد کنید.");
+        return;
     }
+
+    if (!subcriterion) {
+        alert("لطفاً یک زیرمعیار را انتخاب کنید.");
+        return;
+    }
+
+    saveSubcriterion(company, criterion, subcriterion);
+}
 </script>
 
 </body>
