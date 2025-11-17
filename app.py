@@ -1,89 +1,117 @@
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, render_template, send_from_directory
 import os
 import json
 
 app = Flask(__name__)
 
-# -----------------------------------
-# مسیرهای اصلی سیستم
-# -----------------------------------
-
+# ==============================
+# مسیرهای اصلی پروژه
+# ==============================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 COMPANIES_DIR = os.path.join(DATA_DIR, "companies")
-CRITERIA_FILE = os.path.join(DATA_DIR, "criteria", "efqm2025_full_model.json")
+CRITERIA_FILE = os.path.join(DATA_DIR, "criteria", "efqm2025.json")
 
-# --------------------------------------------------------
-# 1) صفحه اصلی (فرم ارزیابی)
-# --------------------------------------------------------
+os.makedirs(COMPANIES_DIR, exist_ok=True)
 
+
+# ==============================
+# صفحه مدیریت شرکت‌ها
+# ==============================
 @app.route("/")
 def index():
-    return send_from_directory("templates", "assessment_form.html")
+    return render_template("company_manager.html")
 
-# سرویس‌دهی فایل‌های static
-@app.route("/static/<path:filename>")
-def static_files(filename):
-    return send_from_directory("static", filename)
 
-# سرویس‌دهی فایل‌های templates
-@app.route("/templates/<path:filename>")
-def templates_files(filename):
-    return send_from_directory("templates", filename)
+# ==============================
+# صفحه ارزیابی یک شرکت
+# ==============================
+@app.route("/assessment")
+def assessment_page():
+    return render_template("assessment_form.html")
 
-# سرویس‌دهی فایل‌های JSON مدل EFQM
-@app.route("/data/<path:filename>")
-def data_files(filename):
-    return send_from_directory("data", filename)
 
-# --------------------------------------------------------
-# 2) API: خواندن مدل EFQM 2025
-# --------------------------------------------------------
-
-@app.route("/api/criteria")
-def get_criteria():
+# ==============================
+# API: بارگذاری معیارها (EFQM2025)
+# ==============================
+@app.get("/api/criteria")
+def api_criteria():
     if not os.path.exists(CRITERIA_FILE):
-        return jsonify({"error": "EFQM model file not found"}), 404
-
+        return jsonify({"error": "criteria file not found"}), 404
     with open(CRITERIA_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
-
     return jsonify(data)
 
-# --------------------------------------------------------
-# 3) API: ذخیره ارزیابی شرکت
-# --------------------------------------------------------
 
-@app.route("/api/save-assessment", methods=["POST"])
-def save_assessment():
-    try:
-        data = request.json
-        company_name = data.get("company")
-        assessment_data = data.get("assessment")
+# ==============================
+# API: لیست شرکت‌ها
+# ==============================
+@app.get("/api/list-companies")
+def list_companies():
+    companies = []
+    for name in os.listdir(COMPANIES_DIR):
+        path = os.path.join(COMPANIES_DIR, name)
+        if os.path.isdir(path):
+            has_assessment = os.path.exists(os.path.join(path, "assessment.json"))
+            companies.append({
+                "name": name,
+                "hasAssessment": has_assessment
+            })
+    return jsonify(companies)
 
-        if not company_name or not assessment_data:
-            return jsonify({"error": "Missing company or assessment"}), 400
 
-        # مسیر شرکت
-        company_folder = os.path.join(COMPANIES_DIR, company_name)
-        os.makedirs(company_folder, exist_ok=True)
+# ==============================
+# API: ساخت شرکت جدید
+# ==============================
+@app.post("/api/create-company")
+def api_create_company():
+    name = request.json.get("name")
+    if not name:
+        return jsonify({"error": "No name"}), 400
 
-        # مسیر ذخیره فایل
-        assessment_file = os.path.join(company_folder, "assessment.json")
+    safe_name = name.replace(" ", "_")
+    company_path = os.path.join(COMPANIES_DIR, safe_name)
+    os.makedirs(company_path, exist_ok=True)
 
-        # ذخیره‌سازی JSON
-        with open(assessment_file, "w", encoding="utf-8") as f:
-            json.dump(assessment_data, f, ensure_ascii=False, indent=2)
+    return jsonify({"message": f"شرکت «{name}» با موفقیت ایجاد شد."})
 
-        from modules.assessment_manager import update_subcriterion
 
+# ==============================
+# کمک‌کننده: بارگذاری ارزیابی شرکت
+# ==============================
+def load_assessment(company):
+    path = os.path.join(COMPANIES_DIR, company, "assessment.json")
+    if not os.path.exists(path):
+        return {"company": company, "criteria": {}}
+
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+# ==============================
+# کمک‌کننده: ذخیره ارزیابی شرکت
+# ==============================
+def save_assessment(company, data):
+    folder = os.path.join(COMPANIES_DIR, company)
+    os.makedirs(folder, exist_ok=True)
+
+    path = os.path.join(folder, "assessment.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return True
+
+
+# ==============================
+# API: ذخیره‌سازی زیرمعیار EFQM
+# ==============================
 @app.post("/api/save-subcriterion")
-def save_subcriterion_api():
+def api_save_subcriterion():
     data = request.json
 
     company = data.get("company")
     criterion = data.get("criterion")
     subcriterion = data.get("subcriterion")
+
     strengths = data.get("strengths", [])
     opportunities = data.get("opportunities", [])
     radar = data.get("radar", {})
@@ -91,8 +119,33 @@ def save_subcriterion_api():
     if not all([company, criterion, subcriterion]):
         return jsonify({"error": "Missing required fields"}), 400
 
-    update_subcriterion(company, criterion, subcriterion, strengths, opportunities, radar)
+    assessment = load_assessment(company)
+
+    # ایجاد ساختار مناسب EFQM
+    if criterion not in assessment["criteria"]:
+        assessment["criteria"][criterion] = {}
+
+    assessment["criteria"][criterion][subcriterion] = {
+        "strengths": strengths,
+        "opportunities": opportunities,
+        "radar": radar
+    }
+
+    save_assessment(company, assessment)
 
     return jsonify({"message": "Subcriterion saved"})
 
-        return
+
+# ==============================
+# API: دسترسی فایل‌های ذخیره‌شده شرکت
+# ==============================
+@app.route("/data/companies/<company>/<filename>")
+def serve_company_file(company, filename):
+    return send_from_directory(os.path.join(COMPANIES_DIR, company), filename)
+
+
+# ==============================
+# اجرای برنامه
+# ==============================
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
