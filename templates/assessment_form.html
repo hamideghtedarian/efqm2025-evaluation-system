@@ -104,9 +104,51 @@
     </select>
 
     <!-- نمایش زیرمعیارها -->
-    <div id="subcriteriaList" class="subcriteria-container">
-        <!-- زیرمعیارها به‌صورت خودکار نمایش داده می‌شوند -->
-    </div>
+   <div id="subcriteriaList" class="subcriteria-container">
+    <!-- زیرمعیارهای قابل انتخاب -->
+</div>
+
+<script>
+    async function populateSubcriteria() {
+        const selectedCode = document.getElementById("criteriaDropdown").value;
+        const criteria = await loadCriteria();
+
+        const selectedCriterion = criteria.find(c => c.code === selectedCode);
+        const listContainer = document.getElementById("subcriteriaList");
+
+        listContainer.innerHTML = "";
+
+        selectedCriterion.subcriteria.forEach(sc => {
+            const item = document.createElement("div");
+            item.classList.add("subcriteria-item");
+            item.setAttribute("data-code", sc.code);
+
+            item.innerHTML = `
+                <strong>${sc.code}</strong> — ${sc.title_fa}
+                <p class="sub-desc">${sc.description_fa}</p>
+            `;
+
+            // قابلیت انتخاب زیرمعیار
+            item.onclick = function () {
+                document
+                    .querySelectorAll(".subcriteria-item")
+                    .forEach(el => el.style.background = "#fafafa");
+
+                item.style.background = "#d7e7ff";  // انتخاب‌شده
+
+                window.selectedSubcriterion = sc.code;
+            };
+
+            listContainer.appendChild(item);
+        });
+
+        // انتخاب اول به صورت پیش‌فرض
+        if (selectedCriterion.subcriteria.length > 0) {
+            window.selectedSubcriterion = selectedCriterion.subcriteria[0].code;
+            listContainer.children[0].style.background = "#d7e7ff";
+        }
+    }
+</script>
 
 
     <!-- نقاط قوت -->
