@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت شرکت‌ها</title>
+
+    <style>
+        body {
+            background: #eef1f5;
+            font-family: Vazirmatn, sans-serif;
+            padding: 30px;
+        }
+
+        .panel {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .company {
+            padding: 15px;
+            background: #fafafa;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            float: left;
+            margin-left: 10px;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .status {
+            float: right;
+            font-size: 13px;
+            color: green;
+            margin-top: 3px;
+        }
+
+        .new-company-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #ddecff;
+            border: 1px solid #aac9ff;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="panel">
+
+    <h2>مدیریت شرکت‌ها</h2>
+
+    <div id="companiesList">
+        <!-- شرکت‌ها به صورت داینامیک بارگذاری می‌شوند -->
+    </div>
+
+    <div class="new-company-box">
+        <label>ایجاد شرکت جدید:</label>
+        <input id="newCompanyName" type="text" placeholder="مثال: شرکت فولاد آریا" style="width:70%; padding:8px;">
+        <button class="btn" onclick="createCompany()">ثبت</button>
+    </div>
+
+</div>
+
+<script>
+    async function loadCompanies() {
+        const response = await fetch("/api/list-companies");
+        const companies = await response.json();
+
+        const div = document.getElementById("companiesList");
+        div.innerHTML = "";
+
+        companies.forEach(c => {
+            const box = document.createElement("div");
+            box.classList.add("company");
+
+            box.innerHTML = `
+                <strong>${c.name}</strong>
+                <span class="status">${c.hasAssessment ? "✔ دارای ارزیابی" : "— بدون ارزیابی"}</span>
+                <button class="btn" onclick="enterCompany('${c.name}')">ورود</button>
+            `;
+
+            div.appendChild(box);
+        });
+    }
+
+    function enterCompany(company) {
+        // ورود به فرم ارزیابی همراه با بارگذاری اطلاعات قبلی
+        window.location.href = `/assessment?company=${company}`;
+    }
+
+    async function createCompany() {
+        const name = document.getElementById("newCompanyName").value.trim();
+        if (!name) {
+            alert("نام شرکت را وارد کنید.");
+            return;
+        }
+
+        const response = await fetch("/api/create-company", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name})
+        });
+
+        const result = await response.json();
+        alert(result.message);
+
+        loadCompanies();
+    }
+
+    // بارگذاری اولیه شرکت‌ها
+    loadCompanies();
+</script>
+
+</body>
+</html>
