@@ -1,0 +1,86 @@
+[
+  {
+    // FA: صنعت معدن – سنگ‌آهن – کنسانتره
+    // EN: Mining – Iron – Concentrate
+    "code": "MIN-IR-CNC",
+    "name_fa": "معدن – سنگ آهن – کنسانتره",
+    "name_en": "Mining – Iron – Concentrate"
+  },
+  {
+    // FA: صنعت معدن – سنگ‌آهن – گندله
+    // EN: Mining – Iron – Pellet
+    "code": "MIN-IR-PEL",
+    "name_fa": "معدن – سنگ آهن – گندله",
+    "name_en": "Mining – Iron – Pellet"
+  },
+  {
+    // FA: صنعت معدن – فولاد – ذوب
+    // EN: Mining – Steel – Smelting
+    "code": "MIN-ST-SMT",
+    "name_fa": "معدن – فولاد – ذوب",
+    "name_en": "Mining – Steel – Smelting"
+  },
+  {
+    // FA: صنعت معدن – فولاد – نورد
+    // EN: Mining – Steel – Rolling
+    "code": "MIN-ST-RLL",
+    "name_fa": "معدن – فولاد – نورد",
+    "name_en": "معدن – فولاد – نورد"
+  },
+  {
+    // FA: صنعت نفت – پالایش
+    // EN: Oil – Refinery
+    "code": "OIL-REF",
+    "name_fa": "نفت – پالایش",
+    "name_en": "Oil – Refinery"
+  },
+  {
+    // FA: صنعت گاز – فرآورش
+    // EN: Gas – Processing
+    "code": "GAS-PRC",
+    "name_fa": "گاز – فرآورش",
+    "name_en": "Gas – Processing"
+  },
+  {
+    // FA: پتروشیمی – پلیمر
+    // EN: Petrochemical – Polymer
+    "code": "PET-POL",
+    "name_fa": "پتروشیمی – پلیمر",
+    "name_en": "Petrochemical – Polymer"
+  },
+  {
+    // FA: پتروشیمی – آروماتیک
+    // EN: Petrochemical – Aromatics
+    "code": "PET-ARM",
+    "name_fa": "پتروشیمی – آروماتیک",
+    "name_en": "Petrochemical – Aromatics"
+  },
+  {
+    // FA: حفاری – حفاری خشکی
+    // EN: Drilling – Onshore Drilling
+    "code": "DRL-ON",
+    "name_fa": "حفاری – حفاری خشکی",
+    "name_en": "Drilling – Onshore"
+  },
+  {
+    // FA: حفاری – حفاری دریایی
+    // EN: Drilling – Offshore Drilling
+    "code": "DRL-OF",
+    "name_fa": "حفاری – حفاری دریایی",
+    "name_en": "Drilling – Offshore"
+  },
+  {
+    // FA: فناورى شهری – فاوا + هوشمندسازی
+    // EN: ICT + Smart Urban ICT
+    "code": "ICT-SUI",
+    "name_fa": "فاوا + هوشمندسازی شهری",
+    "name_en": "ICT + Smart Urban ICT"
+  },
+  {
+    // FA: مدیریت شهری – خدمات شهری
+    // EN: Urban Management – City Services
+    "code": "URB-SRV",
+    "name_fa": "مدیریت شهری – خدمات شهری",
+    "name_en": "Urban Management – City Services"
+  }
+]
