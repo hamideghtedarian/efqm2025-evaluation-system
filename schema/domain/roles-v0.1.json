@@ -1,0 +1,37 @@
+[
+  {
+    // FA: ناظر/حاکمیتی
+    // EN: Regulator
+    "code": "REG",
+    "name_fa": "ناظر / حاکمیتی",
+    "name_en": "Regulator"
+  },
+  {
+    // FA: بهره‌بردار
+    // EN: Operator
+    "code": "OPR",
+    "name_fa": "بهره‌بردار",
+    "name_en": "Operator"
+  },
+  {
+    // FA: ارائه‌دهنده خدمات
+    // EN: Service Provider
+    "code": "SRV",
+    "name_fa": "ارائه‌دهنده خدمات",
+    "name_en": "Service Provider"
+  },
+  {
+    // FA: پیمانکار
+    // EN: Contractor
+    "code": "CTR",
+    "name_fa": "پیمانکار",
+    "name_en": "Contractor"
+  },
+  {
+    // FA: هلدینگ/مادر تخصصی
+    // EN: Holding / Specialized Parent Company
+    "code": "HLD",
+    "name_fa": "هلدینگ / مادر تخصصی",
+    "name_en": "Holding / Parent Company"
+  }
+]
