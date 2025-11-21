@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/hamideghtedarian/efqm2025-evaluation-system/schema/EFQM2025-Assessment-Core-v0.1.json",
+  "title": "EFQM 2025 Assessment Core Schema",
+  "description": "Core structure for EFQM 2025 assessment data including criteria, RADAR scoring, organization information and metadata.",
+  "type": "object",
+
+  "properties": {
+
+    "version": {
+      "type": "object",
+      "properties": {
+        "model": { "type": "string", "enum": ["EFQM2025"] },
+        "schema_version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+$" }
+      },
+      "required": ["model", "schema_version"]
+    },
+
+    "organization": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "sector": { "type": "string" },
+        "country": { "type": "string", "default": "Iran" },
+        "role": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "string", "enum": ["REG", "OPR", "OWN", "SUP", "CNS", "PRT", "EDU"] },
+            "label": { "type": "string" }
+          },
+          "required": ["code", "label"]
+        }
+      },
+      "required": ["name", "role"]
+    },
+
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "criterion": { "type": "string", "pattern": "^[1-7]$" },
+              "subcriterion": { "type": "string", "pattern": "^[1-7]\\.[1-9]$" },
+
+              "RADAR": {
+                "type": "object",
+                "properties": {
+                  "Approach": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "Deployment": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "Assessment_and_Refinement": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "Results": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                },
+                "required": [
+                  "Approach",
+                  "Deployment",
+                  "Assessment_and_Refinement",
+                  "Results"
+                ]
+              },
+
+              "evidence": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+
+              "OFI": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "description": { "type": "string" },
+                    "priority": { "type": "string", "enum": ["Low", "Medium", "High"] }
+                  },
+                  "required": ["description"]
+                }
+              }
+            },
+            "required": ["criterion", "subcriterion", "RADAR"]
+          }
+        }
+      },
+      "required": ["criteria"]
+    },
+
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "assessor": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "confidentiality": { "type": "string", "enum": ["Public", "Restricted", "Confidential"] }
+      },
+      "required": ["assessor", "date", "confidentiality"]
+    }
+  },
+
+  "required": ["version", "organization", "assessment", "metadata"]
+}
