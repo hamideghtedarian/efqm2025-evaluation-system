@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/hamideghtedarian/efqm2025-evaluation-system/schema/EFQM2025-Evidence-v0.2.json",
+  "title": "EFQM 2025 Evidence Schema",
+  "description": "Evidence structure for EFQM 2025 assessment, mapped to RADAR elements and organizational ownership.",
+  "type": "object",
+
+  "properties": {
+    "subcriterion": {
+      "type": "string",
+      "pattern": "^[1-7]\\.[1-9]$"
+    },
+
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "Approach": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EvidenceItem" }
+        },
+        "Deployment": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EvidenceItem" }
+        },
+        "Assessment_and_Refinement": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EvidenceItem" }
+        },
+        "Results": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EvidenceItem" }
+        }
+      },
+      "required": ["Approach", "Deployment", "Assessment_and_Refinement", "Results"]
+    },
+
+    "OFI": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/OFIItem" }
+    }
+  },
+
+  "required": ["subcriterion", "evidence"],
+
+  "definitions": {
+
+    "EvidenceItem": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "file": { "type":"string" },
+        "type": {
+          "type": "string",
+          "enum": ["Policy", "Procedure", "Report", "Record", "Image", "Video", "Link", "Other"]
+        },
+        "confidentiality": {
+          "type": "string",
+          "enum": ["Public", "Restricted", "Confidential", "Highly Confidential"]
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "unit": { "type": "string" },
+            "role": { "type": "string" }
+          },
+          "required": ["unit"]
+        }
+      },
+      "required": ["title", "type", "confidentiality", "owner"]
+    },
+
+    "OFIItem": {
+      "type": "object",
+      "properties": {
+        "issue": { "type": "string" },
+        "improvement_direction": { "type": "string" },
+        "suggested_actions": { "type": "string" },
+        "priority": {
+          "type": "string",
+          "enum": ["Low", "Medium", "High"]
+        },
+        "owner": {
+          "type": "object",
+          "properties": {
+            "unit": { "type": "string" },
+            "role": { "type": "string" }
+          },
+          "required": ["unit"]
+        }
+      },
+      "required": ["issue", "improvement_direction", "owner"]
+    }
+
+  }
+}
